@@ -89,57 +89,95 @@ $ses_username = $_SESSION[loginid];
                             </div>    
                             <div class="row">
                                 <div class="form-group col-sm-4">
-                                    <label>(1)หม้อแปลงขนาด</label>
-                                    <div class="form-group input-group">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกข้อมูล" name="equ_tran" required>
-                                        <span class="input-group-addon">เควีเอ.</span>
+                                    <label>(1) หม้อแปลง</label>
+                                    <div class="form-group">
+                                        <select id="equ_meter" class="form-control" name="equ_meter" required>
+                                            <option value=""><-- เลือกขนาดหม้อแปลง --></option>
+                                            <option value="0"> 1 เฟส ขนาด 30 KVA</option>
+                                            <option value="1">3 เฟส ขนาด 50 KVA</option>
+                                            <option value="2"> 3 เฟส ขนาด 100 KVA</option>
+                                            <option value="3"> 3 เฟส ขนาด 160 KVA</option>
+                                            <option value="4">ง 3 เฟส ขนาด 250 KVA</option>
+                                            <option value="5"> 3 เฟส ขนาด 315 KVA</option>
+                                            <option value="6"> 3 เฟส ขนาด 400 KVA</option>
+                                            <option value="7"> 3 เฟส ขนาด 500 KVA</option>
+                                            <option value="8"> 3 เฟส ขนาด 1000 KVA</option>
+                                            <option value="9"> 3 เฟส ขนาด 1250 KVA</option>
+                                            <option value="10"> 3 เฟส ขนาด 2000 KVA</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
                                     <label>จำนวน</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" placeholder="กรุณากรอกข้อมูล" name="equ_tran_unit"  required>
+                                        <input type="number" class="form-control" name="equ_tran_unit"  required>
                                         <span class="input-group-addon">เครื่อง</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-4">
-                                    <label>(2)เครื่องปรับอากาศ</label>
+                                    <label>(2) เครื่องปรับอากาศ</label>
                                     <div class="form-group input-group">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกข้อมูล" name="equ_air" required>
+                                        <input type="text" class="form-control" name="equ_air" required>
                                         <span class="input-group-addon">บีทียู</span>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
                                     <label>จำนวน</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" placeholder="กรุณากรอกข้อมูล" name="equ_air_unit" required>
+                                        <input type="number" class="form-control" name="equ_air_unit" required>
                                         <span class="input-group-addon">เครื่อง</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-4">
-                                    <label>(3)ดวงโคม</label>
+                                    <label>(3) ดวงโคม</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" placeholder="กรุณากรอกข้อมูล" name="equ_lantern" required>
+                                        <input type="number" class="form-control" name="equ_lantern" required>
                                         <span class="input-group-addon">ดวง</span>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-sm-4">
-                                    <label>(4)เต้าเสียบ</label>
+                                    <label>(4) เต้าเสียบ</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" placeholder="กรุณากรอกข้อมูล" name="equ_outlet" required>
+                                        <input type="number" class="form-control"  name="equ_outlet" required>
                                         <span class="input-group-addon">ชุด</span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-sm-4">
-                                    <label>(5)พัดลม</label>
+                                    <label>(5) พัดลม</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" placeholder="กรุณากรอกข้อมูล" name="equ_fan" required>
+                                        <input type="number" class="form-control" name="equ_fan" required >
                                         <span class="input-group-addon">เครื่อง</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label>(6) มิเตอร์</label>
+                                    <div class="form-group">
+                                        <select id="equ_meter" class="form-control" name="equ_meter" required>
+                                            <option value=""><-- เลือกขนาดหม้อแปลง --></option>
+                                            <?php if($array['re_want_type']=="0"){ ?>
+                                            <?php } ?>
+                                            <option value="">หม้อแปลง 1 เฟส ขนาด 30 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 50 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 100 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 160 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 250 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 315 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 400 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 500 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 1000 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 1250 KVA</option>
+                                            <option value="">หม้อแปลง 3 เฟส ขนาด 2000 KVA</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

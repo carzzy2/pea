@@ -608,7 +608,7 @@ $array_edit=mysql_fetch_array($result_print);
                 </div>
         </div>
 
-				
+
             </div>
         </div>
 </body>

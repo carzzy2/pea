@@ -142,8 +142,8 @@ function Dateim($mydate) {
                                                             <td>
                                                                 <div class="btn-group" align="center">
                                                                     <center>
-                                                                        <a class="btn btn-default" href="StatusElectricity_detail.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ผ่านการสำรวจ</i></a>
-                                                                        <a class="btn btn-danger" href="StatusElectricity_nopass.php?id=<?= $array[re_id] ?>"><i class="fa fa-times"> ไม่ผ่านการสำรวจ</i></a>
+                                                                        <a class="btn btn-default" href="StatusElectricity_detail.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ผ่าน</i></a>
+                                                                        <a class="btn btn-danger" href="StatusElectricity_nopass.php?id=<?= $array[re_id] ?>"><i class="fa fa-times"> ไม่ผ่าน</i></a>
                                                                     </center>
                                                                 </div>
                                                             </td>
