@@ -206,23 +206,6 @@ if($array_print[re_place_type]=="0"){
                                    <?php if($array_print[re_want_type]=="10"){echo "[&nbsp;&nbsp;<img src='img/check.png' width='15px' >]";}else{echo "[&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;";}?>
                                 </td>
                                 <td>ขอลดขนาดมิเตอร์/อุปกรณ์ประกอบ</td>
-                                <td width="35px">
-                                   <?php if($array_print[re_want_type]=="15"){echo "[&nbsp;&nbsp;<img src='img/check.png' width='15px' >]";}else{echo "[&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;";}?>
-                                </td>
-                                <td>ขอใช้ไฟฟ้าตู้โทรศัพท์ต่อตรง</td>
-                            </tr>
-                            <tr>
-                                <td width="35px">
-                                   <?php if($array_print[re_want_type]=="5"){echo "[&nbsp;&nbsp;<img src='img/check.png' width='15px' >]";}else{echo "[&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;";}?>
-                                </td>
-                                <td>ขอหยุดซ่อมแซมเครื่องจักรประจำปี</td>
-                                <td width="35px">
-                                   &nbsp;<?php if($array_print[re_want_type]=="16"){echo "[&nbsp;&nbsp;<img src='img/check.png' width='15px' >]";}else{echo "[&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;";}?>
-                                </td>
-                                <td colspan="3">
-                                    อื่นๆระบุ:
-                                    <?php if($array_print[re_want_type]=="16"){echo $array_print[re_want_other];}else{echo "................................................................................................";}?>
-                                </td>
                             </tr>
                             <tr>
                                 <td width="35px" colspan="6">

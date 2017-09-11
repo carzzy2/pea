@@ -112,7 +112,7 @@ $ses_username = $_SESSION[loginid];
                                 <label><input name="re_want_type" size="30" type="radio" value="9" id="re_want_type9">ขอยกเลิกเลิกการใช้ไฟฟ้า</label>
                             </div>
                             <div class="radio">
-                                <label><input name="re_want_type" size="30" type="radio" value="10" id="re_want_type10">ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ</label>
+                                <label><input name="re_want_type" size="30" type="radio" value="10" id="re_want_type10">ขอลดขนาดมิเตอร์/อุปกรณ์ประกอบ</label>
                             </div>
                         </div>
                         <div class="form-group col-sm-4">
@@ -128,21 +128,8 @@ $ses_username = $_SESSION[loginid];
                             <div class="radio">
                                 <label><input name="re_want_type" size="30" type="radio" value="14" id="re_want_type14">ขอเปลี่ยนมิเตอร์กรณีชำรุด</label>
                             </div>
-                            <div class="radio">
-                                <label><input name="re_want_type" size="30" type="radio" value="15" id="re_want_type15">ขอใช้ไฟฟ้าตู้โทรศัพท์ต่อตรง</label>
-                            </div>
                         </div>
                     </div> 
-                    <div class="row">
-                        <div class="form-group col-sm-2">
-                            <div class="radio">
-                                <label><input name="re_want_type" size="30" type="radio" id="re_want_type16" value="16" >อื่นๆ ระบุ:</label>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-10">
-                            <input class="form-control"  name="re_want_other" type="text" id="re_want_other">	
-                        </div> 
-                    </div>
                         <div class="form-group col-sm-12">
                             <label>รายละเอียดเพื่มเติม</label>
                             <textarea class="form-control"  rows="2" id="re_detail" placeholder="กรุณากรอกข้อมูล" name="re_detail"><?=$_SESSION['re_detail']?></textarea>

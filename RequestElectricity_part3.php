@@ -35,7 +35,7 @@ $ses_username = $_SESSION[loginid];
  <?php
         $read="required";
 ?>
-        <script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function() {
 $("#checkbox-place").click(function(){
     if ($(this).is(':checked')) {

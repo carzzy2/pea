@@ -35,7 +35,83 @@ $ses_username = $_SESSION[loginid];
  <?php
         $read="required";
 ?>
-
+<script type="text/javascript">
+$(document).ready(function() {
+$("#checkbox-place").click(function(){
+    if ($(this).is(':checked')) {
+    $("#re_keep_homeid").val("<?= $_SESSION[cus_homeid] ?>");
+    $("#re_keep_homeid").attr('readonly', true);
+    $("#re_keep_number").val("<?= $_SESSION[cus_number] ?>");
+    $("#re_keep_number").attr('readonly', true);
+    $("#re_keep_village").val("<?= $_SESSION[cus_village] ?>");
+    $("#re_keep_village").attr('readonly', true);
+    $("#re_keep_room").val("<?= $_SESSION[cus_room] ?>");
+    $("#re_keep_room").attr('readonly', true);
+    $("#re_keep_floor").val("<?= $_SESSION[cus_floor] ?>");
+    $("#re_keep_floor").attr('readonly', true);
+    $("#re_keep_alley").val("<?= $_SESSION[cus_alley] ?>");
+    $("#re_keep_alley").attr('readonly', true);
+    $("#re_keep_alleyway").val("<?= $_SESSION[cus_alleyway] ?>");
+    $("#re_keep_alleyway").attr('readonly', true);
+    $("#re_keep_road").val("<?= $_SESSION[cus_road] ?>");
+    $("#re_keep_road").attr('readonly', true);
+    $("#re_keep_vilno").val("<?= $_SESSION[cus_vilno] ?>");
+    $("#re_keep_vilno").attr('readonly', true);
+    $("#re_keep_district").val("<?= $_SESSION[cus_district] ?>");
+    $("#re_keep_district").attr('readonly', true);
+    $("#re_keep_canton").val("<?= $_SESSION[cus_canton] ?>");
+    $("#re_keep_canton").attr('readonly', true);
+    $("#re_keep_province").val("<?= $_SESSION[cus_province] ?>");
+    $("#re_keep_province").attr('readonly', true);
+    $("#re_keep_post").val("<?= $_SESSION[cus_post] ?>");
+    $("#re_keep_post").attr('readonly', true);
+    $("#re_keep_tel").val("<?= $_SESSION[cus_tel] ?>");
+    $("#re_keep_tel").attr('readonly', true);
+    $("#re_keep_fax").val("<?= $_SESSION[cus_fax] ?>");
+    $("#re_keep_fax").attr('readonly', true);
+    $("#re_keep_road").val("<?= $_SESSION[cus_road] ?>");
+    $("#re_keep_road").attr('readonly', true);
+    $("#re_keep_email").val("<?= $_SESSION[cus_email] ?>");
+    $("#re_keep_email").attr('readonly', true);
+  }else{
+     $("#re_keep_homeid").val("");
+    $("#re_keep_homeid").attr('readonly', false);
+    $("#re_keep_number").val("");
+    $("#re_keep_number").attr('readonly', false);
+    $("#re_keep_village").val("");
+    $("#re_keep_village").attr('readonly', false);
+    $("#re_keep_room").val("");
+    $("#re_keep_room").attr('readonly', false);
+    $("#re_keep_floor").val("");
+    $("#re_keep_floor").attr('readonly', false);
+    $("#re_keep_alley").val("");
+    $("#re_keep_alley").attr('readonly', false);
+    $("#re_keep_alleyway").val("");
+    $("#re_keep_alleyway").attr('readonly', false);
+    $("#re_keep_road").val("");
+    $("#re_keep_road").attr('readonly', false);
+    $("#re_keep_vilno").val("");
+    $("#re_keep_vilno").attr('readonly', false);
+    $("#re_keep_district").val("");
+    $("#re_keep_district").attr('readonly', false);
+    $("#re_keep_canton").val("");
+    $("#re_keep_canton").attr('readonly', false);
+    $("#re_keep_province").val("");
+    $("#re_keep_province").attr('readonly', false);
+    $("#re_keep_post").val("");
+    $("#re_keep_post").attr('readonly', false);
+    $("#re_keep_tel").val("");
+    $("#re_keep_tel").attr('readonly', false);
+    $("#re_keep_fax").val("");
+    $("#re_keep_fax").attr('readonly', false);
+    $("#re_keep_road").val("");
+    $("#re_keep_road").attr('readonly', false);
+    $("#re_keep_email").val("");
+    $("#re_keep_email").attr('readonly', false); 
+  }
+}); 
+});
+</script>
     <div id="page-wrapper">
         <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -43,7 +119,7 @@ $ses_username = $_SESSION[loginid];
                 </div>
             <div class="panel-body">
 
-            <form method="post" action="RequestElectricity_Ses.php?mode=RequestElectricity_part6">
+            <form method="post" action="RequestElectricity_save">
                 <?php
                     $new_id =mysql_result(mysql_query("Select Max(substr(re_id,-4))+1 as MaxID from tb_electricity"),0,"MaxID" );
                     if($new_id==''){
@@ -187,11 +263,6 @@ $ses_username = $_SESSION[loginid];
                             <input class="form-control"  name="file" type="file" required/>
                         </div>
                     </div>
-                    <center>
-                        <button class="btn  btn-success" name="Submit" type="submit"><i class="fa fa-check"> บันทึก</i></button>
-                        <input name="txtid" type="hidden" id="txtid" value="<?=$id?>" />
-                        <a class="btn btn-info" onclick="location.href='RequestElectricity.php'"><i class="fa fa-times"> ยกเลิก</i></a>	
-                    </center>
                 </div>
                     <center>
                         <input  type="hidden" class="form-control " name="newcus" id="add" value="addcus">

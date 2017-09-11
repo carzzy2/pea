@@ -9,6 +9,7 @@ if ($new_id == '') {
 } else {
     $id = "13" . sprintf("%010d", $new_id);
 }
+
 if ($_POST[typestatus] == "nopass") {
     $sql = "update tb_electricity set re_status='9' where re_id='" . $_POST[re_id] . "'";
     mysql_query($sql);

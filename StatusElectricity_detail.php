@@ -118,9 +118,19 @@ $ses_username = $_SESSION[loginid];
                             <div class="row">
                                 <div class="form-group col-sm-4">
                                     <label>(2) เครื่องปรับอากาศ</label>
-                                    <div class="form-group input-group">
-                                        <input type="text" class="form-control" name="equ_air" required>
-                                        <span class="input-group-addon">บีทียู</span>
+                                    <div class="form-group">
+                                        <select id="equ_air" class="form-control" name="equ_air" required>
+                                            <option value=""><-- เลือกขนาดเครื่องปรับอากาศ --></option>
+                                            <option value="0">12,000 บีทียู</option>
+                                            <option value="1">15,300 บีทียู</option>
+                                            <option value="2">18,000 บีทียู</option>
+                                            <option value="3">20,800 บีทียู</option>
+                                            <option value="4">22,800 บีทียู</option>
+                                            <option value="5">27,200 บีทียู</option>
+                                            <option value="6">32,800 บีทียู</option>
+                                            <option value="8">38,000 บีทียู</option>
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
@@ -164,19 +174,15 @@ $ses_username = $_SESSION[loginid];
                                     <div class="form-group">
                                         <select id="equ_meter" class="form-control" name="equ_meter" required>
                                             <option value=""><-- เลือกขนาดหม้อแปลง --></option>
-                                            <?php if($array['re_want_type']=="0"){ ?>
-                                            <?php } ?>
-                                            <option value="">หม้อแปลง 1 เฟส ขนาด 30 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 50 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 100 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 160 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 250 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 315 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 400 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 500 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 1000 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 1250 KVA</option>
-                                            <option value="">หม้อแปลง 3 เฟส ขนาด 2000 KVA</option>
+                                            <?php
+                                            $sqlmeter = "SELECT * FROM tb_meter where me_type='".$array['re_want_type']."' ";
+                                            $querrymeter = mysql_query($sqlmeter);
+                                            while ($arraymeter = mysql_fetch_array($querrymeter)) {
+                                                ?>
+                                                <option value="<?= $arraymeter['me_id']; ?>" ><?= $arraymeter['me_name']; ?></option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>

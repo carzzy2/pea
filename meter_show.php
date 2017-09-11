@@ -1,18 +1,14 @@
+
 <?php
 @session_start();
 include "connect_db.php";
-$ses_userid =$_SESSION[ses_userid];
-$ses_username = $_SESSION[loginid];
-	if($ses_userid <> session_id() or $ses_username ==""){
+$ses_umeid =$_SESSION[ses_userid];
+$ses_umename = $_SESSION[loginid];
+	if($ses_umeid <> session_id() or $ses_umename ==""){
 		echo "<script>alert('กรุณาลงชื่อเข้าสู่ระบบก่อน');</script>";
 		echo "<meta http-equiv='refresh' content='0;URL=login.php' />";
 		exit();
 	}
-function Dateim($mydate){
-    $d=split("-",$mydate);
-    $mydate=$d[2]."/".$d[1]."/".($d[0]+543);
-    return "$mydate";
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,11 +37,12 @@ function Dateim($mydate){
         <div class="col-sm-12 ">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h2 class="panel-title">คำร้องขอใช้ไฟฟ้า</h2>
+                    <h2 class="panel-title">ข้อมูลประเภทมิเตอร์</h2>
                 </div>
             <div class="panel-body">
+            <div class="col-sm-12">
             <div class="col-sm-2">
-                    <a href="RequestElectricity.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
+                    <a href="meter_add.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
             </div>
             <div class="col-sm-4">
                 <form name="frmSearch" method="POST">
@@ -57,10 +54,11 @@ function Dateim($mydate){
                     </div> 
                 </form>
             </div>
+
             <div class="col-sm-12">
                 <div class="table-responsive">
                     <?php
-                        $sql_all_rows="select * from tb_electricity order by re_id";
+                        $sql_all_rows="select * from tb_meter order by me_id";
                         $result_all_rows=mysql_db_query($dbname,$sql_all_rows);
                         $rows=mysql_num_rows($result_all_rows);
                         echo $row;
@@ -70,9 +68,9 @@ function Dateim($mydate){
                     <?php
                     for($i=1;$i<=$total_page;$i++){
                             if($start==$i){
-                                    echo "<a href='RequestElectricity_show.php?start=".$i."&limit=".$limit."'><button class='btn btn-default '>".$i."</button></a>&nbsp;";
+                                    echo "<a href='meter_show.php?start=".$i."&limit=".$limit."'><button class='btn btn-default '>".$i."</button></a>&nbsp;";
                             }else{
-                                    echo "<a href='RequestElectricity_show.php?start=".$i."&limit=".$limit."' c><button class='btn btn-default active'>".$i."</button></a>&nbsp;";
+                                    echo "<a href='meter_show.php?start=".$i."&limit=".$limit."' c><button class='btn btn-default active'>".$i."</button></a>&nbsp;";
                             }
 
                     }
@@ -81,119 +79,89 @@ function Dateim($mydate){
                         <thead>               
                             <tr>
                                 <th class=" text-center" >ลำดับ</th>
-                                <th class=" text-center" >รหัสใบคำร้อง</th>
-                                <th class=" text-center" >วันที่บันทึก</th>
+                                <th class=" text-center" >รหัสมิเตอร์</th>
                                 <th class=" text-center" >รายการ</th>
-                                <th class=" text-center" >ลูกค้า</th>
-                                <th class=" text-center" >โทรศัพท์</th>
-                                <th class=" text-center" >สถานะ</th>
+                                <th class=" text-center" >ราคาบริการ</th>
+                                <th class=" text-center" >วัสถุประสงค์</th>
                                 <th class=" text-center">จัดการข้อมูล</th>
                             </tr> 
                         </thead>
                             <tbody>
                             <?php
                                 $n=0;
+
                                 if($_GET[start]=="" || $_GET[start]=="1"){ 
                                         $page="0"; 
                                 }else{
                                         $page=($_GET[start]-1)*$limit; 
                                 }
-                                $sql="select * from tb_electricity where re_id like '%".$_POST[search]."%' order by re_id desc limit $page,$limit";
+                                $sql="select * from tb_meter where me_id like '%".$_POST[search]."%' or me_name like '%".$_POST[search]."%'  limit $page,$limit ";
                                 $result=mysql_db_query($dbname,$sql);
                                     if(mysql_num_rows($result)>0){
                                         while($array=mysql_fetch_array($result)){
-                                            $page++;
-                                            $sqlcus="select * from tb_customer where cus_id='".$array[cus_id]."'";
-                                            $resultcus=mysql_db_query($dbname,$sqlcus);
-                                            $arraycus=mysql_fetch_array($resultcus);
-                                            
-                                            if ($array[re_want_type] == 0) {
+                                            $n++;
+                                            if ($array[me_type] == 0) {
                                                 $want = "ขอติดตั้งมิเตอร์ใหม่";
-                                            } elseif ($array[re_want_type] == 1) {
+                                            } elseif ($array[me_type] == 1) {
                                                 $want = "ขอตัดฝากมิเตอร์โดยไม่ใช้ไฟฟ้า";
-                                            } elseif ($array[re_want_type] == 2) {
+                                            } elseif ($array[me_type] == 2) {
                                                 $want = "ขอต่อกลับการใช้ไฟฟ้า";
-                                            } elseif ($array[re_want_type] == 3) {
+                                            } elseif ($array[me_type] == 3) {
                                                 $want = "ขอเพื่มขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                            } elseif ($array[re_want_type] == 4) {
+                                            } elseif ($array[me_type] == 4) {
                                                 $want = "ขอเปลี่ยนประเภทมิเตอร์";
-                                            } elseif ($array[re_want_type] == 5) {
+                                            } elseif ($array[me_type] == 5) {
                                                 $want = "ขอหยุดซ่อมแซมเครื่องจักรประจำปี";
-                                            } elseif ($array[re_want_type] == 6) {
+                                            } elseif ($array[me_type] == 6) {
                                                 $want = "ขอใช้ไฟฟ้าชั่วคราวแบบเหมาจ่าย";
-                                            } elseif ($array[re_want_type] == 7) {
+                                            } elseif ($array[me_type] == 7) {
                                                 $want = "ขอติดตั้งไฟฟ้าชั่วคราว";
-                                            } elseif ($array[re_want_type] == 8) {
+                                            } elseif ($array[me_type] == 8) {
                                                 $want = "ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT";
-                                            } elseif ($array[re_want_type] == 9) {
+                                            } elseif ($array[me_type] == 9) {
                                                 $want = "ขอยกเลิกเลิกการใช้ไฟฟ้า";
-                                            } elseif ($array[re_want_type] == 10) {
-                                                $want = "ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                            } elseif ($array[re_want_type] == 11) {
+                                            } elseif ($array[me_type] == 10) {
+                                                $want = "ขอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
+                                            } elseif ($array[me_type] == 11) {
                                                 $want = "ขอใช้ไฟฟ้าสาธารณะ";
-                                            } elseif ($array[re_want_type] == 12) {
+                                            } elseif ($array[me_type] == 12) {
                                                 $want = "ขอตัดมิเตอร์ใช้เพื่อแสงสว่างลด CT";
-                                            } elseif ($array[re_want_type] == 13) {
+                                            } elseif ($array[me_type] == 13) {
                                                 $want = "ขอย้ายจุดติดตั้งมิเตอร์/อุปกรณ์ประกอบ";
-                                            } elseif ($array[re_want_type] == 14) {
+                                            } elseif ($array[me_type] == 14) {
                                                 $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
-                                            } elseif ($array[re_want_type] == 15) {
+                                            } elseif ($array[me_type] == 15) {
                                                 $want = "ขอใช้ไฟฟ้าตู้โทรศัพท์ต่อตรง";
-                                            } elseif ($array[re_want_type] == 16) {
+                                            } elseif ($array[me_type] == 16) {
                                                 $want = $array[re_place_other];
-                                            }
-                                            if($array[re_status]==0){
-                                                $status="ยังไม่ได้สำรวจ";
-                                                $label="info";
-                                            }elseif($array[re_status]==1){
-                                               $status="ผ่านการสำรวจแล้ว";
-                                               $label="default";
-                                            }elseif($array[re_status]==2){
-                                               $status="ชำระค่าธรรมเนียมแล้ว";
-                                               $label="default";
-                                            }elseif($array[re_status]==3){
-                                               $status="บันทึกการปฎิบัติงานแล้ว";
-                                               $label="default";
-                                            }elseif($array[re_status]==4){
-                                               $status="ผ่านการตรวจสอบมาตรฐาน";
-                                               $label="default";
-                                            }elseif($array[re_status]==5){
-                                               $status="ไม่ผ่านการตรวจสอบมาตรฐาน";
-                                               $label="default";
-                                            }elseif($array[re_status]==6){
-                                               $status="เสร็จสิ้น";
-                                               $label="success";
-                                            }elseif($array[re_status]==9){
-                                               $status="ไม่ผ่านการสำรวจ";
-                                               $label="danger";
                                             }
                             ?>	
                                     <tr>
-                                        <td class="text-center"><?=$page?></td>
-                                            <td class=" text-center"><?=$array[re_id]?></td>
-                                            <td class=" text-center"><?= Dateim($array[re_date]);?></td>
-                                            <td class=" text-center"><?=$want?></td>
-                                            <td class="text-center"><?=$arraycus[cus_name]?></td>
-                                            <td class="text-center"><?=$arraycus[cus_tel]?></td>
-                                            <td class="text-center"><span class="label label-<?=$label?>"><?=$status?></span></td>
+                                        <td class="text-center"><?=$n?></td>
+                                            <td><?=$array[me_id]?></td>
+                                            <td><?=$first?><?=$array[me_name]?></td>
+                                            <td class="text-right"><?= number_format($array[me_price],2)?></td>
+                                            <td class="text-center"><?=$want?></td>
                                             <td align="center">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-default" href="RequestElectricity_detail.php?re_id=<?=$array[re_id]?>">ดูรายละเอียด</a>
+                                                    <a class="btn btn-default" href="meter_add.php?id=<?=$array[me_id]?>&mode=edit" title="แก้ไข"><i class="fa fa-pencil"> แก้ไข</i></a>
+                                                    <a class="btn btn-danger" onclick="return confirm('คุณต้องการลบข้อมูลนี้ ?')" href="meter_save.php?id=<?=$array[me_id]?>&mode=del" ><span class="glyphicon glyphicon-floppy-remove"> ลบ</span></a>
                                                 </div>
                                             </td>
                                     </tr>
                                     <?php
-                                        }
+                                                    }
                                             }else{	
                                     ?>				  
-                                    <tr><td colspan="7" align="center">ไม่พบข้อมูล</td></tr>
+                                    <tr><td colspan="6" align="center">ไม่พบข้อมูล</td></tr>
                                     <?
                                             }
-                                    ?>
+                                    ?>	
                             </tbody>
                     </table>
                 </div>
             </div>  					
+        </div>					
         </div>
         </div>
     </div>

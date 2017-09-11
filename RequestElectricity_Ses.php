@@ -109,8 +109,5 @@ if($_GET[mode]=="RequestElectricity_part1"){
 		$_SESSION['re_use_type']=$_POST[re_use_type];
 		$_SESSION['re_use_other']=$_POST[re_use_other];
 	echo "<meta http-equiv='refresh' content='0;URL=RequestElectricity_part6.php'>";
-}elseif($_GET[mode]=="RequestElectricity_part6"){
-		$_SESSION['re_dateset']=$_POST[re_dateset];
-	echo "<meta http-equiv='refresh' content='0;URL=RequestElectricity_part7.php'>";
 }	
 ?>

@@ -10,6 +10,7 @@ if($user[user_pos]==0){
                             <ul class="nav nav-second-level">
                                 <li><a href="user_show.php" >ข้อมูลเจ้าหน้าที่</a></li>
                                 <li><a href="customer_show" >ข้อมูลผู้ใช้บริการ</a></li>
+                                <li><a href="meter_show" >ข้อมูลประเภทมิเตอร์</a></li>
                             </ul>
                             <li>
                             <a href="#"><i class="hidden-xs showopacity glyphicon glyphicon-folder-open">&nbsp;</i>รายงาน<span class="fa arrow"></span></a>
@@ -34,6 +35,7 @@ if($user[user_pos]==0){
                             <a href="#"><i class="hidden-xs showopacity glyphicon glyphicon-user">&nbsp;</i>ข้อมูลพื้นฐาน<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li><a href="customer_show" >ข้อมูลผู้ใช้บริการ</a></li>
+                                <li><a href="meter_show" >ข้อมูลประเภทมิเตอร์</a></li>
                             </ul>
                         </li>
 
