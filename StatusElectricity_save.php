@@ -26,8 +26,12 @@ if ($_POST[typestatus] == "nopass") {
     } else {
         $other = $_POST[equ_other];
     }
-    $sql2 = "insert into tb_equipment(equ_id,equ_date,re_id,user_id,equ_tran,equ_tran_unit,equ_air,equ_air_unit,equ_lantern,equ_outlet,equ_fan,equ_other,equ_status) 
-        values('" . $id . "',NOW(),'" . $_POST[re_id] . "','" . $_POST[user_id] . "','" . $_POST[equ_tran] . "','" . $_POST[equ_tran_unit] . "','" . $_POST[equ_air] . "','" . $_POST[equ_air_unit] . "','" . $_POST[equ_lantern] . "','" . $_POST[equ_outlet] . "','" . $_POST[equ_fan] . "','" . $other . "',0)";
+    $sql2 = "insert into tb_equipment(equ_id,equ_date,re_id,user_id,equ_tran,equ_tran_unit,equ_air,equ_air_unit
+    ,equ_lantern,equ_outlet,equ_fan,me_id,equ_meter_unit,equ_other,equ_status) 
+        values('" . $id . "',NOW(),'" . $_POST[re_id] . "','" . $_POST[user_id] . "','" . $_POST[equ_tran] . "',
+        '" . $_POST[equ_tran_unit] . "','" . $_POST[equ_air] . "','" . $_POST[equ_air_unit] . "',
+        '" . $_POST[equ_lantern] . "','" . $_POST[equ_outlet] . "','" . $_POST[equ_fan] . "','" . $_POST[me_id] . "',
+        '" . $_POST[equ_meter_unit] . "','" . $other . "',0)";
     mysql_query($sql2);
     echo "<script>alert('บันทึกการสำรวงานใบคำร้องขอใช้ไฟฟ้าเลขที่ $_POST[re_id] เรียบร้อยแล้ว');</script>";
     echo "<META http-equiv='refresh' Content='0; URL=StatusElectricity.php'>";

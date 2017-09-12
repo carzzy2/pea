@@ -79,9 +79,21 @@ $ses_username = $_SESSION[loginid];
                             <div class="row">
                                 <div class="form-group col-sm-4">
                                     <label>(1)หม้อแปลงขนาด</label>
-                                    <div class="form-group input-group">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกข้อมูล" name="equ_tran" value="<?= $array[equ_tran] ?>" readonly>
-                                        <span class="input-group-addon">เควีเอ.</span>
+                                    <div class="form-group">
+                                    <select id="equ_tran" class="form-control" name="equ_tran" disabled>
+                                        <option value=""><-- เลือกขนาดหม้อแปลง --></option>
+                                        <option value="1 เฟส ขนาด 30 KVA" <?php if($array[equ_tran]=="1 เฟส ขนาด 30 KVA"){ echo "selected";} ?>> 1 เฟส ขนาด 30 KVA</option>
+                                        <option value="3 เฟส ขนาด 50 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 50 KVA"){ echo "selected";} ?>>3 เฟส ขนาด 50 KVA</option>
+                                        <option value="3 เฟส ขนาด 100 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 100 KVA"){ echo "selected";} ?>> 3 เฟส ขนาด 100 KVA</option>
+                                        <option value="3 เฟส ขนาด 160 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 160 KVA"){ echo "selected";} ?>> 3 เฟส ขนาด 160 KVA</option>
+                                        <option value="3 เฟส ขนาด 250 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 250 KVA"){ echo "selected";} ?>> 3 เฟส ขนาด 250 KVA</option>
+                                        <option value="3 เฟส ขนาด 315 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 315 KVA"){ echo "selected";} ?>> 3 เฟส ขนาด 315 KVA</option>
+                                        <option value="3 เฟส ขนาด 400 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 400 KVA"){ echo "selected";} ?>> 3 เฟส ขนาด 400 KVA</option>
+                                        <option value="3 เฟส ขนาด 500 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 500 KVA"){ echo "selected";} ?>> 3 เฟส ขนาด 500 KVA</option>
+                                        <option value="3 เฟส ขนาด 1000 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 1000 KVA"){ echo "selected";} ?>> 3 เฟส ขนาด 1000 KVA</option>
+                                        <option value="3 เฟส ขนาด 1250 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 1250 KVA"){ echo "selected";} ?>> 3 เฟส ขนาด 1250 KVA</option>
+                                        <option value="3 เฟส ขนาด 2000 KVA" <?php if($array[equ_tran]=="3 เฟส ขนาด 2000 KVA"){ echo "selected";} ?>> 3 เฟส ขนาด 2000 KVA</option>
+                                    </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
@@ -95,9 +107,18 @@ $ses_username = $_SESSION[loginid];
                             <div class="row">
                                 <div class="form-group col-sm-4">
                                     <label>(2)เครื่องปรับอากาศ</label>
-                                    <div class="form-group input-group">
-                                        <input type="text" class="form-control" placeholder="กรุณากรอกข้อมูล" name="equ_air" value="<?= $array[equ_air] ?>" readonly>
-                                        <span class="input-group-addon">บีทียู</span>
+                                    <div class="form-group">
+                                        <select id="equ_air" class="form-control" name="equ_air" disabled>
+                                            <option value="12,000 บีทียู" <?php if($array[equ_air]=="12,000 บีทียู"){ echo "selected";} ?>>12,000 บีทียู</option>
+                                            <option value="15,300 บีทียู" <?php if($array[equ_air]=="15,300 บีทียู"){ echo "selected";} ?>>15,300 บีทียู</option>
+                                            <option value="18,000 บีทียู" <?php if($array[equ_air]=="18,000 บีทียู"){ echo "selected";} ?>>18,000 บีทียู</option>
+                                            <option value="20,800 บีทียู" <?php if($array[equ_air]=="20,800 บีทียู"){ echo "selected";} ?>>20,800 บีทียู</option>
+                                            <option value="22,800 บีทียู" <?php if($array[equ_air]=="22,800 บีทียู"){ echo "selected";} ?>>22,800 บีทียู</option>
+                                            <option value="27,200 บีทียู" <?php if($array[equ_air]=="27,200 บีทียู"){ echo "selected";} ?>>27,200 บีทียู</option>
+                                            <option value="32,800 บีทียู" <?php if($array[equ_air]=="32,800 บีทียู"){ echo "selected";} ?>>32,800 บีทียู</option>
+                                            <option value="38,000 บีทียู" <?php if($array[equ_air]=="38,000 บีทียู"){ echo "selected";} ?>>38,000 บีทียู</option>
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
@@ -124,6 +145,8 @@ $ses_username = $_SESSION[loginid];
                                         <span class="input-group-addon">ชุด</span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-sm-4">
                                     <label>(5)พัดลม</label>
                                     <div class="form-group input-group">
@@ -133,8 +156,34 @@ $ses_username = $_SESSION[loginid];
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label>(6) มิเตอร์</label>
+                                    <div class="form-group">
+                                        <select id="me_id" class="form-control" name="me_id" disabled>
+                                            <option value=""><-- เลือกขนาดหม้อแปลง --></option>
+                                            <?php
+                                            $sqlmeter = "SELECT * FROM tb_meter where me_type='".$array['me_id']."' ";
+                                            $querrymeter = mysql_query($sqlmeter);
+                                            while ($arraymeter = mysql_fetch_array($querrymeter)) {
+                                                ?>
+                                                <option value="<?= $arraymeter['me_id']; ?>" selected><?= $arraymeter['me_name']; ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>จำนวน</label>
+                                    <div class="form-group input-group">
+                                        <input type="number" class="form-control" name="equ_meter_unit" value="<?= $array[equ_meter_unit] ?>"readonly>
+                                        <span class="input-group-addon">ตัว</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-sm-8">
-                                    <label>(6)อื่นๆ ระบุ</label>
+                                    <label>(7)อื่นๆ ระบุ</label>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="equ_other" value="<?= $array[equ_other] ?>" readonly> 
                                     </div>

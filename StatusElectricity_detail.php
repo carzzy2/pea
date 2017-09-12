@@ -91,19 +91,19 @@ $ses_username = $_SESSION[loginid];
                                 <div class="form-group col-sm-4">
                                     <label>(1) หม้อแปลง</label>
                                     <div class="form-group">
-                                        <select id="equ_meter" class="form-control" name="equ_meter" required>
+                                        <select id="equ_tran" class="form-control" name="equ_tran" required>
                                             <option value=""><-- เลือกขนาดหม้อแปลง --></option>
-                                            <option value="0"> 1 เฟส ขนาด 30 KVA</option>
-                                            <option value="1">3 เฟส ขนาด 50 KVA</option>
-                                            <option value="2"> 3 เฟส ขนาด 100 KVA</option>
-                                            <option value="3"> 3 เฟส ขนาด 160 KVA</option>
-                                            <option value="4">ง 3 เฟส ขนาด 250 KVA</option>
-                                            <option value="5"> 3 เฟส ขนาด 315 KVA</option>
-                                            <option value="6"> 3 เฟส ขนาด 400 KVA</option>
-                                            <option value="7"> 3 เฟส ขนาด 500 KVA</option>
-                                            <option value="8"> 3 เฟส ขนาด 1000 KVA</option>
-                                            <option value="9"> 3 เฟส ขนาด 1250 KVA</option>
-                                            <option value="10"> 3 เฟส ขนาด 2000 KVA</option>
+                                            <option value="1 เฟส ขนาด 30 KVA"> 1 เฟส ขนาด 30 KVA</option>
+                                            <option value="3 เฟส ขนาด 50 KVA">3 เฟส ขนาด 50 KVA</option>
+                                            <option value="3 เฟส ขนาด 100 KVA"> 3 เฟส ขนาด 100 KVA</option>
+                                            <option value="3 เฟส ขนาด 160 KVA"> 3 เฟส ขนาด 160 KVA</option>
+                                            <option value="3 เฟส ขนาด 250 KVA"> 3 เฟส ขนาด 250 KVA</option>
+                                            <option value="3 เฟส ขนาด 315 KVA"> 3 เฟส ขนาด 315 KVA</option>
+                                            <option value="3 เฟส ขนาด 400 KVA"> 3 เฟส ขนาด 400 KVA</option>
+                                            <option value="3 เฟส ขนาด 500 KVA"> 3 เฟส ขนาด 500 KVA</option>
+                                            <option value="3 เฟส ขนาด 1000 KVA"> 3 เฟส ขนาด 1000 KVA</option>
+                                            <option value="3 เฟส ขนาด 1250 KVA"> 3 เฟส ขนาด 1250 KVA</option>
+                                            <option value="3 เฟส ขนาด 2000 KVA"> 3 เฟส ขนาด 2000 KVA</option>
                                         </select>
                                     </div>
                                 </div>
@@ -121,14 +121,14 @@ $ses_username = $_SESSION[loginid];
                                     <div class="form-group">
                                         <select id="equ_air" class="form-control" name="equ_air" required>
                                             <option value=""><-- เลือกขนาดเครื่องปรับอากาศ --></option>
-                                            <option value="0">12,000 บีทียู</option>
-                                            <option value="1">15,300 บีทียู</option>
-                                            <option value="2">18,000 บีทียู</option>
-                                            <option value="3">20,800 บีทียู</option>
-                                            <option value="4">22,800 บีทียู</option>
-                                            <option value="5">27,200 บีทียู</option>
-                                            <option value="6">32,800 บีทียู</option>
-                                            <option value="8">38,000 บีทียู</option>
+                                            <option value="12,000 บีทียู">12,000 บีทียู</option>
+                                            <option value="15,300 บีทียู">15,300 บีทียู</option>
+                                            <option value="18,000 บีทียู">18,000 บีทียู</option>
+                                            <option value="20,800 บีทียู">20,800 บีทียู</option>
+                                            <option value="22,800 บีทียู">22,800 บีทียู</option>
+                                            <option value="27,200 บีทียู">27,200 บีทียู</option>
+                                            <option value="32,800 บีทียู">32,800 บีทียู</option>
+                                            <option value="38,000 บีทียู">38,000 บีทียู</option>
 
                                         </select>
                                     </div>
@@ -167,12 +167,13 @@ $ses_username = $_SESSION[loginid];
                                         <span class="input-group-addon">เครื่อง</span>
                                     </div>
                                 </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-4">
                                     <label>(6) มิเตอร์</label>
                                     <div class="form-group">
-                                        <select id="equ_meter" class="form-control" name="equ_meter" required>
+                                        <select id="me_id" class="form-control" name="me_id" required>
                                             <option value=""><-- เลือกขนาดหม้อแปลง --></option>
                                             <?php
                                             $sqlmeter = "SELECT * FROM tb_meter where me_type='".$array['re_want_type']."' ";
@@ -184,6 +185,13 @@ $ses_username = $_SESSION[loginid];
                                             }
                                             ?>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>จำนวน</label>
+                                    <div class="form-group input-group">
+                                        <input type="number" class="form-control" name="equ_meter_unit"  required>
+                                        <span class="input-group-addon">ตัว</span>
                                     </div>
                                 </div>
                             </div>
