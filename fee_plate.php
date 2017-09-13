@@ -34,12 +34,12 @@ $ses_username = $_SESSION[loginid];
 ?>
     <div id="page-wrapper">
             <center>
-                <iframe src="RequestElectricity_print.php?re_id=<?=$_GET[re_id]?>" width="100%" height="600"></iframe>
+                <iframe src="fee_print.php?fee_id=<?=$_GET[fee_id]?>" width="100%" height="600"></iframe>
             </center>
             <center>
                 <div class="btn-group">
-                    <a href="RequestElectricity_show" class="btn btn-info" >กลับหน้าแรก</a>
-                    <a href="RequestElectricity_print.php?re_id=<?=$_GET[re_id]?>" class="btn btn-primary" target="_blank">พิมพ์</a>
+                    <a href="fee_show" class="btn btn-info" >กลับหน้าแรก</a>
+                    <a href="fee_print.php?fee_id=<?=$_GET[fee_id]?>" class="btn btn-primary" target="_blank">พิมพ์</a>
                 </div>
             </center>
 

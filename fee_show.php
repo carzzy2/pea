@@ -31,16 +31,17 @@ $ses_username = $_SESSION[loginid];
 
 <?php
     include"sidebar.php"; 
+
 ?>
     <div id="page-wrapper">
         <div class="col-sm-12 ">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h2 class="panel-title">ข้อมูลเจ้าหน้าที่</h2>
+                    <h2 class="panel-title">รับชำระค่าธรรมเนียม</h2>
                 </div>
             <div class="panel-body">
             <div class="col-sm-2">
-                    <a href="user_add.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
+                    <a href="fee_add.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
             </div>
             <div class="col-sm-4">
                 <form name="frmSearch" method="POST">
@@ -56,7 +57,12 @@ $ses_username = $_SESSION[loginid];
             <div class="col-sm-12">
                 <div class="table-responsive">
                     <?php
-                        $sql_all_rows="select * from tb_user order by user_id";
+                    function Dateim($mydate) {
+                        $d = split("-", $mydate);
+                        $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
+                        return "$mydate";
+                    }
+                        $sql_all_rows="select * from tb_fee order by fee_id";
                         $result_all_rows=mysql_db_query($dbname,$sql_all_rows);
                         $rows=mysql_num_rows($result_all_rows);
                         echo $row;
@@ -66,9 +72,9 @@ $ses_username = $_SESSION[loginid];
                     <?php
                     for($i=1;$i<=$total_page;$i++){
                             if($start==$i){
-                                    echo "<a href='user_show.php?start=".$i."&limit=".$limit."'><button class='btn btn-default '>".$i."</button></a>&nbsp;";
+                                    echo "<a href='fee_show.php?start=".$i."&limit=".$limit."'><button class='btn btn-default '>".$i."</button></a>&nbsp;";
                             }else{
-                                    echo "<a href='user_show.php?start=".$i."&limit=".$limit."' c><button class='btn btn-default active'>".$i."</button></a>&nbsp;";
+                                    echo "<a href='fee_show.php?start=".$i."&limit=".$limit."' c><button class='btn btn-default active'>".$i."</button></a>&nbsp;";
                             }
 
                     }
@@ -77,11 +83,11 @@ $ses_username = $_SESSION[loginid];
                         <thead>               
                             <tr>
                                 <th class=" text-center" >ลำดับ</th>
-                                <th class=" text-center" >รหัสเจ้าหน้าที่</th>
-                                <th class=" text-center" >ชื่อ-นามสกุล</th>
-                                <th class=" text-center" >ที่อยู่</th>
-                                <th class=" text-center" >เบอร์โทรศัพท์</th>
-                                <th class=" text-center" >ตำแหน่ง</th>
+                                <th class=" text-center" >รหัสชำระเงิน</th>
+                                <th class=" text-center" >วันที่ชำระ</th>
+                                <th class=" text-center" >พนักงาน</th>
+                                <th class=" text-center" >รายการ</th>
+                                <th class=" text-center" >จำนวนเงิน</th>
                                 <th class=" text-center">จัดการข้อมูล</th>
                             </tr> 
                         </thead>
@@ -93,35 +99,59 @@ $ses_username = $_SESSION[loginid];
                                 }else{
                                         $page=($_GET[start]-1)*$limit; 
                                 }
-                                $sql="select * from tb_user where user_id like '%".$_POST[search]."%' or user_name like '%".$_POST[search]."%' or user_last like '%".$_POST[search]."%' limit $page,$limit ";
+                                $sql="select * from tb_fee,tb_user,tb_electricity where fee_id like '%".$_POST[search]."%'
+                                    and tb_fee.re_id=tb_electricity.re_id and tb_fee.user_id=tb_user.user_id 
+                                          limit $page,$limit ";
                                 $result=mysql_db_query($dbname,$sql);
                                     if(mysql_num_rows($result)>0){
                                         while($array=mysql_fetch_array($result)){
                                             $n++;
-                                            if($array[user_first]==0){
-                                                $first="นาย";
-                                            }elseif($array[user_first]==1){
-                                                $first="นาง";
-                                            }else{
-                                               $first="นางสาว"; 
-                                            }
-                                            if($array[user_pos]==0){
-                                                $stat="ผู้ดูแลระบบ";
-                                            }else{
-                                               $stat="เจ้าหน้าที่"; 
+                                            if ($array[re_want_type] == 0) {
+                                                $want = "ขอติดตั้งมิเตอร์ใหม่";
+                                            } elseif ($array[re_want_type] == 1) {
+                                                $want = "ขอตัดฝากมิเตอร์โดยไม่ใช้ไฟฟ้า";
+                                            } elseif ($array[re_want_type] == 2) {
+                                                $want = "ขอต่อกลับการใช้ไฟฟ้า";
+                                            } elseif ($array[re_want_type] == 3) {
+                                                $want = "ขอเพื่มขนาดมิเตอร์/อุปกรณ์ประกอบ";
+                                            } elseif ($array[re_want_type] == 4) {
+                                                $want = "ขอเปลี่ยนประเภทมิเตอร์";
+                                            } elseif ($array[re_want_type] == 5) {
+                                                $want = "ขอหยุดซ่อมแซมเครื่องจักรประจำปี";
+                                            } elseif ($array[re_want_type] == 6) {
+                                                $want = "ขอใช้ไฟฟ้าชั่วคราวแบบเหมาจ่าย";
+                                            } elseif ($array[re_want_type] == 7) {
+                                                $want = "ขอติดตั้งไฟฟ้าชั่วคราว";
+                                            } elseif ($array[re_want_type] == 8) {
+                                                $want = "ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT";
+                                            } elseif ($array[re_want_type] == 9) {
+                                                $want = "ขอยกเลิกเลิกการใช้ไฟฟ้า";
+                                            } elseif ($array[re_want_type] == 10) {
+                                                $want = "ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
+                                            } elseif ($array[re_want_type] == 11) {
+                                                $want = "ขอใช้ไฟฟ้าสาธารณะ";
+                                            } elseif ($array[re_want_type] == 12) {
+                                                $want = "ขอตัดมิเตอร์ใช้เพื่อแสงสว่างลด CT";
+                                            } elseif ($array[re_want_type] == 13) {
+                                                $want = "ขอย้ายจุดติดตั้งมิเตอร์/อุปกรณ์ประกอบ";
+                                            } elseif ($array[re_want_type] == 14) {
+                                                $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
+                                            } elseif ($array[re_want_type] == 15) {
+                                                $want = "ขอใช้ไฟฟ้าตู้โทรศัพท์ต่อตรง";
+                                            } elseif ($array[re_want_type] == 16) {
+                                                $want = $array[re_place_other];
                                             }
                             ?>	
                                     <tr>
                                         <td class="text-center"><?=$n?></td>
-                                            <td><?=$array[user_id]?></td>
-                                            <td><?=$first?><?=$array[user_name]?> <?=$array[user_last]?></td>
-                                            <td><?=$array[user_add]?></td>
-                                            <td class="text-center"><?=$array[user_tel]?></td>
-                                            <td class="text-center"><?=$stat?></td>
+                                            <td><?=$array[fee_id]?></td>
+                                            <td><?= Dateim($array[re_date]); ?></td>
+                                            <td><?=$array[user_name]?> <?=$array[user_last]?></td>
+                                            <td class="text-center"><?=$want?></td>
+                                            <td class="text-center"><?= number_format($array[fee_price])?></td>
                                             <td align="center">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-default" href="user_add.php?id=<?=$array[user_id]?>&mode=edit" title="แก้ไข"><i class="fa fa-pencil"> แก้ไข</i></a>
-                                                    <a class="btn btn-danger" onclick="return confirm('คุณต้องการลบข้อมูลนี้ ?')" href="user_save.php?id=<?=$array[user_id]?>&mode=del" ><span class="glyphicon glyphicon-floppy-remove"> ลบ</span></a>
+                                                    <a class="btn btn-default" href="fee_detail.php?re_id=<?=$array[fee_id]?>">ดูรายละเอียด</a>
                                                 </div>
                                             </td>
                                     </tr>

@@ -1,222 +1,188 @@
 <?php
 @session_start();
 include "connect_db.php";
-$ses_userid =$_SESSION[ses_userid];
+$ses_userid = $_SESSION[ses_userid];
 $ses_username = $_SESSION[loginid];
-	if($ses_userid <> session_id() or $ses_username ==""){
-		echo "<script>alert('กรุณาลงชื่อเข้าสู่ระบบก่อน');</script>";
-		echo "<meta http-equiv='refresh' content='0;URL=login.php' />";
-		exit();
-	}
+if ($ses_userid <> session_id() or $ses_username == "") {
+    echo "<script>alert('กรุณาลงชื่อเข้าสู่ระบบก่อน');</script>";
+    echo "<meta http-equiv='refresh' content='0;URL=login.php' />";
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>PEA</title>
-    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet"><!-- Bootstrap Core CSS -->
-    <link href="vendor/metisMenu/metisMenu.css" rel="stylesheet"><!-- MetisMenu CSS -->
-    <link href="dist/css/sb-admin-2.css" rel="stylesheet"><!-- Custom CSS -->
-    <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"><!-- Custom Fonts -->
-    <script src="vendor/jquery/jquery.min.js"></script><!-- jQuery -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script><!-- Bootstrap Core JavaScript -->
-    <script src="vendor/metisMenu/metisMenu.min.js"></script><!-- Metis Menu Plugin JavaScript -->
-    <script src="dist/js/sb-admin-2.js"></script><!-- Custom Theme JavaScript -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>PEA</title>
+        <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet"><!-- Bootstrap Core CSS -->
+        <link href="vendor/metisMenu/metisMenu.css" rel="stylesheet"><!-- MetisMenu CSS -->
+        <link href="dist/css/sb-admin-2.css" rel="stylesheet"><!-- Custom CSS -->
+        <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"><!-- Custom Fonts -->
+        <script src="vendor/jquery/jquery.min.js"></script><!-- jQuery -->
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script><!-- Bootstrap Core JavaScript -->
+        <script src="vendor/metisMenu/metisMenu.min.js"></script><!-- Metis Menu Plugin JavaScript -->
+        <script src="dist/js/sb-admin-2.js"></script><!-- Custom Theme JavaScript -->
 
-</head>
+    </head>
 
-<body>
-<?php include "header.php";
-?>
+    <body>
+        <?php include "header.php";
+        ?>
 
-<?php
-    include"sidebar.php"; 
-?>
- <?php
- function Dateim($mydate){
-    $d=split("-",$mydate);
-    $mydate=$d[2]."/".$d[1]."/".($d[0]+543);
-    return "$mydate";
-}
-    $sql="select * from tb_electricity ele,tb_customer cus,tb_user user where re_id='".$_GET[id]."' and ele.cus_id=cus.cus_id and ele.user_id=user.user_id";
-    $result=mysql_db_query($dbname,$sql);
-    $array=mysql_fetch_array($result);
-?>
-    <div id="page-wrapper">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h2 class="panel-title">อนุมัติการสำรวจหน้างานเลขที่ <?= $_GET[id] ?></h2>
-            </div>
-            <div class="panel-body">
-                <form method="post" action="StatusElectricity_save">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-3 form-group">
-                                <label>เลขที่คำร้อง</label>
-                                <input class="form-control" autocomplete=off  name="re_id" type="text" id="re_id" value="<?= $_GET[id] ?>" size="30" readonly/>
-                            </div>
-                            <div class="col-sm-3 form-group">
-                                <label>กฟฟ(สาขา).</label>
-                                <input  type="text" class="form-control"  value="<?= $array['re_branch'] ?>" readonly>		
-                            </div>
-                            
-                            <div class="col-sm-3 form-group">
-                                <label>วัน/เดือน/ปี</label>
-                                <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= Dateim($array[re_date]);?>"  readonly/>	
-                            </div>
-                            <div class="col-sm-3 form-group">
-                                <label>เจ้าหน้าที่ที่สำรวจ</label>
-                                <select id="user_id" class="form-control" name="user_id" required>
-                                    <option value=""><-- เลือกเจ้าหน้าที่สำรวจ --></option>
-                                    <?php
-                                    $strSQL = "SELECT * FROM tb_user where user_pos='1' ";
-                                    $objQuery = mysql_query($strSQL);
-                                    while ($objResult = mysql_fetch_array($objQuery)) {
-                                        ?>
-                                        <option value="<?= $objResult['user_id']; ?>" ><?= $objResult['user_id']; ?> <?php echo $objResult['user_name']; ?> <?php echo $objResult['user_last']; ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
+        <?php
+        include"sidebar.php";
+        ?>
+        <?php
+        $new_id = mysql_result(mysql_query("Select Max(substr(fee_id,-4))+1 as MaxID from tb_fee"), 0, "MaxID");
+        if ($new_id == '') {
+            $feeid = "140000000001";
+        } else {
+            $feeid = "14" . sprintf("%010d", $new_id);
+        }
+        ?>
+        <div id="page-wrapper">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h2 class="panel-title">รับชำระค่าธรรมเนียม</h2>
+                </div>
+                <div class="panel-body">
+                    <form method="post" action="fee_save.php">
                         <div class="col-sm-12">
                             <div class="row">
-                                <div class="form-group col-sm-12">
-                                    <label>อุปกรณ์ที่ใช้ติดตั้ง</label>
+                                <div class="col-sm-3 form-group">
+                                    <label>รหัสชำระเงิน</label>
+                                    <input class="form-control" autocomplete=off  name="fee_id" type="text" id="fee_id" value="<?= $feeid ?>" size="30" readonly/>
                                 </div>
-                            </div>    
-                            <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label>(1) หม้อแปลง</label>
-                                    <div class="form-group">
-                                        <select id="equ_tran" class="form-control" name="equ_tran" required>
-                                            <option value=""><-- เลือกขนาดหม้อแปลง --></option>
-                                            <option value="1 เฟส ขนาด 30 KVA"> 1 เฟส ขนาด 30 KVA</option>
-                                            <option value="3 เฟส ขนาด 50 KVA">3 เฟส ขนาด 50 KVA</option>
-                                            <option value="3 เฟส ขนาด 100 KVA"> 3 เฟส ขนาด 100 KVA</option>
-                                            <option value="3 เฟส ขนาด 160 KVA"> 3 เฟส ขนาด 160 KVA</option>
-                                            <option value="3 เฟส ขนาด 250 KVA"> 3 เฟส ขนาด 250 KVA</option>
-                                            <option value="3 เฟส ขนาด 315 KVA"> 3 เฟส ขนาด 315 KVA</option>
-                                            <option value="3 เฟส ขนาด 400 KVA"> 3 เฟส ขนาด 400 KVA</option>
-                                            <option value="3 เฟส ขนาด 500 KVA"> 3 เฟส ขนาด 500 KVA</option>
-                                            <option value="3 เฟส ขนาด 1000 KVA"> 3 เฟส ขนาด 1000 KVA</option>
-                                            <option value="3 เฟส ขนาด 1250 KVA"> 3 เฟส ขนาด 1250 KVA</option>
-                                            <option value="3 เฟส ขนาด 2000 KVA"> 3 เฟส ขนาด 2000 KVA</option>
-                                        </select>
-                                    </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>วัน/เดือน/ปี</label>
+                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
                                 </div>
-                                <div class="form-group col-sm-4">
-                                    <label>จำนวน</label>
-                                    <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_tran_unit"  required>
-                                        <span class="input-group-addon">เครื่อง</span>
-                                    </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>เจ้าหน้าที่ผู้รับคำร้อง</label>
+                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="user_id" type="text" id="user_id" value="<?=$user[user_name]?> <?=$user[user_last]?>" readonly/>	
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label>(2) เครื่องปรับอากาศ</label>
-                                    <div class="form-group">
-                                        <select id="equ_air" class="form-control" name="equ_air" required>
-                                            <option value=""><-- เลือกขนาดเครื่องปรับอากาศ --></option>
-                                            <option value="12,000 บีทียู">12,000 บีทียู</option>
-                                            <option value="15,300 บีทียู">15,300 บีทียู</option>
-                                            <option value="18,000 บีทียู">18,000 บีทียู</option>
-                                            <option value="20,800 บีทียู">20,800 บีทียู</option>
-                                            <option value="22,800 บีทียู">22,800 บีทียู</option>
-                                            <option value="27,200 บีทียู">27,200 บีทียู</option>
-                                            <option value="32,800 บีทียู">32,800 บีทียู</option>
-                                            <option value="38,000 บีทียู">38,000 บีทียู</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    <label>จำนวน</label>
-                                    <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_air_unit" required>
-                                        <span class="input-group-addon">เครื่อง</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label>(3) ดวงโคม</label>
-                                    <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_lantern" required>
-                                        <span class="input-group-addon">ดวง</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label>(4) เต้าเสียบ</label>
-                                    <div class="form-group input-group">
-                                        <input type="number" class="form-control"  name="equ_outlet" required>
-                                        <span class="input-group-addon">ชุด</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label>(5) พัดลม</label>
-                                    <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_fan" required >
-                                        <span class="input-group-addon">เครื่อง</span>
-                                    </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>เลขที่คำร้องขอใช้ไฟฟ้า</label>
+                                    <select id="re_id" class="form-control" name="re_id" OnChange="window.location = '?item=' + this.value;">
+                                        <option value=""><-- เลือกเลขที่คำร้องขอใช้ไฟฟ้า --></option>
+                                        <?php
+                                        $strSQL = "SELECT * FROM tb_electricity where re_status='1' ORDER BY re_id ASC";
+                                        $objQuery = mysql_query($strSQL);
+                                        while ($objResult = mysql_fetch_array($objQuery)) {
+                                            if ($_GET["item"] == $objResult["re_id"]) {
+                                                $sel = "selected";
+                                            } else {
+                                                $sel = "";
+                                            }
+                                            ?>
+                                            <option value="<?= $objResult["re_id"]; ?>"<?php echo $sel; ?>><?= $objResult["re_id"]; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 
                             </div>
+                            <?php
+                            if ($_GET["item"] != "") {
+                                    $sql = "select * from tb_electricity ele,tb_customer cus where re_id='" . $_GET[item] . "' and ele.cus_id=cus.cus_id";
+                                    $result = mysql_db_query($dbname, $sql);
+                                    $array = mysql_fetch_array($result);
+                                    if ($array[re_want_type] == 0) {
+                                        $want = "ขอติดตั้งมิเตอร์ใหม่";
+                                    } elseif ($array[re_want_type] == 1) {
+                                        $want = "ขอตัดฝากมิเตอร์โดยไม่ใช้ไฟฟ้า";
+                                    } elseif ($array[re_want_type] == 2) {
+                                        $want = "ขอต่อกลับการใช้ไฟฟ้า";
+                                    } elseif ($array[re_want_type] == 3) {
+                                        $want = "ขอเพื่มขนาดมิเตอร์/อุปกรณ์ประกอบ";
+                                    } elseif ($array[re_want_type] == 4) {
+                                        $want = "ขอเปลี่ยนประเภทมิเตอร์";
+                                    } elseif ($array[re_want_type] == 5) {
+                                        $want = "ขอหยุดซ่อมแซมเครื่องจักรประจำปี";
+                                    } elseif ($array[re_want_type] == 6) {
+                                        $want = "ขอใช้ไฟฟ้าชั่วคราวแบบเหมาจ่าย";
+                                    } elseif ($array[re_want_type] == 7) {
+                                        $want = "ขอติดตั้งไฟฟ้าชั่วคราว";
+                                    } elseif ($array[re_want_type] == 8) {
+                                        $want = "ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT";
+                                    } elseif ($array[re_want_type] == 9) {
+                                        $want = "ขอยกเลิกเลิกการใช้ไฟฟ้า";
+                                    } elseif ($array[re_want_type] == 10) {
+                                        $want = "ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
+                                    } elseif ($array[re_want_type] == 11) {
+                                        $want = "ขอใช้ไฟฟ้าสาธารณะ";
+                                    } elseif ($array[re_want_type] == 12) {
+                                        $want = "ขอตัดมิเตอร์ใช้เพื่อแสงสว่างลด CT";
+                                    } elseif ($array[re_want_type] == 13) {
+                                        $want = "ขอย้ายจุดติดตั้งมิเตอร์/อุปกรณ์ประกอบ";
+                                    } elseif ($array[re_want_type] == 14) {
+                                        $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
+                                    }
+                                ?>
                             <div class="row">
-                                <div class="form-group col-sm-4">
-                                    <label>(6) มิเตอร์</label>
-                                    <div class="form-group">
-                                        <select id="me_id" class="form-control" name="me_id" required>
-                                            <option value=""><-- เลือกขนาดหม้อแปลง --></option>
-                                            <?php
-                                            $sqlmeter = "SELECT * FROM tb_meter where me_type='".$array['re_want_type']."' ";
-                                            $querrymeter = mysql_query($sqlmeter);
-                                            while ($arraymeter = mysql_fetch_array($querrymeter)) {
-                                                ?>
-                                                <option value="<?= $arraymeter['me_id']; ?>" ><?= $arraymeter['me_name']; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>ชื่อลูกค้า</label>
+                                    <input class="form-control" autocomplete=off value="<?= $array['cus_name'] ?>" size="30" readonly/>
                                 </div>
-                                <div class="form-group col-sm-4">
-                                    <label>จำนวน</label>
-                                    <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_meter_unit"  required>
-                                        <span class="input-group-addon">ตัว</span>
-                                    </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>เบอร์โทรศัพท์</label>
+                                    <input class="form-control" autocomplete=off  value="<?= $array['cus_tel'] ?>" size="30" readonly/>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-sm-8">
-                                    <label>(6)อื่นๆ ระบุ</label>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="equ_other">
-                                    </div>
-                                </div>
-
-                            </div>
+                                <table  class="table table-bordered table-hover">
+                                    <thead>               
+                                        <tr>             
+                                            <th class="text-center" width="150px">รหัสสำรวจ</th>
+                                            <th class="text-center">วันที่สำรวจ</th>
+                                            <th class="text-center">รายการ</th>
+                                            <th  class="text-center" width="200px">จำนวนเงิน</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        function Dateim($mydate) {
+                                            $d = split("-", $mydate);
+                                            $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
+                                            return "$mydate";
+                                        }
+                                                $sql_mat = "select * from tb_equipment,tb_meter where tb_equipment.re_id='" . $_GET['item'] . "' and tb_equipment.equ_status='0' and tb_meter.me_id=tb_equipment.me_id";
+                                                $result_mat = mysql_db_query($dbname, $sql_mat);
+                                                $array_mat = mysql_fetch_array($result_mat);
+                                                $total=($array_mat['me_price']*7)/100+$array_mat['me_price'];
+                                                ?>		
+                                                <tr>
+                                                    <td class="text-center"><?= $array_mat['equ_id'] ?></td>
+                                                    <td class="text-center"><?= Dateim($array_mat['equ_date']); ?></td>
+                                                    <td><?=$want ?></td>
+                                                    <td class="text-right"><?= number_format($array_mat['me_price'],2) ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2"></td>
+                                                    <td  class="text-right"><b>ภาษีมูลค่าเพื่ม</b></td>
+                                                    <td  class="text-right"><b><?= number_format(($array_mat['me_price']*7)/100,2) ?></b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2"></td>
+                                                    <td  class="text-right"><b>รวมทั้งสิ้น</b></td>
+                                                    <td  class="text-right"><b><?= number_format($total,2) ?></b></td>
+                                                </tr>
+                                    </tbody>
+                                </table>
+                            <?php } ?>
+                            <center>
+                                <input type="hidden" name="fee_price" value="<?=$total?>" >
+                                <a class="btn btn-info" onclick="location.href = 'fee_show.php'"> ย้อนกลับ</a>
+                                <button class="btn  btn-success" name="Submit" type="submit" value="1">บันทึก</button>                            
+                            </center>
                         </div>
-                        <center>
-                            <input type="hidden" name="typestatus" value="pass" >
-                            <a class="btn btn-info" onclick="location.href='StatusElectricity.php'"> ย้อนกลับ</a>
-                            <button class="btn  btn-success" name="Submit" type="submit" value="1">บันทึก</button>                            
-                        </center>
-                    </div>
-                </form> 
+                    </form> 
+                </div>
+
+
             </div>
-
-
         </div>
-    </div>
-</body>
+    </body>
 
 </html>

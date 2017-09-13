@@ -52,7 +52,7 @@ $ses_username = $_SESSION[loginid];
                     }
                     	
                 ?>
-				<div class="col-sm-12">
+		<div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-3 form-group">
                             <label>เลขที่คำร้อง</label>
