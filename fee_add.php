@@ -130,6 +130,10 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                     <label>เบอร์โทรศัพท์</label>
                                     <input class="form-control" autocomplete=off  value="<?= $array['cus_tel'] ?>" size="30" readonly/>
                                 </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>มีความประสงค์</label>
+                                    <input class="form-control" autocomplete=off  value="<?= $want ?>" size="30" readonly/>
+                                </div>
                             </div>
                                 <table  class="table table-bordered table-hover">
                                     <thead>               
@@ -155,7 +159,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                                 <tr>
                                                     <td class="text-center"><?= $array_mat['equ_id'] ?></td>
                                                     <td class="text-center"><?= Dateim($array_mat['equ_date']); ?></td>
-                                                    <td><?=$want ?></td>
+                                                    <td><?=$array_mat['me_name'] ?></td>
                                                     <td class="text-right"><?= number_format($array_mat['me_price'],2) ?></td>
                                                 </tr>
                                                 <tr>
