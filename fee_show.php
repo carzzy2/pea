@@ -151,7 +151,7 @@ $ses_username = $_SESSION[loginid];
                                             <td class="text-center"><?= number_format($array[fee_price])?></td>
                                             <td align="center">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-default" href="fee_detail.php?re_id=<?=$array[fee_id]?>">ดูรายละเอียด</a>
+                                                    <a class="btn btn-default" href="fee_detail.php?fee_id=<?=$array[fee_id]?>">ดูรายละเอียด</a>
                                                 </div>
                                             </td>
                                     </tr>
