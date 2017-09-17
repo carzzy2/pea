@@ -9,12 +9,17 @@ if ($new_id == '') {
 } else {
     $id = "13" . sprintf("%010d", $new_id);
 }
-
+if ($_POST[equ_detail] == "") {
+        $other = "-";
+    } else {
+        $other = $_POST[equ_detail];
+    }
 if ($_POST[typestatus] == "nopass") {
+
     $sql = "update tb_electricity set re_status='9' where re_id='" . $_POST[re_id] . "'";
     mysql_query($sql);
     $sql2 = "insert into tb_equipment(equ_id,equ_date,re_id,user_id,equ_detail,equ_status) 
-        values('" . $id . "',NOW(),'" . $_POST[re_id] . "','" . $_POST[user_id] . "','" . $_POST[equ_detail] . "',1)";
+        values('" . $id . "',NOW(),'" . $_POST[re_id] . "','" . $_POST[user_id] . "','" . $other . "',1)";
     mysql_query($sql2);
     echo "<script>alert('บันทึกการสำรวงานใบคำร้องขอใช้ไฟฟ้าเลขที่ $_POST[re_id] เรียบร้อยแล้ว');</script>";
     echo "<META http-equiv='refresh' Content='0; URL=StatusElectricity.php'> ";
@@ -27,7 +32,7 @@ if ($_POST[typestatus] == "nopass") {
         $other = $_POST[equ_other];
     }
     $sql2 = "insert into tb_equipment(equ_id,equ_date,re_id,user_id,equ_tran,equ_tran_unit,equ_air,equ_air_unit
-    ,equ_lantern,equ_outlet,equ_fan,me_id,equ_meter_unit,equ_other,equ_status) 
+    ,equ_lantern,equ_outlet,equ_fan,me_id,equ_meter_unit,equ_detail,equ_status) 
         values('" . $id . "',NOW(),'" . $_POST[re_id] . "','" . $_POST[user_id] . "','" . $_POST[equ_tran] . "',
         '" . $_POST[equ_tran_unit] . "','" . $_POST[equ_air] . "','" . $_POST[equ_air_unit] . "',
         '" . $_POST[equ_lantern] . "','" . $_POST[equ_outlet] . "','" . $_POST[equ_fan] . "','" . $_POST[me_id] . "',

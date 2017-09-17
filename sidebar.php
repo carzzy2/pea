@@ -45,7 +45,7 @@ if($user[user_pos]==0){
                         <li><a href="StatusElectricity.php"><i class="hidden-xs showopacity glyphicon glyphicon-zoom-in">&nbsp;</i>สำรวจสถานะหน้างาน</a></li>
                         
                         <li><a href="fee_show.php"><i class="hidden-xs showopacity glyphicon glyphicon-usd">&nbsp;</i>รับชำระค่าธรรมเนียม</a></li>
-                        <li><a href="#.php"><i class="hidden-xs showopacity glyphicon glyphicon-list-alt">&nbsp;</i>บันทึกการปฎิบัติงาน</a></li>
+                        <li><a href="work_show.php"><i class="hidden-xs showopacity glyphicon glyphicon-list-alt">&nbsp;</i>บันทึกการปฎิบัติงาน</a></li>
                         <li><a href="#.php"><i class="hidden-xs showopacity glyphicon glyphicon-eye-open">&nbsp;</i>ตรวจสอบมาตรฐาน</a></li>
                         <li><a href="#.php"><i class="hidden-xs showopacity glyphicon glyphicon-pencil">&nbsp;</i>ตรวจสอบสถานะ</a></li>
                         <li>

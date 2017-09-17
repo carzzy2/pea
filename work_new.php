@@ -34,24 +34,24 @@ if ($ses_userid <> session_id() or $ses_username == "") {
         include"sidebar.php";
         ?>
         <?php
-        $new_id = mysql_result(mysql_query("Select Max(substr(fee_id,-4))+1 as MaxID from tb_fee"), 0, "MaxID");
+        $new_id = mysql_result(mysql_query("Select Max(substr(work_id,-4))+1 as MaxID from tb_work"), 0, "MaxID");
         if ($new_id == '') {
-            $feeid = "140000000001";
+            $feeid = "150000000001";
         } else {
-            $feeid = "14" . sprintf("%010d", $new_id);
+            $feeid = "15" . sprintf("%010d", $new_id);
         }
         ?>
         <div id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h2 class="panel-title">รับชำระค่าธรรมเนียม</h2>
+                    <h2 class="panel-title">บันทึกการปฎิบัติงาน</h2>
                 </div>
                 <div class="panel-body">
-                    <form method="post" action="fee_save.php">
+                    <form method="post" action="work_cal.php">
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-3 form-group">
-                                    <label>รหัสชำระเงิน</label>
+                                    <label>รหัสการปฎิบัติงาน</label>
                                     <input class="form-control" autocomplete=off  name="fee_id" type="text" id="fee_id" value="<?= $feeid ?>" size="30" readonly/>
                                 </div>
                                 <div class="col-sm-3 form-group">
@@ -59,18 +59,14 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                     <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
                                 </div>
                                 <div class="col-sm-3 form-group">
-                                    <label>เจ้าหน้าที่ผู้รับคำร้อง</label>
-                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="user_id" type="text" id="user_id" value="<?=$user[user_name]?> <?=$user[user_last]?>" readonly/>	
-                                </div>
-                                <div class="col-sm-3 form-group">
                                     <label>เลขที่คำร้องขอใช้ไฟฟ้า</label>
-                                    <select id="re_id" class="form-control" name="re_id" OnChange="window.location = '?item=' + this.value;">
+                                    <select id="re_id" class="form-control" name="re_id" OnChange="window.location = 'work_addreid?re_id=' + this.value;">
                                         <option value=""><-- เลือกเลขที่คำร้องขอใช้ไฟฟ้า --></option>
                                         <?php
-                                        $strSQL = "SELECT * FROM tb_electricity where re_status='1' ORDER BY re_id ASC";
+                                        $strSQL = "SELECT * FROM tb_electricity where re_status='2' ORDER BY re_id ASC";
                                         $objQuery = mysql_query($strSQL);
                                         while ($objResult = mysql_fetch_array($objQuery)) {
-                                            if ($_GET["item"] == $objResult["re_id"]) {
+                                            if ($_SESSION['ss_re_id'] == $objResult["re_id"]) {
                                                 $sel = "selected";
                                             } else {
                                                 $sel = "";
@@ -85,100 +81,78 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                 
                             </div>
                             <?php
-                            if ($_GET["item"] != "") {
+                            if ($_SESSION['ss_re_id'] != "") {
                                     $sql = "select * from tb_electricity ele,tb_customer cus where re_id='" . $_GET[item] . "' and ele.cus_id=cus.cus_id";
                                     $result = mysql_db_query($dbname, $sql);
                                     $array = mysql_fetch_array($result);
-                                    if ($array[re_want_type] == 0) {
-                                        $want = "ขอติดตั้งมิเตอร์ใหม่";
-                                    } elseif ($array[re_want_type] == 1) {
-                                        $want = "ขอตัดฝากมิเตอร์โดยไม่ใช้ไฟฟ้า";
-                                    } elseif ($array[re_want_type] == 2) {
-                                        $want = "ขอต่อกลับการใช้ไฟฟ้า";
-                                    } elseif ($array[re_want_type] == 3) {
-                                        $want = "ขอเพื่มขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                    } elseif ($array[re_want_type] == 4) {
-                                        $want = "ขอเปลี่ยนประเภทมิเตอร์";
-                                    } elseif ($array[re_want_type] == 5) {
-                                        $want = "ขอหยุดซ่อมแซมเครื่องจักรประจำปี";
-                                    } elseif ($array[re_want_type] == 6) {
-                                        $want = "ขอใช้ไฟฟ้าชั่วคราวแบบเหมาจ่าย";
-                                    } elseif ($array[re_want_type] == 7) {
-                                        $want = "ขอติดตั้งไฟฟ้าชั่วคราว";
-                                    } elseif ($array[re_want_type] == 8) {
-                                        $want = "ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT";
-                                    } elseif ($array[re_want_type] == 9) {
-                                        $want = "ขอยกเลิกเลิกการใช้ไฟฟ้า";
-                                    } elseif ($array[re_want_type] == 10) {
-                                        $want = "ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                    } elseif ($array[re_want_type] == 11) {
-                                        $want = "ขอใช้ไฟฟ้าสาธารณะ";
-                                    } elseif ($array[re_want_type] == 12) {
-                                        $want = "ขอตัดมิเตอร์ใช้เพื่อแสงสว่างลด CT";
-                                    } elseif ($array[re_want_type] == 13) {
-                                        $want = "ขอย้ายจุดติดตั้งมิเตอร์/อุปกรณ์ประกอบ";
-                                    } elseif ($array[re_want_type] == 14) {
-                                        $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
-                                    }
                                 ?>
                             <div class="row">
                                 <div class="col-sm-3 form-group">
-                                    <label>ชื่อลูกค้า</label>
-                                    <input class="form-control" autocomplete=off value="<?= $array['cus_name'] ?>" size="30" readonly/>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label>เบอร์โทรศัพท์</label>
-                                    <input class="form-control" autocomplete=off  value="<?= $array['cus_tel'] ?>" size="30" readonly/>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label>มีความประสงค์</label>
-                                    <input class="form-control" autocomplete=off  value="<?= $want ?>" size="30" readonly/>
+                                    <label>เจ้าหน้าที่ปฎิบัติงาน</label>
+                                    <select id="user_id" class="form-control" name="user_id" OnChange="window.location = 'work_add?user_id=' + this.value;">
+                                        <option value=""><-- เลือกเจ้าหน้าที่ปฎิบัติงาน --></option>
+                                        <?php
+                                        $strSQL = "SELECT * FROM tb_user where user_pos='1' ";
+                                        $objQuery = mysql_query($strSQL);
+                                        while ($objResult = mysql_fetch_array($objQuery)) {
+                                            ?>
+                                            <option value="<?= $objResult['user_id']; ?>" ><?= $objResult['user_id']; ?> <?php echo $objResult['user_name']; ?> <?php echo $objResult['user_last']; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                                 <table  class="table table-bordered table-hover">
                                     <thead>               
                                         <tr>             
-                                            <th class="text-center" width="150px">รหัสสำรวจ</th>
-                                            <th class="text-center">วันที่สำรวจ</th>
-                                            <th class="text-center">รายการ</th>
-                                            <th  class="text-center" width="200px">จำนวนเงิน</th>
+                                            <th class="text-center" width="150px">รหัสเจ้าหน้าที่</th>
+                                            <th class="text-center">ชื่อเจ้าหน้าที่</th>
+                                            <th class="text-center">หน้าที่</th>
+                                            <th  class="text-center" width="200px">จัดการข้อมูล</th>
                                         </tr> 
                                     </thead>
-                                    <tbody>
-                                        <?php
-                                        function Dateim($mydate) {
-                                            $d = split("-", $mydate);
-                                            $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
-                                            return "$mydate";
-                                        }
-                                                $sql_mat = "select * from tb_equipment,tb_meter where tb_equipment.re_id='" . $_GET['item'] . "' and tb_equipment.equ_status='0' and tb_meter.me_id=tb_equipment.me_id";
-                                                $result_mat = mysql_db_query($dbname, $sql_mat);
-                                                $array_mat = mysql_fetch_array($result_mat);
-                                                $total=($array_mat['me_price']*7)/100+$array_mat['me_price'];
-                                                ?>		
-                                                <tr>
-                                                    <td class="text-center"><?= $array_mat['equ_id'] ?></td>
-                                                    <td class="text-center"><?= Dateim($array_mat['equ_date']); ?></td>
-                                                    <td><?=$array_mat['me_name'] ?></td>
-                                                    <td class="text-right"><?= number_format($array_mat['me_price'],2) ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2"></td>
-                                                    <td  class="text-right"><b>ภาษีมูลค่าเพื่ม</b></td>
-                                                    <td  class="text-right"><b><?= number_format(($array_mat['me_price']*7)/100,2) ?></b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2"></td>
-                                                    <td  class="text-right"><b>รวมทั้งสิ้น</b></td>
-                                                    <td  class="text-right"><b><?= number_format($total,2) ?></b></td>
-                                                </tr>
-                                    </tbody>
+		<tbody>
+<?php
+	if(count($_SESSION['ss_user_id'])==0){
+		$enable="disabled";
+		$title="กรุณาเลือกเจ้าหน้าที่";
+?>		
+                     <tr>
+                        <td colspan="4" align="center" >กรุณาเลือกเจ้าหน้าที่</td>
+                    </tr>
+<?php
+	}else{
+		for($i=0;$i<count($_SESSION['ss_user_id']);$i++){
+			$sql_user="select * from tb_user where user_id='".$_SESSION['ss_user_id'][$i]."'";
+			$result_user=mysql_db_query($dbname,$sql_user);
+			$array_user=mysql_fetch_array($result_user);
+			$title="คลิก";
+?>		
+            <tr>
+                <td class="text-center"><?=$_SESSION['ss_user_id'][$i]?></td>
+                <td>คุณ<?=$array_user[user_name]?> <?=$array_user[user_last]?></td>
+                <td><textarea name="work_detail[]" cols="20" class="form-control" placeholder="ระบุหน้าที่" required><?=$_SESSION['ss_user_detail'][$i]?></textarea></td>
+                <td align="center"><a class="btn btn-danger"  title="ลบ" href="work_cal.php?tdel=<?=$array_user[user_id]?>">ลบออก</a>
+            </tr>
+<?php
+		}
+?>
+	
+<?php
+}
+?>	
+                </tbody>
                                 </table>
                             <?php } ?>
                             <center>
                                 <input type="hidden" name="fee_price" value="<?=$total?>" >
-                                <a class="btn btn-info" onclick="location.href = 'fee_show.php'"> ย้อนกลับ</a>
-                                <button class="btn  btn-success" name="Submit" type="submit" value="1">บันทึก</button>                            
+                                <a class="btn btn-info" onclick="location.href = 'work_show.php'"> ย้อนกลับ</a>
+                                <?php
+                            if ($_SESSION['ss_re_id'] != "") {
+                                ?>
+                                <input class="btn btn-success" name="finish" type="submit" id="finish" <?=$enable?> title="<?=$title?>" value="บันทึก" >             
+                            <?php } ?>
                             </center>
                         </div>
                     </form> 

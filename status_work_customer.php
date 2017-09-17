@@ -8,6 +8,11 @@ $ses_username = $_SESSION[loginid];
 		echo "<meta http-equiv='refresh' content='0;URL=login.php' />";
 		exit();
 	}
+        function Dateim($mydate) {
+            $d = split("-", $mydate);
+            $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
+            return "$mydate";
+        }
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,25 +33,78 @@ $ses_username = $_SESSION[loginid];
 
 <body>
 <?php include "header_cus.php";?>
+</nav>
+<div class="container">
+    <h2>ผลการค้นหาคำร้องขอใช้ไฟฟ้าเลขที่ <?= $_SESSION[loginid] ?></h2>
+    <hr class="star-primary">
+    <div class="col-md-12">
+        <div class="table-responsive col-md-12">
+            <table  class="table table-striped table-bordered  ">
+                <thead>               
+                    <tr>
+                        <th class=" text-center" >วันที่</th>
+                        <th class=" text-center" >สถานะการทำงาน</th>
+                        <th class=" text-center" >พนักงานผู้ดำเนินการ</th>
+                        <th class=" text-center" >หมายเหตุ</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <?php
+                    $sql = "select * from tb_electricity,tb_user where re_id='" . $_SESSION[loginid] . "' and tb_electricity.user_id = tb_user.user_id  order by re_id desc ";
+                    $result = mysql_db_query($dbname, $sql);
+                    if (mysql_num_rows($result) > 0) {
+                        while ($array = mysql_fetch_array($result)) {
+                            ?>	
+                            <tr>
+                                <td class="text-center"><?= Dateim($array['re_date']); ?></td>
+                                <td class="text-center">ลงทะเบียน</td>
+                                <td class="text-center"><?= $array['user_name'] ?> <?= $array['user_last'] ?></td>
+                                <td><?= $array['re_detail'] ?></td>
+                            </tr>
+                            <?php
+                        }
+                    } else {
+                        ?>				  
+                    <tr><td colspan="7" align="center">ไม่พบข้อมูล</td></tr>
+                    <?
+                    }
+                    ?>
+                </tbody>
+                <tbody>
+                    <?php
+                    $sql2 = "select * from tb_equipment,tb_user where re_id='" . $_SESSION[loginid] . "' and tb_equipment.user_id=tb_user.user_id";
+                    $result2 = mysql_db_query($dbname, $sql2);
+                    if (mysql_num_rows($result2) > 0) {
+                        while ($array2 = mysql_fetch_array($result2)) {
+                            
+                            if($array2[equ_status]==0){
+                                $ee="สำรวจแล้ว";
+                            }else{
+                                $ee="ไม่ผ่านการสำรวจ";
+                            }
+                            if($array['equ_detail']==""){
+                                $detail="-";
+                            }else{
+                                $detail=$array['equ_detail'];
+                            }
+                            ?>	
+                            <tr>
+                                <td class="text-center"><?= Dateim($array2['equ_date']); ?></td>
+                                <td class="text-center" ><?=$ee?></td>
+                                <td class="text-center"><?= $array2['user_name'] ?> <?= $array2['user_last'] ?></td>
+                                <td><?= $detail ?></td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                        ?>				  
 
-<?php
-    include"sidebar.php"; 
-?>
-    <!-- Contact Section -->
-    <div id="page-wrapper" >
-        <div class="col-sm-12 ">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>ตรวจสอบสถานะเลขที่ <?=$_SESSION[loginid]?></h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <center>
-                <img  class="img-responsive" src="img/PEA.jpg" width="500px" >
-            </center>
+                </tbody>
+            </table>
         </div>
-    </div>
-
+    </div>  
+</div>
+            
 </body>
 
 </html>

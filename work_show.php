@@ -37,11 +37,11 @@ $ses_username = $_SESSION[loginid];
         <div class="col-sm-12 ">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h2 class="panel-title">รับชำระค่าธรรมเนียม</h2>
+                    <h2 class="panel-title">บันทึกการปฎิบัติงาน</h2>
                 </div>
             <div class="panel-body">
             <div class="col-sm-2">
-                    <a href="fee_add.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
+                    <a href="work_new.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
             </div>
             <div class="col-sm-4">
                 <form name="frmSearch" method="POST">
@@ -62,7 +62,7 @@ $ses_username = $_SESSION[loginid];
                         $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
                         return "$mydate";
                     }
-                        $sql_all_rows="select * from tb_fee order by fee_id";
+                        $sql_all_rows="select * from tb_work order by work_id";
                         $result_all_rows=mysql_db_query($dbname,$sql_all_rows);
                         $rows=mysql_num_rows($result_all_rows);
                         echo $row;
@@ -72,9 +72,9 @@ $ses_username = $_SESSION[loginid];
                     <?php
                     for($i=1;$i<=$total_page;$i++){
                             if($start==$i){
-                                    echo "<a href='fee_show.php?start=".$i."&limit=".$limit."'><button class='btn btn-default '>".$i."</button></a>&nbsp;";
+                                    echo "<a href='work_show.php?start=".$i."&limit=".$limit."'><button class='btn btn-default '>".$i."</button></a>&nbsp;";
                             }else{
-                                    echo "<a href='fee_show.php?start=".$i."&limit=".$limit."' c><button class='btn btn-default active'>".$i."</button></a>&nbsp;";
+                                    echo "<a href='work_show.php?start=".$i."&limit=".$limit."' c><button class='btn btn-default active'>".$i."</button></a>&nbsp;";
                             }
 
                     }
@@ -83,11 +83,10 @@ $ses_username = $_SESSION[loginid];
                         <thead>               
                             <tr>
                                 <th class=" text-center" >ลำดับ</th>
-                                <th class=" text-center" >รหัสชำระเงิน</th>
-                                <th class=" text-center" >วันที่ชำระ</th>
-                                <th class=" text-center" >พนักงาน</th>
-                                <th class=" text-center" >รายการ</th>
-                                <th class=" text-center" >จำนวนเงิน</th>
+                                <th class=" text-center" >รหัสการปฎิบัติงาน</th>
+                                <th class=" text-center" >วันที่บันทึก</th>
+                                <th class=" text-center" >เลขที่ใบคำร้องขอใช้ไฟฟ้า</th>
+                                <th class=" text-center" >ชื่องาน</th>
                                 <th class=" text-center">จัดการข้อมูล</th>
                             </tr> 
                         </thead>
@@ -99,9 +98,8 @@ $ses_username = $_SESSION[loginid];
                                 }else{
                                         $page=($_GET[start]-1)*$limit; 
                                 }
-                                $sql="select * from tb_fee,tb_user,tb_electricity where fee_id like '%".$_POST[search]."%'
-                                    and tb_fee.re_id=tb_electricity.re_id and tb_fee.user_id=tb_user.user_id 
-                                          limit $page,$limit ";
+                                $sql="select * from tb_work,tb_electricity where work_id like '%".$_POST[search]."%'
+                                    and tb_work.re_id=tb_electricity.re_id  limit $page,$limit ";
                                 $result=mysql_db_query($dbname,$sql);
                                     if(mysql_num_rows($result)>0){
                                         while($array=mysql_fetch_array($result)){
@@ -144,14 +142,13 @@ $ses_username = $_SESSION[loginid];
                             ?>	
                                     <tr>
                                         <td class="text-center"><?=$n?></td>
-                                            <td><?=$array[fee_id]?></td>
-                                            <td><?= Dateim($array[re_date]); ?></td>
-                                            <td><?=$array[user_name]?> <?=$array[user_last]?></td>
+                                            <td><?=$array[work_id]?></td>
+                                            <td><?= Dateim($array[work_date]); ?></td>
+                                            <td class="text-center"><?=$array[re_id]?></td>
                                             <td class="text-center"><?=$want?></td>
-                                            <td class="text-center"><?= number_format($array[fee_price])?></td>
                                             <td align="center">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-default" href="fee_detail.php?fee_id=<?=$array[fee_id]?>">ดูรายละเอียด</a>
+                                                    <a class="btn btn-default" href="work_detail.php?work_id=<?=$array[work_id]?>">ดูรายละเอียด</a>
                                                 </div>
                                             </td>
                                     </tr>

@@ -199,7 +199,7 @@ $ses_username = $_SESSION[loginid];
                                 <div class="form-group col-sm-8">
                                     <label>(6)อื่นๆ ระบุ</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="equ_other">
+                                        <input type="text" class="form-control" name="equ_detail">
                                     </div>
                                 </div>
 

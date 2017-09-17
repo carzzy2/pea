@@ -185,7 +185,7 @@ $ses_username = $_SESSION[loginid];
                                 <div class="form-group col-sm-8">
                                     <label>(7)อื่นๆ ระบุ</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="equ_other" value="<?= $array[equ_other] ?>" readonly> 
+                                        <input type="text" class="form-control" name="equ_detail" value="<?= $array[equ_detail] ?>" readonly> 
                                     </div>
                                 </div>
 
