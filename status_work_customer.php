@@ -43,8 +43,8 @@ $ses_username = $_SESSION[loginid];
                 <thead>               
                     <tr>
                         <th class=" text-center" >วันที่</th>
-                        <th class=" text-center" >สถานะการทำงาน</th>
                         <th class=" text-center" >พนักงานผู้ดำเนินการ</th>
+                        <th class=" text-center" >สถานะการทำงาน</th>
                         <th class=" text-center" >หมายเหตุ</th>
                     </tr> 
                 </thead>
@@ -54,23 +54,27 @@ $ses_username = $_SESSION[loginid];
                     $result = mysql_db_query($dbname, $sql);
                     if (mysql_num_rows($result) > 0) {
                         while ($array = mysql_fetch_array($result)) {
+                            if($array[re_want_type]=="1" or $array[re_want_type]=="6" or $array[re_want_type]=="7" or $array[re_want_type]=="8" or $array[re_want_type]=="9" or $array[re_want_type]=="14"){
                             ?>	
                             <tr>
                                 <td class="text-center"><?= Dateim($array['re_date']); ?></td>
-                                <td class="text-center">ลงทะเบียน</td>
                                 <td class="text-center"><?= $array['user_name'] ?> <?= $array['user_last'] ?></td>
+                                <td class="text-center">เสร็จสิ้น</td>
                                 <td><?= $array['re_detail'] ?></td>
                             </tr>
                             <?php
+                            }else{ ?>
+                                <tr>
+                                    <td class="text-center"><?= Dateim($array['re_date']); ?></td>
+                                    <td class="text-center"><?= $array['user_name'] ?> <?= $array['user_last'] ?></td>
+                                    <td class="text-center">ลงทะเบียน</td>
+                                    <td><?= $array['re_detail'] ?></td>
+                                </tr>
+                            <?php
+                            }
                         }
-                    } else {
-                        ?>				  
-                    <tr><td colspan="7" align="center">ไม่พบข้อมูล</td></tr>
-                    <?
-                    }
-                    ?>
-                </tbody>
-                <tbody>
+                    } 
+                    ?>				                           
                     <?php
                     $sql2 = "select * from tb_equipment,tb_user where re_id='" . $_SESSION[loginid] . "' and tb_equipment.user_id=tb_user.user_id";
                     $result2 = mysql_db_query($dbname, $sql2);
@@ -82,23 +86,22 @@ $ses_username = $_SESSION[loginid];
                             }else{
                                 $ee="ไม่ผ่านการสำรวจ";
                             }
-                            if($array['equ_detail']==""){
+                            if($array2['equ_detail']==""){
                                 $detail="-";
                             }else{
-                                $detail=$array['equ_detail'];
+                                $detail=$array2['equ_detail'];
                             }
                             ?>	
                             <tr>
                                 <td class="text-center"><?= Dateim($array2['equ_date']); ?></td>
-                                <td class="text-center" ><?=$ee?></td>
                                 <td class="text-center"><?= $array2['user_name'] ?> <?= $array2['user_last'] ?></td>
+                                <td class="text-center" ><?=$ee?></td>
                                 <td><?= $detail ?></td>
                             </tr>
                             <?php
                         }
                     }
                         ?>				  
-
                 </tbody>
             </table>
         </div>

@@ -29,28 +29,60 @@ if($_POST[txtmode]=="add"){
     }else{
         $sql_find ="select * from  tb_user where user_id='".$_GET[id]."'";
         $dbquery=mysql_db_query($dbname,$sql_find);
-        while ($data = mysql_fetch_array($dbquery) ) {
-            if($data[user_pos]==0){
-                $sql_findboss ="select * from tb_user where user_pos='0'";
-                $dbqueryboss=mysql_db_query($dbname,$sql_findboss);
-                $num = mysql_num_rows($dbqueryboss);
-                if($num<2){
-                    echo "<script>alert('ไม่สามารถลบได้! ต้องมี admin 1 คนในระบบ');</script>";
-                    echo "<meta http-equiv='refresh' content='0;URL=user_show.php'>";
-                }else{
-                    echo "<script>alert('ลบข้อมูลเรียบร้อยแล้ว');</script>";
-                    $sql="delete from tb_user where user_id='".$_GET[id]."'";
-                    mysql_query($sql);
-                    echo "<meta http-equiv='refresh' content='0;URL=user_show.php'>";
-                }
+        $data = mysql_fetch_array($dbquery);
+        if($data[user_pos]==0){
+            $sql_findboss ="select * from tb_user where user_pos='0'";
+            $dbqueryboss=mysql_db_query($dbname,$sql_findboss);
+            $num = mysql_num_rows($dbqueryboss);
+            if($num<2){
+                echo "<script>alert('ไม่สามารถลบได้! ต้องมี admin 1 คนในระบบ');</script>";
+                echo "<meta http-equiv='refresh' content='0;URL=user_show.php'>";
+                exit();
             }else{
                 echo "<script>alert('ลบข้อมูลเรียบร้อยแล้ว');</script>";
                 $sql="delete from tb_user where user_id='".$_GET[id]."'";
                 mysql_query($sql);
-                echo "<META http-equiv='refresh' Content='0; URL=user_show.php'> ";	
-
+                echo "<meta http-equiv='refresh' content='0;URL=user_show.php'>";
             }
+        }else{
+                $sql1="SELECT * FROM tb_general WHERE user_id='".$_GET[id]."'";
+                $res1 = mysql_query($sql1);
+                $count1 = mysql_num_rows($res1);
+                
+                $sql2="SELECT * FROM tb_electricity WHERE user_id='".$_GET[id]."'";
+                $res2 = mysql_query($sql2);
+                $count2 = mysql_num_rows($res2);
+                
+                $sql3="SELECT * FROM tb_equipment WHERE user_id='".$_GET[id]."'";
+                $res3 = mysql_query($sql3);
+                $count3 = mysql_num_rows($res3);
+                
+                $sql4="SELECT * FROM tb_fee WHERE user_id='".$_GET[id]."'";
+                $res4 = mysql_query($sql4);
+                $count4 = mysql_num_rows($res4);
+                
+                $sql5="SELECT * FROM tb_work WHERE user_id='".$_GET[id]."'";
+                $res5 = mysql_query($sql5);
+                $count5 = mysql_num_rows($res5);
+                
+                $sql6="SELECT * FROM tb_work_detail WHERE user_id='".$_GET[id]."'";
+                $res6 = mysql_query($sql6);
+                $count6 = mysql_num_rows($res6);
+                
+                if($count1 or $count2 or $count3 or $count4 or $count5 or $count6 > 0){
+                    echo "<script>alert('ไม่สามารถลบข้อมูลได้ เนื่องจากข้อมูลมีความสัมพันธ์กับตารางข้อมูลอื่น');</script>";
+                    echo "<META http-equiv='refresh' Content='0; URL=user_show.php'> ";
+                }else{
+                    echo "<script>alert('ลบข้อมูลเรียบร้อยแล้ว');</script>";
+                    $sqldel="delete from tb_user where user_id='".$_GET[id]."'";
+                    mysql_query($sqldel);
+                    echo "<META http-equiv='refresh' Content='0; URL=user_show.php'> ";	
+                }
+            
+            
+
         }
+        
     }
 }
 ?>
