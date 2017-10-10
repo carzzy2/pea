@@ -143,29 +143,29 @@ function Dateim($mydate){
                                                 $want = $array[re_place_other];
                                             }
                                             if($array[re_status]==0){
-                                                $status="ยังไม่ได้สำรวจ";
-                                                $label="info";
+                                                $label="ยังไม่ได้สำรวจ";
+                                                $status="#848480";
                                             }elseif($array[re_status]==1){
-                                               $status="ผ่านการสำรวจแล้ว";
-                                               $label="default";
+                                               $status="#5bc0de";
+                                               $label="ผ่านการสำรวจแล้ว";
                                             }elseif($array[re_status]==2){
-                                               $status="ชำระค่าธรรมเนียมแล้ว";
-                                               $label="default";
+                                               $status="#F78234";
+                                               $label="ชำระค่าธรรมเนียมแล้ว";
                                             }elseif($array[re_status]==3){
-                                               $status="บันทึกการปฎิบัติงานแล้ว";
-                                               $label="default";
+                                               $status="#99cc00";
+                                               $label="บันทึกการปฎิบัติงานแล้ว";
                                             }elseif($array[re_status]==4){
-                                               $status="ผ่านการตรวจสอบมาตรฐาน";
-                                               $label="default";
+                                               $status="#16DD87";
+                                               $label="ผ่านการตรวจสอบมาตรฐาน";
                                             }elseif($array[re_status]==5){
-                                               $status="ไม่ผ่านการตรวจสอบมาตรฐาน";
-                                               $label="default";
+                                               $status="#751C90";
+                                               $label="ไม่ผ่านการตรวจสอบมาตรฐาน";
                                             }elseif($array[re_status]==6){
-                                               $status="เสร็จสิ้น";
-                                               $label="success";
+                                               $status="#2E9AFE";
+                                               $label="เสร็จสิ้น";
                                             }elseif($array[re_status]==9){
-                                               $status="ไม่ผ่านการสำรวจ";
-                                               $label="danger";
+                                               $status="#d9534f";
+                                               $label="ไม่ผ่านการสำรวจ";
                                             }
                             ?>	
                                     <tr>
@@ -174,8 +174,8 @@ function Dateim($mydate){
                                             <td class=" text-center"><?= Dateim($array[re_date]);?></td>
                                             <td class=" text-center"><?=$want?></td>
                                             <td class="text-center"><?=$arraycus[cus_name]?></td>
-                                            <td class="text-center"><?=$arraycus[cus_tel]?></td>
-                                            <td class="text-center"><span class="label label-<?=$label?>"><?=$status?></span></td>
+                                            <td class="text-center" ><?=$arraycus[cus_tel]?></td>
+                                            <td class="text-center"><div style="border-radius:10px; background-color: <?=$status?>; color: white;"><?=$label?></div></td>
                                             <td align="center">
                                                 <div class="btn-group">
                                                     <a class="btn btn-default" href="RequestElectricity_detail.php?re_id=<?=$array[re_id]?>">ดูรายละเอียด</a>
@@ -192,8 +192,45 @@ function Dateim($mydate){
                                     ?>
                             </tbody>
                     </table>
+                    
                 </div>
-            </div>  					
+            </div>
+                <div class="col-md-12">
+                    <table class="table">
+                            <tr>
+                                <td><div style="background-color: #848480; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>ยังไม่ได้สำรวจ</td>
+                            </tr>
+                            <tr>
+                                <td width="100px"><div style="background-color: #d9534f; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>ไม่ผ่านการสำรวจ</td>
+                            </tr>
+                            <tr>
+                                <td><div style="background-color: #5bc0de; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>ผ่านการสำรวจแล้ว</td>
+                            </tr>
+                            <tr>
+                                <td><div style="background-color: #F78234; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>ชำระค่าธรรมเนียมแล้ว</td>
+                            </tr>
+                            <tr>
+                                <td><div style="background-color: #99cc00; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>บันทึกการปฎิบัติงานแล้ว</td>
+                            </tr>
+                            <tr>
+                                <td><div style="background-color: #16DD87; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>ผ่านการตรวจสอบมาตรฐาน</td>
+                            </tr>
+                            <tr>
+                                <td><div style="background-color: #751C90; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>ไม่ผ่านการตรวจสอบมาตรฐาน</td>
+                            </tr>
+                            <tr>
+                                <td><div style="background-color: #2E9AFE; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>เสร็จสิ้น</td>
+                            </tr>
+                    </table>
+                </div>
         </div>
         </div>
     </div>

@@ -110,7 +110,7 @@ $ses_username = $_SESSION[loginid];
                                 <div class="form-group col-sm-4">
                                     <label>จำนวน</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_tran_unit"  required>
+                                        <input type="number" class="form-control" name="equ_tran_unit" min="0"  required>
                                         <span class="input-group-addon">เครื่อง</span>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@ $ses_username = $_SESSION[loginid];
                                 <div class="form-group col-sm-4">
                                     <label>จำนวน</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_air_unit" required>
+                                        <input type="number" class="form-control" name="equ_air_unit" min="0" required>
                                         <span class="input-group-addon">เครื่อง</span>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@ $ses_username = $_SESSION[loginid];
                                 <div class="form-group col-sm-4">
                                     <label>(3) ดวงโคม</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_lantern" required>
+                                        <input type="number" class="form-control" name="equ_lantern" min="0" required>
                                         <span class="input-group-addon">ดวง</span>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@ $ses_username = $_SESSION[loginid];
                                 <div class="form-group col-sm-4">
                                     <label>(4) เต้าเสียบ</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control"  name="equ_outlet" required>
+                                        <input type="number" class="form-control"  name="equ_outlet" min="0" required>
                                         <span class="input-group-addon">ชุด</span>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@ $ses_username = $_SESSION[loginid];
                                 <div class="form-group col-sm-4">
                                     <label>(5) พัดลม</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_fan" required >
+                                        <input type="number" class="form-control" name="equ_fan" min="0" required>
                                         <span class="input-group-addon">เครื่อง</span>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@ $ses_username = $_SESSION[loginid];
                                 <div class="form-group col-sm-4">
                                     <label>จำนวน</label>
                                     <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_meter_unit"  required>
+                                        <input type="number" class="form-control" name="equ_meter_unit" min="0" required>
                                         <span class="input-group-addon">ตัว</span>
                                     </div>
                                 </div>

@@ -39,39 +39,54 @@ $ses_username = $_SESSION[loginid];
     $mydate=$d[2]."/".$d[1]."/".($d[0]+543);
     return "$mydate";
 }
-    $sql="select * from tb_equipment,tb_electricity,tb_user where tb_equipment.equ_id='".$_GET[id]."' and tb_equipment.re_id=tb_electricity.re_id and tb_equipment.user_id = tb_user.user_id  ";
-    $result=mysql_db_query($dbname,$sql);
-    $array=mysql_fetch_array($result);
+$sql="select * from tb_electricity,tb_user where tb_electricity.re_id='".$_GET[id]."' and tb_electricity.user_id = tb_user.user_id ";
+$result=mysql_db_query($dbname,$sql);
+$array2=mysql_fetch_array($result);
+    
+
 ?>
     <div id="page-wrapper">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h2 class="panel-title">รายละเอียดการสำรวจหน้างานเลขที่ <?=$_GET[id]?> </h2>
+                <h2 class="panel-title">รายละเอียดการสำรวจหน้างานใบคำร้องขอใช้ไฟฟ้าเลขที่ <?=$_GET[id]?> </h2>
             </div>
             <div class="panel-body">
-                <form method="post" action="StatusElectricity_save">
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-3 form-group">
                                 <label>เลขที่คำร้อง</label>
-                                <input class="form-control" autocomplete=off  name="re_id" type="text" id="re_id" value="<?= $array[re_id] ?>" size="30" readonly/>
+                                <input class="form-control" autocomplete=off  name="re_id" type="text" id="re_id" value="<?= $array2[re_id] ?>" size="30" readonly/>
                             </div>
                             <div class="col-sm-3 form-group">
                                 <label>กฟฟ(สาขา).</label>
-                                <input  type="text" class="form-control"  value="<?= $array['re_branch'] ?>" readonly>		
+                                <input  type="text" class="form-control"  value="<?= $array2['re_branch'] ?>" readonly>		
                             </div>
                             
                             <div class="col-sm-3 form-group">
                                 <label>วัน/เดือน/ปี</label>
-                                <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= Dateim($array[equ_date]);?>"  readonly/>	
+                                <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" value="<?= Dateim($array2[re_date]);?>"  readonly/>	
                             </div>
                             <div class="col-sm-3 form-group">
                                 <label>เจ้าหน้าที่ที่สำรวจ</label>
-                                <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?=$array[user_name];?> <?=$array[user_last];?>"  readonly/>
+                                <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" value="<?=$array2[user_name];?> <?=$array2[user_last];?>"  readonly/>
                             </div>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="row">
+                        <?php
+                        $n=0;
+                            $sql_eq="select * from tb_equipment where re_id='".$_GET[id]."' order by equ_id asc ";
+                            $result_eq=mysql_db_query($dbname,$sql_eq);
+                            while ($array = mysql_fetch_array($result_eq)) {
+                               $n++; 
+                               echo "<label>สำรวจครั้งที่".$n."</label>";
+                                if($array[equ_status]==0){
+                        ?>
+                        <br>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">ผ่านการสำรวจ</h2>
+                            </div>
+                            <div class="panel-body">
+                                 <div class="row">
                                 <div class="form-group col-sm-12">
                                     <label>อุปกรณ์ที่ใช้ติดตั้ง</label>
                                 </div>
@@ -190,15 +205,37 @@ $ses_username = $_SESSION[loginid];
                                 </div>
 
                             </div>
+                            </div>
                         </div>
-                        <center>
-                            <a class="btn btn-info" onclick="location.href='StatusElectricity.php'"> ย้อนกลับ</a>                     
-                        </center>
-                    </div>
-                </form> 
+                     <?php
+                    }else{
+                        ?>
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">ไม่ผ่านการสำรวจ</h2>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label >เนื่องจาก</label>
+                                        <blockquote>
+                                            <?= $array[equ_detail] ?>
+                                        </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <?php
+                        }
+                    }
+                        ?>
+                    <center>
+                        <a class="btn btn-info" onclick="location.href='StatusElectricity.php'"> ย้อนกลับ</a>                     
+                    </center>
+                </div>
             </div>
-
-
+         </div>
         </div>
     </div>
 </body>

@@ -64,23 +64,7 @@ function Dateim($mydate) {
                                 </div>
                                 <div class="col-sm-3 form-group">
                                     <label>เลขที่คำร้องขอใช้ไฟฟ้า</label>
-                                    <select id="re_id" class="form-control" name="re_id" OnChange="window.location = 'work_addreid?re_id=' + this.value;" disabled>
-                                        <option value=""><-- เลือกเลขที่คำร้องขอใช้ไฟฟ้า --></option>
-                                        <?php
-                                        $strSQL = "SELECT * FROM tb_electricity where re_status='1' ORDER BY re_id ASC";
-                                        $objQuery = mysql_query($strSQL);
-                                        while ($objResult = mysql_fetch_array($objQuery)) {
-                                            if ($array_show[re_id] == $objResult["re_id"]) {
-                                                $sel = "selected";
-                                            } else {
-                                                $sel = "";
-                                            }
-                                            ?>
-                                            <option value="<?= $objResult["re_id"]; ?>"<?php echo $sel; ?>><?= $objResult["re_id"]; ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
+                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" type="text"  value="<?=$array_show[re_id]?>"  readonly/>
                                 </div>
                                 
                             </div>

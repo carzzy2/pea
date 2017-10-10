@@ -8,6 +8,44 @@ if ($ses_userid <> session_id() or $ses_username == "") {
     echo "<meta http-equiv='refresh' content='0;URL=login.php' />";
     exit();
 }
+function getlistname($want_type, $other) {
+    if ($want_type == 0) {
+        $want = "ขอติดตั้งมิเตอร์ใหม่";
+    } elseif ($want_type == 1) {
+        $want = "ขอตัดฝากมิเตอร์โดยไม่ใช้ไฟฟ้า";
+    } elseif ($want_type == 2) {
+        $want = "ขอต่อกลับการใช้ไฟฟ้า";
+    } elseif ($want_type == 3) {
+        $want = "ขอเพื่มขนาดมิเตอร์/อุปกรณ์ประกอบ";
+    } elseif ($want_type == 4) {
+        $want = "ขอเปลี่ยนประเภทมิเตอร์";
+    } elseif ($want_type == 5) {
+        $want = "ขอหยุดซ่อมแซมเครื่องจักรประจำปี";
+    } elseif ($want_type == 6) {
+        $want = "ขอใช้ไฟฟ้าชั่วคราวแบบเหมาจ่าย";
+    } elseif ($want_type == 7) {
+        $want = "ขอติดตั้งไฟฟ้าชั่วคราว";
+    } elseif ($want_type == 8) {
+        $want = "ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT";
+    } elseif ($want_type == 9) {
+        $want = "ขอยกเลิกเลิกการใช้ไฟฟ้า";
+    } elseif ($want_type == 10) {
+        $want = "ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
+    } elseif ($want_type == 11) {
+        $want = "ขอใช้ไฟฟ้าสาธารณะ";
+    } elseif ($want_type == 12) {
+        $want = "ขอตัดมิเตอร์ใช้เพื่อแสงสว่างลด CT";
+    } elseif ($want_type == 13) {
+        $want = "ขอย้ายจุดติดตั้งมิเตอร์/อุปกรณ์ประกอบ";
+    } elseif ($want_type == 14) {
+        $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
+    } elseif ($want_type == 15) {
+        $want = "ขอใช้ไฟฟ้าตู้โทรศัพท์ต่อตรง";
+    } elseif ($want_type == 16) {
+        $want = $other;
+    }
+    return $want;
+}
 
 function Dateim($mydate) {
     $d = split("-", $mydate);
@@ -78,6 +116,7 @@ function Dateim($mydate) {
                                             </thead>
                                             <tbody>
                                                 <?php
+       
                                                 $page = 0;
                                                 $sql = "select * from tb_electricity where re_id like '%" . $_POST[search] . "%' and re_status in (0,9) order by re_id desc";
                                                 $result = mysql_db_query($dbname, $sql);
@@ -87,55 +126,22 @@ function Dateim($mydate) {
                                                         $sqlcus = "select * from tb_customer where cus_id='" . $array[cus_id] . "'";
                                                         $resultcus = mysql_db_query($dbname, $sqlcus);
                                                         $arraycus = mysql_fetch_array($resultcus);
-
+                                                        
                                                         if ($array[re_status] == "9") {
                                                             $status = "ไม่ผ่านการสำรวจ";
                                                             $label = "danger";
-                                                        } else {
-                                                            $status = "ยังไม่มีการสำรวจ";
-                                                            $label = "info";
+                                                        } elseif($array[re_status] == "0") {
+                                                            $status = "ยังไม่ได้สำรวจ";
+                                                            $label = "success";
                                                         }
-                                                        if ($array[re_want_type] == 0) {
-                                                            $want = "ขอติดตั้งมิเตอร์ใหม่";
-                                                        } elseif ($array[re_want_type] == 1) {
-                                                            $want = "ขอตัดฝากมิเตอร์โดยไม่ใช้ไฟฟ้า";
-                                                        } elseif ($array[re_want_type] == 2) {
-                                                            $want = "ขอต่อกลับการใช้ไฟฟ้า";
-                                                        } elseif ($array[re_want_type] == 3) {
-                                                            $want = "ขอเพื่มขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                                        } elseif ($array[re_want_type] == 4) {
-                                                            $want = "ขอเปลี่ยนประเภทมิเตอร์";
-                                                        } elseif ($array[re_want_type] == 5) {
-                                                            $want = "ขอหยุดซ่อมแซมเครื่องจักรประจำปี";
-                                                        } elseif ($array[re_want_type] == 6) {
-                                                            $want = "ขอใช้ไฟฟ้าชั่วคราวแบบเหมาจ่าย";
-                                                        } elseif ($array[re_want_type] == 7) {
-                                                            $want = "ขอติดตั้งไฟฟ้าชั่วคราว";
-                                                        } elseif ($array[re_want_type] == 8) {
-                                                            $want = "ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT";
-                                                        } elseif ($array[re_want_type] == 9) {
-                                                            $want = "ขอยกเลิกเลิกการใช้ไฟฟ้า";
-                                                        } elseif ($array[re_want_type] == 10) {
-                                                            $want = "ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                                        } elseif ($array[re_want_type] == 11) {
-                                                            $want = "ขอใช้ไฟฟ้าสาธารณะ";
-                                                        } elseif ($array[re_want_type] == 12) {
-                                                            $want = "ขอตัดมิเตอร์ใช้เพื่อแสงสว่างลด CT";
-                                                        } elseif ($array[re_want_type] == 13) {
-                                                            $want = "ขอย้ายจุดติดตั้งมิเตอร์/อุปกรณ์ประกอบ";
-                                                        } elseif ($array[re_want_type] == 14) {
-                                                            $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
-                                                        } elseif ($array[re_want_type] == 15) {
-                                                            $want = "ขอใช้ไฟฟ้าตู้โทรศัพท์ต่อตรง";
-                                                        } elseif ($array[re_want_type] == 16) {
-                                                            $want = $array[re_place_other];
-                                                        }
+                                                        $wanttype = getlistname($array[re_want_type],$array[re_place_other]);
+
                                                         ?>	
                                                         <tr>
                                                             <td class="text-center"><?= $page ?></td>
                                                             <td class=" text-center"><?= $array[re_id] ?></td>
                                                             <td class=" text-center"><?= Dateim($array[re_date]); ?></td>
-                                                            <td class=" text-center"><?= $want ?></td>
+                                                            <td class=" text-center"><?= $wanttype ?></td>
                                                             <td class="text-center"><?= $arraycus[cus_name] ?></td>
                                                             <td class="text-center"><?= $arraycus[cus_tel] ?></td>
                                                             <td class="text-center"><span class="label label-<?= $label ?>"><?= $status ?></span></td>
@@ -177,10 +183,11 @@ function Dateim($mydate) {
                                         <table width="100%" class="table table-bordered table-hover">
                                             <thead>               
                                                 <tr>
-                                                    <th class=" text-center" >ลำดับ</th>
-                                                    <th class=" text-center" >รหัสสำรวจ</th>
-                                                    <th class=" text-center" >วันที่บันทึก</th>
                                                     <th class=" text-center" >รหัสใบคำร้อง</th>
+                                                    <th class=" text-center" >วันที่บันทึก</th>
+                                                    <th class=" text-center" >รายการ</th>
+                                                    <th class=" text-center" >ลูกค้า</th>
+                                                    <th class=" text-center" >โทรศัพท์</th>
                                                     <th class=" text-center" >สถานะ</th>
                                                     <th class=" text-center">จัดการข้อมูล</th>
                                                 </tr> 
@@ -188,37 +195,35 @@ function Dateim($mydate) {
                                             <tbody>
                                                 <?php
                                                 $n = 0;
-                                                $sql = "select * from tb_equipment where equ_id like '%" . $_POST[search] . "%'  order by equ_id desc";
+                                                $sql = "select * from tb_electricity,tb_equipment where tb_electricity.re_id like '%" . $_POST[search] . "%' and tb_electricity.re_id=tb_equipment.re_id group by tb_electricity.re_id  order by tb_electricity.re_id desc";
                                                 $result = mysql_db_query($dbname, $sql);
                                                 if (mysql_num_rows($result) > 0) {
                                                     while ($array = mysql_fetch_array($result)) {
-                                                        $n++;
                                                         $sqlcus = "select * from tb_customer where cus_id='" . $array[cus_id] . "'";
                                                         $resultcus = mysql_db_query($dbname, $sqlcus);
                                                         $arraycus = mysql_fetch_array($resultcus);
-
-                                                        if ($array[equ_status] == "1") {
+                                                        
+                                                        if ($array[re_status] == "9") {
                                                             $status = "ไม่ผ่านการสำรวจ";
                                                             $label = "danger";
                                                         } else {
-                                                            $status = "ผ่านการสำรวจ";
-                                                            $label = "success";
+                                                            $status = "ผ่านการสำรวจแล้ว";
+                                                            $label = "info";
                                                         }
+                                                        $wanttype = getlistname($array[re_want_type],$array[re_place_other]);
+
                                                         ?>	
                                                         <tr>
-                                                            <td class="text-center"><?= $n ?></td>
-                                                            <td class=" text-center"><?= $array[equ_id] ?></td>
-                                                            <td class=" text-center"><?= Dateim($array[equ_date]); ?></td>
                                                             <td class=" text-center"><?= $array[re_id] ?></td>
+                                                            <td class=" text-center"><?= Dateim($array[re_date]); ?></td>
+                                                            <td class=" text-center"><?= $wanttype ?></td>
+                                                            <td class="text-center"><?= $arraycus[cus_name] ?></td>
+                                                            <td class="text-center"><?= $arraycus[cus_tel] ?></td>
                                                             <td class="text-center"><span class="label label-<?= $label ?>"><?= $status ?></span></td>
                                                             <td align="center">
                                                                 <div class="btn-group" >
                                                                     <center>
-                                                                        <?php if($array[equ_status]==0){?>
-                                                                            <a class="btn btn-default" href="StatusElectricity_view.php?id=<?= $array[equ_id]?>">ดูรายละเอียด</a>
-                                                                        <?php }else{ ?>
-                                                                            <a class="btn btn-default" href="StatusElectricity_view2.php?id=<?= $array[equ_id]?>">ดูรายละเอียด</a>
-                                                                        <?php }?>
+                                                                            <a class="btn btn-default" href="StatusElectricity_view.php?id=<?= $array[re_id]?>">ดูรายละเอียด</a>
                                                                     </center>
                                                                 </div>
                                                             </td>

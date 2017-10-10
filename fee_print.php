@@ -23,17 +23,24 @@ function Dateim($mydate) {
         $array_print = mysql_fetch_array($result_print);
         ?>
         <br>
-        <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
+        <table border="1" align="center" style=" border-collapse:inherit; ">
             <tr >
                 <td width="70px" style="border-right-color: white;">
                     <img  src="img/lo.png" width="70" >
                 </td>
-                <td valign="top" align="center"  width="350px" style="padding-top:7px;">
+                <td valign="top" align="center"  style="padding-top:7px;">
                     <b>การไฟฟ้าส่วนภูมิภาค<br>
                         200 ถนนงามวงส์วาน จตุจักร กรุงเทพฯ 10900<br>
-                        ใบเสร็จชำระเงิน</b>
+                        </b>
                 </td>
-                <td valign="top" style="padding-top:7px;" colspan="2">
+            </tr>
+            <tr>
+                <td valign="top" colspan="2">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    ใบเสร็จชำระเงิน <br>
+                    
                     รหัสชำระเงิน <?= $array_print[fee_id] ?><br>
                     ผู้รับเงิน <?= $array_print[user_name] ?> <?= $array_print[user_last] ?><br>
                     วันที่ <?= Dateim($array_print[fee_date]); ?>
@@ -76,7 +83,9 @@ function Dateim($mydate) {
             $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
             
         }
-        $tex=$array_print['fee_price'] - $array_ele['me_price'];
+        $tt =($array_print['fee_price'] *100) /107;
+        $tex=$array_print['fee_price'] - $tt ;
+        
         ?>
         <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
             <tr>
@@ -89,20 +98,13 @@ function Dateim($mydate) {
             </tr>
         </table>
         <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
-            <thead>               
                 <tr>             
-                    <th>รหัสสำรวจ</th>
-                    <th >วันที่สำรวจ</th>
-                    <th >รายการ</th>
-                    <th >จำนวนเงิน</th>
-                </tr> 
-            </thead>
-            <tbody>		
+                    <th align="center" colspan="2">รายการ</th>
+                    <th align="center" colspan="2">จำนวนเงิน</th>
+                </tr> 		
                 <tr>
-                    <td align="center"><?= $array_ele['equ_id'] ?></td>
-                    <td align="center"><?= Dateim($array_ele['equ_date']); ?></td>
-                    <td ><?= $array_ele['me_name'] ?></td>
-                    <td align="right"><?= number_format($array_ele['me_price'], 2) ?></td>
+                    <td align="center" colspan="2"><?= $array_ele['me_name'] ?></td>
+                    <td align="right" colspan="2"><?= number_format($tt, 2) ?></td>
                 </tr>
                 <tr>
                     <td colspan="2"></td>
@@ -114,36 +116,16 @@ function Dateim($mydate) {
                     <td align="right"><b>รวมทั้งสิ้น</b></td>
                     <td align="right"><b><?= number_format(($array_print['fee_price']), 2) ?></b></td>
                 </tr>
-            </tbody>
-        </table>
-        <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
-            <tr>
-                <td valign="top" colspan="4" style="padding-top:7px;">
-
-                    <br><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    (ลงชื่อ)............................................<br>
-
-                    <br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    ตำแหน่ง.........................................(ผู้ใช้ไฟฟ้า/ลูกค้า/ผู้รับมอบอำนาจ)
-                </td>
-            </tr>
         </table>
     </body>
 </html>
 <?Php
 $html = ob_get_contents();
 ob_end_clean();
-$pdf = new mPDF('th', 'A4', '0', 'THSaraban'); //การตั้งค่ากระดาษถ้าต้องการแนวตั้ง ก็ A4 เฉยๆครับ ถ้าต้องการแนวนอนเท่ากับ A4-L
+
+$pdf = new mPDF('th', array( 120,120 ), '0', 'THSaraban'); //การตั้งค่ากระดาษถ้าต้องการแนวตั้ง ก็ A4 เฉยๆครับ ถ้าต้องการแนวนอนเท่ากับ A4-L
+$pdf->SetLeftMargin( 1 );
+$pdf->SetTopMargin( 1 );
 $pdf->SetAutoFont();
 $pdf->SetDisplayMode('fullpage');
 $pdf->WriteHTML($html, 2);
