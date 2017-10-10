@@ -43,7 +43,11 @@ $ses_username = $_SESSION[loginid];
     }elseif($array_edit['cus_first']=="2"){
         $first="นางสาว";
     }
-   
+   function Dateim($mydate) {
+    $d = split("-", $mydate);
+    $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
+    return "$mydate";
+    }
     if($array_edit[rg_want_type]==0){
     $want="ขอรับเงินประกันการใช้ไฟฟ้าคืน";
     }elseif($array_edit[rg_want_type]==1){
@@ -76,7 +80,6 @@ $ses_username = $_SESSION[loginid];
     $result_user=mysql_db_query($dbname,$sql_user);
     $array_user=mysql_fetch_array($result_user);
     
-
 ?>
     <div id="page-wrapper">
         <div class="panel panel-primary">
@@ -91,8 +94,6 @@ $ses_username = $_SESSION[loginid];
                         <div class="col-sm-3 form-group">
                             <label>เลขที่คำร้อง</label>
                         <input class="form-control" autocomplete=off  name="rg_id" type="text" id="rg_id" value="<?=$array_edit[rg_id]?>" size="30" readonly/>
-                        <input class="form-control"   name="rg_id" type="hidden" id="rg_id" value="<?=$array_edit[rg_id]?>" >
-
                         </div>
                         <div class="col-sm-3 form-group">
                             <label>กฟฟ(สาขา).</label>
@@ -112,14 +113,6 @@ $ses_username = $_SESSION[loginid];
                         <label>มีความประสงค์</label>
                             <input class="form-control"  name="rg_want_other" type="text" id="rg_want_other" value="<?=$want?>" readonly/>
                         </div>
-                        <?php  if($array_edit[rg_want_type] > 3){ ?>
-                        <input name="rg_money" type="hidden" value="0" >
-                        <?php }else{ ?> 
-                            <div class="form-group col-sm-3">
-                                <label>จำนวนเงิน</label>
-                                <input class="form-control" placeholder="กรุณากรอกจำนวนเงิน" name="rg_money" type="text" id="rg_money"  required/>
-                            </div>
-                        <?php } ?>
                     </div>
                         <div class="form-group col-sm-12">
                             <label>รายละเอียดเพื่มเติม</label>
@@ -127,7 +120,8 @@ $ses_username = $_SESSION[loginid];
                         </div> 
                     <center>
                         <input name="ok" type="submit" value="อนุมัติใบคำร้อง" id="calculatertool" class="btn btn-success" >
-                        <input name="txtid" type="hidden" id="txtid" value="<?=$id?>" />
+                        <input name="txtid" type="hidden" value="<?=$id?>" />
+                        <input name="rg_want_type" type="hidden" value="<?=$array_edit[rg_want_type]?>" />
                         <a class="btn btn-info" onclick="location.href='StatusGeneral.php'">ย้อนกลับ</a>
                     </center>
                 </div>

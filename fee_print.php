@@ -18,6 +18,13 @@ function Dateim($mydate) {
     </head>
     <body>
         <?php
+        $sql_ch = "select * from  tb_fee where fee_id='" . $_GET[fee_id] . "'";
+        $result_ch = mysql_db_query($dbname, $sql_ch);
+        $array_ch = mysql_fetch_array($result_ch);
+        if($array_ch[re_id]!=""){
+        ?>
+        
+        <?php
         $sql_print = "select * from  tb_fee,tb_user,tb_meter where fee_id='" . $_GET[fee_id] . "' and tb_fee.user_id=tb_user.user_id";
         $result_print = mysql_db_query($dbname, $sql_print);
         $array_print = mysql_fetch_array($result_print);
@@ -117,6 +124,105 @@ function Dateim($mydate) {
                     <td align="right"><b><?= number_format(($array_print['fee_price']), 2) ?></b></td>
                 </tr>
         </table>
+        <?php
+        
+        }else{
+            
+        ?>
+        <?php
+        $sql_print = "select * from  tb_fee,tb_user,tb_general,tb_customer where fee_id='" . $_GET[fee_id] . "' and tb_fee.user_id=tb_user.user_id and tb_fee.rg_id=tb_general.rg_id and tb_customer.cus_id = tb_general.cus_id";
+        $result_print = mysql_db_query($dbname, $sql_print);
+        $array_print = mysql_fetch_array($result_print);
+        ?>
+        <br>
+        <table border="1" align="center" style=" border-collapse:inherit; ">
+            <tr >
+                <td width="70px" style="border-right-color: white;">
+                    <img  src="img/lo.png" width="70" >
+                </td>
+                <td valign="top" align="center"  style="padding-top:7px;">
+                    <b>การไฟฟ้าส่วนภูมิภาค<br>
+                        200 ถนนงามวงส์วาน จตุจักร กรุงเทพฯ 10900<br>
+                        </b>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" colspan="2">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    ใบเสร็จชำระเงิน <br>
+                    
+                    รหัสชำระเงิน <?= $array_print[fee_id] ?><br>
+                    ผู้รับเงิน <?= $array_print[user_name] ?> <?= $array_print[user_last] ?><br>
+                    วันที่ <?= Dateim($array_print[fee_date]); ?>
+                </td>
+            </tr>
+        </table>
+        <?php
+        if($array_print[rg_want_type]==0){
+            $want="ขอรับเงินประกันการใช้ไฟฟ้าคืน";
+        }elseif($array_print[rg_want_type]==1){
+            $want="ขอรับเงินประกันคาปาซิเตอร์คืน";
+        }elseif($array_print[rg_want_type]==2){
+            $want="ขอรับเงินประกันหม้อแปลงไฟฟ้าคืน";
+        }elseif($array_print[rg_want_type]==3){
+            $want="ขอรับค่าขยายเขตระบบจำหน่ายไฟฟ้าคืน";
+        }elseif($array_print[rg_want_type]==4){
+            $want="ขอใช้บริการพิมพ์โฆษณาหลังใบแจ้งหนี้";
+        }elseif($array_print[rg_want_type]==5){
+            $want="ขอชำระเงินค่าไฟฟ้าโดยหักจากบัญชีเงินฝากธนาคาร";
+        }elseif($array_print[rg_want_type]==6){
+            $want="ขอเช่าพื้นที่โฆษณา";
+        }elseif($array_print[rg_want_type]==7){
+            $want="ขอเช่าพาดสายโทรนาคม";
+        }elseif($array_print[rg_want_type]==8){
+            $want="ขอเช่าสาย fiber optic";
+        }elseif($array_print[rg_want_type]==9){
+            $want="ขอเช่าที่ดิน";
+        }elseif($array_print[rg_want_type]==10){
+            $want="ขอซื้อที่ดิน";
+        }elseif($array_print[rg_want_type]==11){
+            $want="ขอใช้ไฟฟ้าที่ กฟภ. สนับสนุน";
+        }else{
+           $want=$array_print[rg_want_other]; 
+        }
+        $tt =($array_print['fee_price'] *100) /107;
+        $tex=$array_print['fee_price'] - $tt ;
+        
+        ?>
+        <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
+            <tr>
+                <td colspan="4" style="padding-top:9px;">
+                    รหัสใบคำร้องทั่วไป : <?= $array_print[rg_id] ?> <br>
+                    ชื่อลูกค้า : <?= $array_print[cus_name] ?> <br>
+                    เบอร์โทรศัพท์ : <?= $array_print[cus_tel] ?><br>
+                </td>
+            </tr>
+        </table>
+        <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
+                <tr>             
+                    <th align="center" colspan="2">รายการ</th>
+                    <th align="center" colspan="2">จำนวนเงิน</th>
+                </tr> 		
+                <tr>
+                    <td align="center" colspan="2"><?= $want ?></td>
+                    <td align="right" colspan="2"><?= number_format($tt, 2) ?></td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td  align="right"><b>ภาษีมูลค่าเพื่ม</b></td>
+                    <td  align="right"><b><?= number_format($tex, 2) ?></b></td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td align="right"><b>รวมทั้งสิ้น</b></td>
+                    <td align="right"><b><?= number_format(($array_print['fee_price']), 2) ?></b></td>
+                </tr>
+        </table>
+        <?php
+        }
+        ?>
     </body>
 </html>
 <?Php

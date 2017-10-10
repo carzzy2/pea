@@ -176,6 +176,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                 </table>
                             <?php } ?>
                             <center>
+                                <input type="hidden" name="send_type" value="reid" >
                                 <input type="hidden" name="fee_price" value="<?=$total?>" >
                                 <a class="btn btn-info" onclick="location.href = 'fee_show.php'"> ย้อนกลับ</a>
                                 <button class="btn  btn-success" name="Submit" type="submit" value="1">บันทึก</button>                            

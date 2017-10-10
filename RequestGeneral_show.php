@@ -135,14 +135,17 @@ function Dateim($mydate){
                                                $want=$array[rg_want_other]; 
                                             }
                                             if($array[rg_status]==0){
-                                                $status="ยังไม่อนุมัติ";
-                                                $label="info";
+                                                $status="#848480";
+                                                $label="ยังไม่อนุมัติ";
                                             }elseif($array[rg_status]==1){
-                                               $status="อนุมัติแล้ว";
-                                               $label="success";
-                                            }else{
-                                              $status="ยกเลิกใบคำร้อง";
-                                              $label="danger";
+                                               $status="#F78234";
+                                               $label="อนุมัติแล้ว";
+                                            }elseif($array[rg_status]==2){
+                                               $status="#d9534f";
+                                              $label="ยกเลิกใบคำร้อง";
+                                            }elseif($array[rg_status]==3){
+                                              $status="#2E9AFE";
+                                               $label="เสร็จสิ้น";
                                             }
                             ?>	
                                     <tr>
@@ -152,7 +155,7 @@ function Dateim($mydate){
                                             <td class=" text-center"><?=$want?></td>
                                             <td class="text-center"><?=$arraycus[cus_name]?></td>
                                             <td class="text-center"><?=$arraycus[cus_tel]?></td>
-                                            <td class="text-center"><span class="label label-<?=$label?>"><?=$status?></span></td>
+                                            <td class="text-center"><div style="border-radius:10px; background-color: <?=$status?>; color: white;"><?=$label?></div></td>
                                             <td align="center">
                                                 <div class="btn-group">
                                                     <a class="btn btn-default" href="RequestGeneral_detail.php?rg_id=<?=$array[rg_id]?>" >ดูรายละเอียด</a>
@@ -170,7 +173,27 @@ function Dateim($mydate){
                             </tbody>
                     </table>
                 </div>
-            </div>  					
+            </div>
+                <div class="col-md-12">
+                    <table class="table">
+                            <tr>
+                                <td><div style="background-color: #848480; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>ยังไม่อนุมัติ</td>
+                            </tr>
+                            <tr>
+                                <td width="100px"><div style="background-color: #d9534f; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>ยกเลิกใบคำร้อง</td>
+                            </tr>
+                            <tr>
+                                <td><div style="background-color: #F78234; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>อนุมัติแล้ว</td>
+                            </tr>
+                            <tr>
+                                <td><div style="background-color: #2E9AFE; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+                                <td>เสร็จสิ้น</td>
+                            </tr>
+                    </table>
+                </div>                
         </div>
         </div>
     </div>

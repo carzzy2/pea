@@ -21,11 +21,8 @@ if($_POST[rg_detail]=="" ){
 }else{
     $other3=$_POST[rg_detail];
 }
-if($_POST[rg_want_type]>3 ){
-    $status=1;
-}else{
     $status=0;
-}
+
 if($_SESSION[ss_add]=="oldcus"){ 
         $sql="insert into tb_general(rg_id,rg_date,rg_branch,user_id,cus_id,
             rg_place_type,rg_place_other,rg_place_name,

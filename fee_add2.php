@@ -8,6 +8,11 @@ if ($ses_userid <> session_id() or $ses_username == "") {
     echo "<meta http-equiv='refresh' content='0;URL=login.php' />";
     exit();
 }
+function Dateim($mydate) {
+    $d = split("-", $mydate);
+    $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
+    return "$mydate";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +25,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
         <link href="dist/css/sb-admin-2.css" rel="stylesheet"><!-- Custom CSS -->
         <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"><!-- Custom Fonts -->
         <script src="vendor/jquery/jquery.min.js"></script><!-- jQuery -->
+        <script src="vendor/jquery/jquery.alphanumeric.js"></script><!-- jQuery -->
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script><!-- Bootstrap Core JavaScript -->
         <script src="vendor/metisMenu/metisMenu.min.js"></script><!-- Metis Menu Plugin JavaScript -->
         <script src="dist/js/sb-admin-2.js"></script><!-- Custom Theme JavaScript -->
@@ -56,27 +62,27 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                 </div>
                                 <div class="col-sm-3 form-group">
                                     <label>วัน/เดือน/ปี</label>
-                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
+                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
                                 </div>
                                 <div class="col-sm-3 form-group">
                                     <label>เจ้าหน้าที่ผู้รับคำร้อง</label>
                                     <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="user_id" type="text" id="user_id" value="<?=$user[user_name]?> <?=$user[user_last]?>" readonly/>	
                                 </div>
                                 <div class="col-sm-3 form-group">
-                                    <label>เลขที่คำร้องขอใช้ไฟฟ้า</label>
-                                    <select id="re_id" class="form-control" name="re_id" OnChange="window.location = '?item=' + this.value;">
-                                        <option value=""><-- เลือกเลขที่คำร้องขอใช้ไฟฟ้า --></option>
+                                    <label>เลขที่คำร้องขอทั่วไป</label>
+                                    <select id="rg_id" class="form-control" name="rg_id" OnChange="window.location = '?item=' + this.value;">
+                                        <option value=""><-- เลือกเลขที่คำร้องขอทั่วไป --></option>
                                         <?php
-                                        $strSQL = "SELECT * FROM tb_electricity where re_status='1' ORDER BY re_id ASC";
+                                        $strSQL = "SELECT * FROM tb_general where rg_status='1'  ORDER BY rg_id ASC";
                                         $objQuery = mysql_query($strSQL);
                                         while ($objResult = mysql_fetch_array($objQuery)) {
-                                            if ($_GET["item"] == $objResult["re_id"]) {
+                                            if ($_GET["item"] == $objResult["rg_id"]) {
                                                 $sel = "selected";
                                             } else {
                                                 $sel = "";
                                             }
                                             ?>
-                                            <option value="<?= $objResult["re_id"]; ?>"<?php echo $sel; ?>><?= $objResult["re_id"]; ?></option>
+                                            <option value="<?= $objResult["rg_id"]; ?>"<?php echo $sel; ?>><?= $objResult["rg_id"]; ?></option>
                                             <?php
                                         }
                                         ?>
@@ -86,39 +92,35 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                             </div>
                             <?php
                             if ($_GET["item"] != "") {
-                                    $sql = "select * from tb_electricity ele,tb_customer cus where re_id='" . $_GET[item] . "' and ele.cus_id=cus.cus_id";
+                                    $sql = "select * from tb_general ge,tb_customer cus where rg_id='" . $_GET[item] . "' and ge.cus_id=cus.cus_id";
                                     $result = mysql_db_query($dbname, $sql);
                                     $array = mysql_fetch_array($result);
-                                    if ($array[re_want_type] == 0) {
-                                        $want = "ขอติดตั้งมิเตอร์ใหม่";
-                                    } elseif ($array[re_want_type] == 1) {
-                                        $want = "ขอตัดฝากมิเตอร์โดยไม่ใช้ไฟฟ้า";
-                                    } elseif ($array[re_want_type] == 2) {
-                                        $want = "ขอต่อกลับการใช้ไฟฟ้า";
-                                    } elseif ($array[re_want_type] == 3) {
-                                        $want = "ขอเพื่มขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                    } elseif ($array[re_want_type] == 4) {
-                                        $want = "ขอเปลี่ยนประเภทมิเตอร์";
-                                    } elseif ($array[re_want_type] == 5) {
-                                        $want = "ขอหยุดซ่อมแซมเครื่องจักรประจำปี";
-                                    } elseif ($array[re_want_type] == 6) {
-                                        $want = "ขอใช้ไฟฟ้าชั่วคราวแบบเหมาจ่าย";
-                                    } elseif ($array[re_want_type] == 7) {
-                                        $want = "ขอติดตั้งไฟฟ้าชั่วคราว";
-                                    } elseif ($array[re_want_type] == 8) {
-                                        $want = "ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT";
-                                    } elseif ($array[re_want_type] == 9) {
-                                        $want = "ขอยกเลิกเลิกการใช้ไฟฟ้า";
-                                    } elseif ($array[re_want_type] == 10) {
-                                        $want = "ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                    } elseif ($array[re_want_type] == 11) {
-                                        $want = "ขอใช้ไฟฟ้าสาธารณะ";
-                                    } elseif ($array[re_want_type] == 12) {
-                                        $want = "ขอตัดมิเตอร์ใช้เพื่อแสงสว่างลด CT";
-                                    } elseif ($array[re_want_type] == 13) {
-                                        $want = "ขอย้ายจุดติดตั้งมิเตอร์/อุปกรณ์ประกอบ";
-                                    } elseif ($array[re_want_type] == 14) {
-                                        $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
+                                    if($array[rg_want_type]==0){
+                                        $want="ขอรับเงินประกันการใช้ไฟฟ้าคืน";
+                                    }elseif($array[rg_want_type]==1){
+                                        $want="ขอรับเงินประกันคาปาซิเตอร์คืน";
+                                    }elseif($array[rg_want_type]==2){
+                                        $want="ขอรับเงินประกันหม้อแปลงไฟฟ้าคืน";
+                                    }elseif($array[rg_want_type]==3){
+                                        $want="ขอรับค่าขยายเขตระบบจำหน่ายไฟฟ้าคืน";
+                                    }elseif($array[rg_want_type]==4){
+                                        $want="ขอใช้บริการพิมพ์โฆษณาหลังใบแจ้งหนี้";
+                                    }elseif($array[rg_want_type]==5){
+                                        $want="ขอชำระเงินค่าไฟฟ้าโดยหักจากบัญชีเงินฝากธนาคาร";
+                                    }elseif($array[rg_want_type]==6){
+                                        $want="ขอเช่าพื้นที่โฆษณา";
+                                    }elseif($array[rg_want_type]==7){
+                                        $want="ขอเช่าพาดสายโทรนาคม";
+                                    }elseif($array[rg_want_type]==8){
+                                        $want="ขอเช่าสาย fiber optic";
+                                    }elseif($array[rg_want_type]==9){
+                                        $want="ขอเช่าที่ดิน";
+                                    }elseif($array[rg_want_type]==10){
+                                        $want="ขอซื้อที่ดิน";
+                                    }elseif($array[rg_want_type]==11){
+                                        $want="ขอใช้ไฟฟ้าที่ กฟภ. สนับสนุน";
+                                    }else{
+                                       $want=$array[rg_want_other]; 
                                     }
                                 ?>
                             <div class="row">
@@ -130,53 +132,29 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                     <label>เบอร์โทรศัพท์</label>
                                     <input class="form-control" autocomplete=off  value="<?= $array['cus_tel'] ?>" size="30" readonly/>
                                 </div>
-                                <div class="col-sm-3 form-group">
-                                    <label>มีความประสงค์</label>
-                                    <input class="form-control" autocomplete=off  value="<?= $want ?>" size="30" readonly/>
-                                </div>
                             </div>
                                 <table  class="table table-bordered table-hover">
                                     <thead>               
                                         <tr>             
-                                            <th class="text-center" width="150px">รหัสสำรวจ</th>
-                                            <th class="text-center">วันที่สำรวจ</th>
+                                            <th class="text-center" width="150px">รหัสคำร้อง</th>
+                                            <th class="text-center">วันที่บันทึก</th>
                                             <th class="text-center">รายการ</th>
                                             <th  class="text-center" width="200px">จำนวนเงิน</th>
                                         </tr> 
                                     </thead>
-                                    <tbody>
-                                        <?php
-                                        function Dateim($mydate) {
-                                            $d = split("-", $mydate);
-                                            $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
-                                            return "$mydate";
-                                        }
-                                                $sql_mat = "select * from tb_equipment,tb_meter where tb_equipment.re_id='" . $_GET['item'] . "' and tb_equipment.equ_status='0' and tb_meter.me_id=tb_equipment.me_id";
-                                                $result_mat = mysql_db_query($dbname, $sql_mat);
-                                                $array_mat = mysql_fetch_array($result_mat);
-                                                $total=($array_mat['me_price']*7)/100+$array_mat['me_price'];
-                                                ?>		
-                                                <tr>
-                                                    <td class="text-center"><?= $array_mat['equ_id'] ?></td>
-                                                    <td class="text-center"><?= Dateim($array_mat['equ_date']); ?></td>
-                                                    <td><?=$array_mat['me_name'] ?></td>
-                                                    <td class="text-right"><?= number_format($array_mat['me_price'],2) ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2"></td>
-                                                    <td  class="text-right"><b>ภาษีมูลค่าเพื่ม</b></td>
-                                                    <td  class="text-right"><b><?= number_format(($array_mat['me_price']*7)/100,2) ?></b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2"></td>
-                                                    <td  class="text-right"><b>รวมทั้งสิ้น</b></td>
-                                                    <td  class="text-right"><b><?= number_format($total,2) ?></b></td>
-                                                </tr>
+                                    <tbody>		
+                                        <tr>
+                                            <td class="text-center"><?= $array['rg_id'] ?></td>
+                                            <td class="text-center"><?= Dateim($array['rg_date']); ?></td>
+                                            <td><?=$want?></td>
+                                            <td class="text-right"><input type="text" class="form-control" style="text-align: right" id="fee_price" name="fee_price" ></td>
+                                        </tr>
+ 
                                     </tbody>
                                 </table>
                             <?php } ?>
                             <center>
-                                <input type="hidden" name="fee_price" value="<?=$total?>" >
+                                <input type="hidden" name="send_type" value="rgid" >
                                 <a class="btn btn-info" onclick="location.href = 'fee_show.php'"> ย้อนกลับ</a>
                                 <button class="btn  btn-success" name="Submit" type="submit" value="1">บันทึก</button>                            
                             </center>
@@ -184,7 +162,12 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                     </form> 
                 </div>
 
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#fee_price').numeric();
+ 
+});
+</script>
             </div>
         </div>
     </body>
