@@ -46,7 +46,7 @@ if($user[user_pos]==0){
                         
                         <li><a href="fee_show.php"><i class="hidden-xs showopacity glyphicon glyphicon-usd">&nbsp;</i>รับชำระค่าธรรมเนียม</a></li>
                         <li><a href="work_show.php"><i class="hidden-xs showopacity glyphicon glyphicon-list-alt">&nbsp;</i>บันทึกการปฎิบัติงาน</a></li>
-                        <li><a href="#"><i class="hidden-xs showopacity glyphicon glyphicon-eye-open">&nbsp;</i>ตรวจสอบมาตรฐาน</a></li>
+                        <li><a href="investigate_show.php"><i class="hidden-xs showopacity glyphicon glyphicon-eye-open">&nbsp;</i>ตรวจสอบมาตรฐาน</a></li>
                         <li>
                             <a href="#"><i class="hidden-xs showopacity glyphicon glyphicon-folder-open">&nbsp;</i>รายงาน<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

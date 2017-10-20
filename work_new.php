@@ -60,7 +60,23 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                 </div>
                                 <div class="col-sm-3 form-group">
                                     <label>เลขที่คำร้องขอใช้ไฟฟ้า</label>
-                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
+                                     <select id="re_id" class="form-control" name="re_id" OnChange="window.location = 'work_addreid?re_id=' + this.value;">
+                                        <option value=""><-- เลือกเลขที่คำร้องขอใช้ไฟฟ้า --></option>
+                                        <?php
+                                        $strSQL = "SELECT * FROM tb_electricity where re_status='2' ORDER BY re_id ASC";
+                                        $objQuery = mysql_query($strSQL);
+                                        while ($objResult = mysql_fetch_array($objQuery)) {
+                                            if ($_SESSION['ss_re_id'] == $objResult["re_id"]) {
+                                                $sel = "selected";
+                                            } else {
+                                                $sel = "";
+                                            }
+                                            ?>
+                                            <option value="<?= $objResult["re_id"]; ?>"<?php echo $sel; ?>><?= $objResult["re_id"]; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 
                             </div>
