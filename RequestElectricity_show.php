@@ -44,19 +44,49 @@ function Dateim($mydate){
                     <h2 class="panel-title">คำร้องขอใช้ไฟฟ้า</h2>
                 </div>
             <div class="panel-body">
-            <div class="col-sm-2">
-                    <a href="RequestElectricity.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
-            </div>
-            <div class="col-sm-4">
-                <form name="frmSearch" method="POST">
-                    <div class="form-group input-group">
-                        <input type="search" name="search" class="form-control" placeholder="ค้นหาข้อมูล">
-                        <span class="input-group-btn">
-                            <button class="btn btn-info" type="submit" style="height:34px;"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div> 
-                </form>
-            </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <a href="RequestElectricity.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <form name="frmSearch" method="POST">
+                            <div class="form-group input-group">
+                                <input type="search" name="search" class="form-control" placeholder="ค้นหาข้อมูล">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="submit" style="height:34px;"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="col-md-1" style="background-color: #848480; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span class="col-md-2">ยังไม่ได้สำรวจ</span>
+                        
+                        <span class="col-md-1" style="background-color: #d9534f; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span class="col-md-2">ไม่ผ่านการสำรวจ</span>
+                        
+                        <span class="col-md-1" style="background-color: #5bc0de; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span class="col-md-2">ผ่านการสำรวจแล้ว</span>
+                        
+                        <span class="col-md-1" style="background-color: #F78234; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span class="col-md-2">ชำระค่าธรรมเนียมแล้ว</span>
+                        <br><br>
+                        <span class="col-md-1" style="background-color: #99cc00; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span class="col-md-2">บันทึกการปฎิบัติงานแล้ว</span> 
+                        
+                        <span  class="col-md-1" style="background-color: #16DD87; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span class="col-md-2">ผ่านการตรวจสอบมาตรฐาน</span>  
+                        
+                        <span  class="col-md-1" style="background-color: #751C90; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span class="col-md-2">ไม่ผ่านการตรวจสอบมาตรฐาน</span> 
+                        
+                        <span class="col-md-1" style="background-color: #2E9AFE; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span class="col-md-2">เสร็จสิ้น</span> 
+                    </div>
+                </div>
+                <br>
             <div class="col-sm-12">
                 <div class="table-responsive">
                     <?php
@@ -85,8 +115,7 @@ function Dateim($mydate){
                                 <th class=" text-center" >วันที่บันทึก</th>
                                 <th class=" text-center" >รายการ</th>
                                 <th class=" text-center" >ลูกค้า</th>
-                                <th class=" text-center" >โทรศัพท์</th>
-                                <th class=" text-center" >สถานะ</th>
+                                <th class=" text-center" style="min-width: 200">สถานะ</th>
                                 <th class=" text-center">จัดการข้อมูล</th>
                             </tr> 
                         </thead>
@@ -174,7 +203,6 @@ function Dateim($mydate){
                                             <td class=" text-center"><?= Dateim($array[re_date]);?></td>
                                             <td class=" text-center"><?=$want?></td>
                                             <td class="text-center"><?=$arraycus[cus_name]?></td>
-                                            <td class="text-center" ><?=$arraycus[cus_tel]?></td>
                                             <td class="text-center"><div style="border-radius:10px; background-color: <?=$status?>; color: white;"><?=$label?></div></td>
                                             <td align="center">
                                                 <div class="btn-group">
@@ -195,42 +223,7 @@ function Dateim($mydate){
                     
                 </div>
             </div>
-                <div class="col-md-12">
-                    <table class="table">
-                            <tr>
-                                <td><div style="background-color: #848480; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>ยังไม่ได้สำรวจ</td>
-                            </tr>
-                            <tr>
-                                <td width="100px"><div style="background-color: #d9534f; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>ไม่ผ่านการสำรวจ</td>
-                            </tr>
-                            <tr>
-                                <td><div style="background-color: #5bc0de; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>ผ่านการสำรวจแล้ว</td>
-                            </tr>
-                            <tr>
-                                <td><div style="background-color: #F78234; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>ชำระค่าธรรมเนียมแล้ว</td>
-                            </tr>
-                            <tr>
-                                <td><div style="background-color: #99cc00; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>บันทึกการปฎิบัติงานแล้ว</td>
-                            </tr>
-                            <tr>
-                                <td><div style="background-color: #16DD87; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>ผ่านการตรวจสอบมาตรฐาน</td>
-                            </tr>
-                            <tr>
-                                <td><div style="background-color: #751C90; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>ไม่ผ่านการตรวจสอบมาตรฐาน</td>
-                            </tr>
-                            <tr>
-                                <td><div style="background-color: #2E9AFE; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>เสร็จสิ้น</td>
-                            </tr>
-                    </table>
-                </div>
+
         </div>
         </div>
     </div>

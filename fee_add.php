@@ -51,18 +51,6 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-3 form-group">
-                                    <label>รหัสชำระเงิน</label>
-                                    <input class="form-control" autocomplete=off  name="fee_id" type="text" id="fee_id" value="<?= $feeid ?>" size="30" readonly/>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label>วัน/เดือน/ปี</label>
-                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label>เจ้าหน้าที่ผู้รับคำร้อง</label>
-                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="user_id" type="text" id="user_id" value="<?=$user[user_name]?> <?=$user[user_last]?>" readonly/>	
-                                </div>
-                                <div class="col-sm-3 form-group">
                                     <label>เลขที่คำร้องขอใช้ไฟฟ้า</label>
                                     <select id="re_id" class="form-control" name="re_id" OnChange="window.location = '?item=' + this.value;">
                                         <option value=""><-- เลือกเลขที่คำร้องขอใช้ไฟฟ้า --></option>
@@ -82,6 +70,19 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         ?>
                                     </select>
                                 </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>รหัสชำระเงิน</label>
+                                    <input class="form-control" autocomplete=off  name="fee_id" type="text" id="fee_id" value="<?= $feeid ?>" size="30" readonly/>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>วัน/เดือน/ปี</label>
+                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>เจ้าหน้าที่ผู้รับคำร้อง</label>
+                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="user_id" type="text" id="user_id" value="<?=$user[user_name]?> <?=$user[user_last]?>" readonly/>	
+                                </div>
+                                
                                 
                             </div>
                             <?php

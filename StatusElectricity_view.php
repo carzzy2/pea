@@ -42,7 +42,7 @@ $ses_username = $_SESSION[loginid];
 $sql="select * from tb_electricity,tb_user where tb_electricity.re_id='".$_GET[id]."' and tb_electricity.user_id = tb_user.user_id ";
 $result=mysql_db_query($dbname,$sql);
 $array2=mysql_fetch_array($result);
-    
+
 
 ?>
     <div id="page-wrapper">
@@ -75,6 +75,13 @@ $array2=mysql_fetch_array($result);
                         $n=0;
                             $sql_eq="select * from tb_equipment where re_id='".$_GET[id]."' order by equ_id asc ";
                             $result_eq=mysql_db_query($dbname,$sql_eq);
+                            if (mysql_num_rows($result_eq) == 0) {
+                                ?>
+                        <div class="alert alert-info">
+                            <strong>เลขที่ใบคำร้องขอใช้ไฟฟ้านี่ ไม่มีการสำรวจ</strong> 
+                          </div>
+                        <?php
+                            }else{
                             while ($array = mysql_fetch_array($result_eq)) {
                                $n++; 
                                echo "<label>สำรวจครั้งที่".$n."</label>";
@@ -229,6 +236,7 @@ $array2=mysql_fetch_array($result);
                         <?php
                         }
                     }
+                        }
                         ?>
                     <center>
                         <a class="btn btn-info" onclick="location.href='StatusElectricity.php'"> ย้อนกลับ</a>                     

@@ -55,6 +55,10 @@ function Dateim($mydate) {
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-3 form-group">
+                                    <label>เลขที่คำร้องขอใช้ไฟฟ้า</label>
+                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" type="text"  value="<?=$array_show[re_id]?>"  readonly/>
+                                </div>
+                                <div class="col-sm-3 form-group">
                                     <label>รหัสการปฎิบัติงาน</label>
                                     <input class="form-control" autocomplete=off  name="fee_id" type="text" id="fee_id" value="<?=$array_show[work_id]?>" size="30" readonly/>
                                 </div>
@@ -62,10 +66,7 @@ function Dateim($mydate) {
                                     <label>วัน/เดือน/ปี</label>
                                     <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= Dateim($array_show[work_date]); ?>"  readonly/>	
                                 </div>
-                                <div class="col-sm-3 form-group">
-                                    <label>เลขที่คำร้องขอใช้ไฟฟ้า</label>
-                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" type="text"  value="<?=$array_show[re_id]?>"  readonly/>
-                                </div>
+                                
                                 
                             </div>
                             <?php
@@ -77,13 +78,12 @@ function Dateim($mydate) {
                             <div class="row">
                                 
                            
-                            <div class="col-md-12">
+                            <div class="col-md-9">
                                 <table  class="table table-bordered table-hover">
                                     <thead>               
                                         <tr>             
                                             <th class="text-center" width="150px">รหัสเจ้าหน้าที่</th>
                                             <th class="text-center" width="400px">ชื่อเจ้าหน้าที่</th>
-                                            <th class="text-center">หน้าที่</th>
                                         </tr> 
                                     </thead>
                             <?php
@@ -97,7 +97,7 @@ function Dateim($mydate) {
                                 <tr>    
                                     <td>&nbsp;<?=$array_detail[user_id]?></td>
                                     <td>คุณ<?=$array_detail[user_name]?> <?=$array_detail[user_last]?></td>
-                                    <td align="right"><textarea name="work_detail[]" cols="20" class="form-control" placeholder="ระบุหน้าที่" disabled><?=$array_detail[work_detail]?></textarea></td>
+                                   
                                 </tr>
                                 <?php
                                 }

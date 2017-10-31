@@ -8,6 +8,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
     echo "<meta http-equiv='refresh' content='0;URL=login.php' />";
     exit();
 }
+
 function getlistname($want_type, $other) {
     if ($want_type == 0) {
         $want = "ขอติดตั้งมิเตอร์ใหม่";
@@ -77,171 +78,102 @@ function Dateim($mydate) {
         <div id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h2 class="panel-title">สำรวจสถานะหน้างาน</h2>
+                    <h2 class="panel-title">การสำรวจ</h2>
                 </div>
                 <div class="panel-body">
                     <div class="col-sm-12">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#re" data-toggle="tab">อัพเดทสถานะ</a>
-                            </li>
-                            <li><a href="#equ" data-toggle="tab">การสำรวจ</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane fade in active" id="re"><br>
-                                <div class="col-sm-4">
-                                    <form name="frmSearch" method="POST">
-                                        <div class="form-group input-group">
-                                            <input type="search" name="search" class="form-control" placeholder="ค้นหา">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-info" type="submit" style="height:34px;"><i class="fa fa-search"></i></button>
-                                            </span>
-                                        </div> 
-                                    </form>
-                                </div>
-                                <div class="col-sm-12">    
-                                    <div class="table-responsive">
-                                        <table width="100%" class="table table-bordered table-hover">
-                                            <thead>               
-                                                <tr>
-                                                    <th class=" text-center" >ลำดับ</th>
-                                                    <th class=" text-center" >รหัสใบคำร้อง</th>
-                                                    <th class=" text-center" >วันที่บันทึก</th>
-                                                    <th class=" text-center" >รายการ</th>
-                                                    <th class=" text-center" >ลูกค้า</th>
-                                                    <th class=" text-center" >โทรศัพท์</th>
-                                                    <th class=" text-center" >สถานะ</th>
-                                                    <th class=" text-center">จัดการข้อมูล</th>
-                                                </tr> 
-                                            </thead>
-                                            <tbody>
-                                                <?php
-       
-                                                $page = 0;
-                                                $sql = "select * from tb_electricity where re_id like '%" . $_POST[search] . "%' and re_status in (0,9) order by re_id desc";
-                                                $result = mysql_db_query($dbname, $sql);
-                                                if (mysql_num_rows($result) > 0) {
-                                                    while ($array = mysql_fetch_array($result)) {
-                                                        $page++;
-                                                        $sqlcus = "select * from tb_customer where cus_id='" . $array[cus_id] . "'";
-                                                        $resultcus = mysql_db_query($dbname, $sqlcus);
-                                                        $arraycus = mysql_fetch_array($resultcus);
-                                                        
-                                                        if ($array[re_status] == "9") {
-                                                            $status = "ไม่ผ่านการสำรวจ";
-                                                            $label = "danger";
-                                                        } elseif($array[re_status] == "0") {
-                                                            $status = "ยังไม่ได้สำรวจ";
-                                                            $label = "success";
-                                                        }
-                                                        $wanttype = getlistname($array[re_want_type],$array[re_place_other]);
+                        <div class="col-sm-4">
+                            <form name="frmSearch" method="POST">
+                                <div class="form-group input-group">
+                                    <input type="search" name="search" class="form-control" placeholder="ค้นหา">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info" type="submit" style="height:34px;"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div> 
+                            </form>
+                        </div>
+                        <div class="col-sm-12">    
+                            <div class="table-responsive">
+                                <table width="100%" class="table table-bordered table-hover">
+                                    <thead>               
+                                        <tr>
+                                            <th class=" text-center" >ลำดับ</th>
+                                            <th class=" text-center">ดูรายละเอียด</th>
+                                            <th class=" text-center" >รหัสใบคำร้อง</th>
+                                            <th class=" text-center" >วันที่บันทึก</th>
+                                            <th class=" text-center" >รายการ</th>
+                                            <th class=" text-center" >ลูกค้า</th>
+                                            <th class=" text-center" >สถานะ</th>
+                                            <th class=" text-center">จัดการข้อมูล</th>
+                                        </tr> 
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $stop = array("1","5","6","7","8","9","14");
+                                        $page = 0;
+                                        $sql = "select * from tb_electricity where re_id like '%" . $_POST[search] . "%'  order by re_id desc";
+                                        $result = mysql_db_query($dbname, $sql);
+                                        if (mysql_num_rows($result) > 0) {
+                                            while ($array = mysql_fetch_array($result)) {
+                                                $page++;
+                                                $sqlcus = "select * from tb_customer where cus_id='" . $array[cus_id] . "'";
+                                                $resultcus = mysql_db_query($dbname, $sqlcus);
+                                                $arraycus = mysql_fetch_array($resultcus);
 
-                                                        ?>	
-                                                        <tr>
-                                                            <td class="text-center"><?= $page ?></td>
-                                                            <td class=" text-center"><?= $array[re_id] ?></td>
-                                                            <td class=" text-center"><?= Dateim($array[re_date]); ?></td>
-                                                            <td class=" text-center"><?= $wanttype ?></td>
-                                                            <td class="text-center"><?= $arraycus[cus_name] ?></td>
-                                                            <td class="text-center"><?= $arraycus[cus_tel] ?></td>
-                                                            <td class="text-center"><span class="label label-<?= $label ?>"><?= $status ?></span></td>
-                                                            <td>
-                                                                <div class="btn-group" align="center">
-                                                                    <center>
-                                                                        <a class="btn btn-default" href="StatusElectricity_detail.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ผ่าน</i></a>
-                                                                        <a class="btn btn-danger" href="StatusElectricity_nopass.php?id=<?= $array[re_id] ?>"><i class="fa fa-times"> ไม่ผ่าน</i></a>
-                                                                    </center>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    }
+                                                if ($array[re_status] == "9") {
+                                                    $status = "ไม่ผ่านการสำรวจ";
+                                                    $label = "danger";
+                                                } elseif ($array[re_status] == "0") {
+                                                    $status = "ยังไม่ได้สำรวจ";
+                                                    $label = "success";
                                                 } else {
-                                                    ?>				  
-                                                    <tr><td colspan="7" align="center">ไม่พบข้อมูล</td></tr>
-                                                    <?php
+                                                    $status = "ผ่านการสำรวจแล้ว";
+                                                    $label = "info";
                                                 }
+                                                $wanttype = getlistname($array[re_want_type], $array[re_place_other]);
+                                                
+                                                if(!in_array($array['re_want_type'],$stop)){
                                                 ?>	
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="equ"><br>
-                                <div class="col-sm-4">
-                                    <form name="frmSearch" method="POST">
-                                        <div class="form-group input-group">
-                                            <input type="search" name="search" class="form-control" placeholder="ค้นหา">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-info" type="submit" style="height:34px;"><i class="fa fa-search"></i></button>
-                                            </span>
-                                        </div> 
-                                    </form>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="table-responsive">
-                                        <table width="100%" class="table table-bordered table-hover">
-                                            <thead>               
                                                 <tr>
-                                                    <th class=" text-center" >รหัสใบคำร้อง</th>
-                                                    <th class=" text-center" >วันที่บันทึก</th>
-                                                    <th class=" text-center" >รายการ</th>
-                                                    <th class=" text-center" >ลูกค้า</th>
-                                                    <th class=" text-center" >โทรศัพท์</th>
-                                                    <th class=" text-center" >สถานะ</th>
-                                                    <th class=" text-center">จัดการข้อมูล</th>
-                                                </tr> 
-                                            </thead>
-                                            <tbody>
+                                                    <td class="text-center"><?= $page ?></td>
+                                                    <td><a class="btn btn-default" href="StatusElectricity_view.php?id=<?= $array[re_id] ?>">ดูรายละเอียด</a></td>
+                                                    <td class=" text-center"><?= $array[re_id] ?></td>
+                                                    <td class=" text-center"><?= Dateim($array[re_date]); ?></td>
+                                                    <td class=" text-center"><?= $wanttype ?></td>
+                                                    <td class="text-center"><?= $arraycus[cus_name] ?></td>
+                                                    <td class="text-center"><span class="label label-<?= $label ?>"><?= $status ?></span></td>
+                                                    <td>
+                                                        <div class="btn-group" align="center">
+                                                            <?php if($array['re_status'] == "0" or $array[re_status] == "9"){?>
+                                                            <center>
+                                                                <a class="btn btn-default" href="StatusElectricity_detail.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ผ่าน</i></a>
+                                                                <a class="btn btn-danger" href="StatusElectricity_nopass.php?id=<?= $array[re_id] ?>"><i class="fa fa-times"> ไม่ผ่าน</i></a>
+                                                            </center>
+                                                           
+                                                            <?php }else{?>
+                                                             <center>
+                                                                <a class="btn btn-default disabled" ><i class="fa fa-check"> ผ่าน</i></a>
+                                                                <a class="btn btn-danger disabled" ><i class="fa fa-times"> ไม่ผ่าน</i></a>
+                                                            </center>
+                                                            <?php }?>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                                 <?php
-                                                $n = 0;
-                                                $sql = "select * from tb_electricity,tb_equipment where tb_electricity.re_id like '%" . $_POST[search] . "%' and tb_electricity.re_id=tb_equipment.re_id group by tb_electricity.re_id  order by tb_electricity.re_id desc";
-                                                $result = mysql_db_query($dbname, $sql);
-                                                if (mysql_num_rows($result) > 0) {
-                                                    while ($array = mysql_fetch_array($result)) {
-                                                        $sqlcus = "select * from tb_customer where cus_id='" . $array[cus_id] . "'";
-                                                        $resultcus = mysql_db_query($dbname, $sqlcus);
-                                                        $arraycus = mysql_fetch_array($resultcus);
-                                                        
-                                                        if ($array[re_status] == "9") {
-                                                            $status = "ไม่ผ่านการสำรวจ";
-                                                            $label = "danger";
-                                                        } else {
-                                                            $status = "ผ่านการสำรวจแล้ว";
-                                                            $label = "info";
-                                                        }
-                                                        $wanttype = getlistname($array[re_want_type],$array[re_place_other]);
-
-                                                        ?>	
-                                                        <tr>
-                                                            <td class=" text-center"><?= $array[re_id] ?></td>
-                                                            <td class=" text-center"><?= Dateim($array[re_date]); ?></td>
-                                                            <td class=" text-center"><?= $wanttype ?></td>
-                                                            <td class="text-center"><?= $arraycus[cus_name] ?></td>
-                                                            <td class="text-center"><?= $arraycus[cus_tel] ?></td>
-                                                            <td class="text-center"><span class="label label-<?= $label ?>"><?= $status ?></span></td>
-                                                            <td align="center">
-                                                                <div class="btn-group" >
-                                                                    <center>
-                                                                            <a class="btn btn-default" href="StatusElectricity_view.php?id=<?= $array[re_id]?>">ดูรายละเอียด</a>
-                                                                    </center>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                    }
-                                                } else {
-                                                    ?>				  
-                                                    <tr><td colspan="6" align="center">ไม่พบข้อมูล</td></tr>
-                                                    <?php
-                                                }
-                                                ?>	
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                            }
+                                            }
+                                        } else {
+                                            ?>				  
+                                            <tr><td colspan="7" align="center">ไม่พบข้อมูล</td></tr>
+                                            <?php
+                                        }
+                                        ?>	
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

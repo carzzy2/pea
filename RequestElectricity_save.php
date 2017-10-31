@@ -33,7 +33,7 @@ if($_SESSION[re_detail]=="" ){
 }else{
     $other3=$_SESSION[re_detail];
 }
-if($_SESSION[re_want_type]=="1" or $_SESSION[re_want_type]=="6" or $_SESSION[re_want_type]=="7" or $_SESSION[re_want_type]=="8" or $_SESSION[re_want_type]=="9" or $_SESSION[re_want_type]=="14"){
+if($_SESSION[re_want_type]=="1" or $_SESSION[re_want_type]=="5" or $_SESSION[re_want_type]=="6" or $_SESSION[re_want_type]=="7" or $_SESSION[re_want_type]=="8" or $_SESSION[re_want_type]=="9" or $_SESSION[re_want_type]=="14"){
     $status="4";
 }else{
      $status="0";

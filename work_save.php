@@ -15,8 +15,8 @@
         if(mysql_query($sql)){
             for($i=0;$i<count($_SESSION['ss_user_id']);$i++){
 
-                $sql_detail="insert into tb_work_detail(work_id,user_id,work_detail)
-                        values('".$new."','".$_SESSION['ss_user_id'][$i]."','".$_SESSION['ss_user_detail'][$i]."')";
+                $sql_detail="insert into tb_work_detail(work_id,user_id)
+                        values('".$new."','".$_SESSION['ss_user_id'][$i]."')";
                 mysql_query($sql_detail);
             }
             session_unregister("ss_re_id");

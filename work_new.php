@@ -50,15 +50,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                     <form method="post" action="work_cal.php">
                         <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-sm-3 form-group">
-                                    <label>รหัสการปฎิบัติงาน</label>
-                                    <input class="form-control" autocomplete=off  name="fee_id" type="text" id="fee_id" value="<?= $feeid ?>" size="30" readonly/>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label>วัน/เดือน/ปี</label>
-                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
-                                </div>
-                                <div class="col-sm-3 form-group">
+                                    <div class="col-sm-3 form-group">
                                     <label>เลขที่คำร้องขอใช้ไฟฟ้า</label>
                                      <select id="re_id" class="form-control" name="re_id" OnChange="window.location = 'work_addreid?re_id=' + this.value;">
                                         <option value=""><-- เลือกเลขที่คำร้องขอใช้ไฟฟ้า --></option>
@@ -78,6 +70,15 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         ?>
                                     </select>
                                 </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>รหัสการปฎิบัติงาน</label>
+                                    <input class="form-control" autocomplete=off  name="fee_id" type="text" id="fee_id" value="<?= $feeid ?>" size="30" readonly/>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label>วัน/เดือน/ปี</label>
+                                    <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
+                                </div>
+
                                 
                             </div>
                             <?php
@@ -103,12 +104,14 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                            <div class="col-md-9">
+
                                 <table  class="table table-bordered table-hover">
                                     <thead>               
                                         <tr>             
                                             <th class="text-center" width="150px">รหัสเจ้าหน้าที่</th>
                                             <th class="text-center">ชื่อเจ้าหน้าที่</th>
-                                            <th class="text-center">หน้าที่</th>
                                             <th  class="text-center" width="200px">จัดการข้อมูล</th>
                                         </tr> 
                                     </thead>
@@ -132,7 +135,6 @@ if ($ses_userid <> session_id() or $ses_username == "") {
             <tr>
                 <td class="text-center"><?=$_SESSION['ss_user_id'][$i]?></td>
                 <td>คุณ<?=$array_user[user_name]?> <?=$array_user[user_last]?></td>
-                <td><textarea name="work_detail[]" cols="20" class="form-control" placeholder="ระบุหน้าที่" required><?=$_SESSION['ss_user_detail'][$i]?></textarea></td>
                 <td align="center"><a class="btn btn-danger"  title="ลบ" href="work_cal.php?tdel=<?=$array_user[user_id]?>">ลบออก</a>
             </tr>
 <?php
@@ -144,6 +146,8 @@ if ($ses_userid <> session_id() or $ses_username == "") {
 ?>	
                 </tbody>
                                 </table>
+                                 </div>                               
+                            </div>
                             <?php } ?>
                             <center>
                                 <input type="hidden" name="fee_price" value="<?=$total?>" >

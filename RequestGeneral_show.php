@@ -44,19 +44,37 @@ function Dateim($mydate){
                     <h2 class="panel-title">ใบคำร้องทั่วไป</h2>
                 </div>
             <div class="panel-body">
-            <div class="col-sm-2">
-                    <a href="RequestGeneral.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
-            </div>
-            <div class="col-sm-4">
-                <form name="frmSearch" method="POST">
-                    <div class="form-group input-group">
-                        <input type="search" name="search" class="form-control" placeholder="ค้นหาข้อมูล">
-                        <span class="input-group-btn">
-                            <button class="btn btn-info" type="submit" style="height:34px;"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div> 
-                </form>
-            </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <a href="RequestGeneral.php"><input type="button" value="เพิ่มข้อมูล" class="btn  btn-success"></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <form name="frmSearch" method="POST">
+                            <div class="form-group input-group">
+                                <input type="search" name="search" class="form-control" placeholder="ค้นหาข้อมูล">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="submit" style="height:34px;"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span style="background-color: #848480; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span>ยังไม่อนุมัติ</span>
+                        
+                        <span style="background-color: #d9534f; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span>ยกเลิกใบคำร้อง</span>
+                        
+                        <span style="background-color: #F78234; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span>อนุมัติแล้ว</span>
+                        
+                        <span style="background-color: #2E9AFE; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                        <span>เสร็จสิ้น</span>                     
+                    </div>
+                </div>
+                
             <div class="col-sm-12">
                 <div class="table-responsive">
                     <?php
@@ -77,6 +95,7 @@ function Dateim($mydate){
 
                     }
                     ?> <br><br>
+                    
                     <table width="100%" class="table table-bordered table-hover">
                         <thead>               
                             <tr>
@@ -85,8 +104,7 @@ function Dateim($mydate){
                                 <th class=" text-center" >วันที่บันทึก</th>
                                 <th class=" text-center" >รายการ</th>
                                 <th class=" text-center" >ลูกค้า</th>
-                                <th class=" text-center" >โทรศัพท์</th>
-                                <th class=" text-center" >สถานะ</th>
+                                <th class=" text-center" style="min-width: 150"  >สถานะ</th>
                                 <th class=" text-center">จัดการข้อมูล</th>
                             </tr> 
                         </thead>
@@ -154,7 +172,6 @@ function Dateim($mydate){
                                             <td class=" text-center"><?= Dateim($array[rg_date]);?></td>
                                             <td class=" text-center"><?=$want?></td>
                                             <td class="text-center"><?=$arraycus[cus_name]?></td>
-                                            <td class="text-center"><?=$arraycus[cus_tel]?></td>
                                             <td class="text-center"><div style="border-radius:10px; background-color: <?=$status?>; color: white;"><?=$label?></div></td>
                                             <td align="center">
                                                 <div class="btn-group">
@@ -173,27 +190,7 @@ function Dateim($mydate){
                             </tbody>
                     </table>
                 </div>
-            </div>
-                <div class="col-md-12">
-                    <table class="table">
-                            <tr>
-                                <td><div style="background-color: #848480; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>ยังไม่อนุมัติ</td>
-                            </tr>
-                            <tr>
-                                <td width="100px"><div style="background-color: #d9534f; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>ยกเลิกใบคำร้อง</td>
-                            </tr>
-                            <tr>
-                                <td><div style="background-color: #F78234; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>อนุมัติแล้ว</td>
-                            </tr>
-                            <tr>
-                                <td><div style="background-color: #2E9AFE; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
-                                <td>เสร็จสิ้น</td>
-                            </tr>
-                    </table>
-                </div>                
+            </div>               
         </div>
         </div>
     </div>
