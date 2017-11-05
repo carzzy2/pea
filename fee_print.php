@@ -94,8 +94,6 @@ function Dateim($mydate) {
                     รหัสใบคำร้อง : <?= $array_ele[re_id] ?> <br>
                     ชื่อ : <?= $array_ele[cus_name] ?> <br>
                     ที่อยู่ :บ้านเลขที่ <?=$array_ele[cus_number]?> หมู่บ้าน/อาคาร <?=$array_ele[cus_village]?> ซ. <?=$array_ele[cus_alleyway]?> ถ. <?=$array_ele[cus_road]?> ม. <?=$array_ele[cus_vilno]?> ต. <?=$array_ele[cus_district]?> อ. <?=$array_ele[cus_canton]?> จ. <?=$array_ele[cus_province]?> <?=$array_ele[cus_post]?><br>
-
-                    รายการ : <?= $want ?>
                 </td>
             </tr>
             <tr>
