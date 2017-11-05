@@ -99,7 +99,7 @@ $ses_umename = $_SESSION[loginid];
                                 $result=mysql_db_query($dbname,$sql);
                                     if(mysql_num_rows($result)>0){
                                         while($array=mysql_fetch_array($result)){
-                                            $n++;
+                                            $page++;
                                             if ($array[me_type] == 0) {
                                                 $want = "ขอติดตั้งมิเตอร์ใหม่";
                                             } elseif ($array[me_type] == 1) {
@@ -137,7 +137,7 @@ $ses_umename = $_SESSION[loginid];
                                             }
                             ?>	
                                     <tr>
-                                        <td class="text-center"><?=$n?></td>
+                                        <td class="text-center"><?=$page?></td>
                                             <td><?=$array[me_id]?></td>
                                             <td><?=$first?><?=$array[me_name]?></td>
                                             <td class="text-right"><?= number_format($array[me_price],2)?></td>

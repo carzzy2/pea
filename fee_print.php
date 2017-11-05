@@ -29,31 +29,25 @@ function Dateim($mydate) {
         $result_print = mysql_db_query($dbname, $sql_print);
         $array_print = mysql_fetch_array($result_print);
         ?>
-        <br>
-        <table border="1" align="center" style=" border-collapse:inherit; ">
-            <tr >
-                <td width="70px" style="border-right-color: white;">
+        <table  align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
+                <tr >
+                    <td colspan="2" width="70px" style="border-right-color: white;">
+                <center>
                     <img  src="img/lo.png" width="70" >
-                </td>
-                <td valign="top" align="center"  style="padding-top:7px;">
-                    <b>การไฟฟ้าส่วนภูมิภาค<br>
-                        200 ถนนงามวงส์วาน จตุจักร กรุงเทพฯ 10900<br>
-                        </b>
-                </td>
-            </tr>
+                </center>
+            </td>
+        </table>
+        <table width="100%"  align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
             <tr>
                 <td valign="top" colspan="2">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    ใบเสร็จชำระเงิน <br>
-                    
-                    รหัสชำระเงิน <?= $array_print[fee_id] ?><br>
-                    ผู้รับเงิน <?= $array_print[user_name] ?> <?= $array_print[user_last] ?><br>
-                    วันที่ <?= Dateim($array_print[fee_date]); ?>
+                    ใบเสร็จเลขที่ <?= $array_print[fee_id] ?><br>
+                                       การไฟฟ้าส่วนภูมิภาคขอนแก่น(มะลิวัลย์)(สาขาที่ 00918)<br>
+                        เลขที่ 444 หมู่ 8 ถนนมะลิวัลย์ ตำบลบ้านเป็ด อำเภอเมืองขอนแก่น จังหวัดขอนแก่น 40000<br>
+                        
                 </td>
             </tr>
         </table>
+        <hr >
         <?php
         $sql_ele = "select * from  tb_electricity,tb_equipment,tb_meter,tb_customer where tb_electricity.re_id='" . $array_print[re_id] . "' and tb_equipment.me_id=tb_meter.me_id and tb_electricity.cus_id=tb_customer.cus_id and tb_equipment.equ_status='0' ";
         $result_ele = mysql_db_query($dbname, $sql_ele);
@@ -94,36 +88,62 @@ function Dateim($mydate) {
         $tex=$array_print['fee_price'] - $tt ;
         
         ?>
-        <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
+        <table width="100%"  align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
             <tr>
                 <td colspan="4" style="padding-top:9px;">
-                    รหัสใบคำร้องขอใช้ไฟฟ้า : <?= $array_ele[re_id] ?> <br>
-                    ชื่อลูกค้า : <?= $array_ele[cus_name] ?> <br>
-                    เบอร์โทรศัพท์ : <?= $array_ele[cus_tel] ?><br>
-                    มีความประสงค์ : <?= $want ?>
+                    รหัสใบคำร้อง : <?= $array_ele[re_id] ?> <br>
+                    ชื่อ : <?= $array_ele[cus_name] ?> <br>
+                    ที่อยู่ :บ้านเลขที่ <?=$array_ele[cus_number]?> หมู่บ้าน/อาคาร <?=$array_ele[cus_village]?> ซ. <?=$array_ele[cus_alleyway]?> ถ. <?=$array_ele[cus_road]?> ม. <?=$array_ele[cus_vilno]?> ต. <?=$array_ele[cus_district]?> อ. <?=$array_ele[cus_canton]?> จ. <?=$array_ele[cus_province]?> <?=$array_ele[cus_post]?><br>
+
+                    รายการ : <?= $want ?>
                 </td>
             </tr>
+            <tr>
+                    <td colspan="4" >
+                        รายการ: <?= $want ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" >
+                        จำนวนเงิน
+                    </td>
+                    <td colspan="2" align='right'>
+                        <?= number_format($tt, 2) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" >
+                        ภาษีมูลค่าเพื่ม
+                    </td>
+                    <td colspan="2" align='right'>
+                        <?= number_format($tex, 2) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" >
+                        รวมทั้งสิ้น
+                    </td>
+                    <td colspan="2" align='right' >
+                        <?= number_format(($array_print['fee_price']), 2) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-top:15px;">
+                        ชำระ
+                    </td>
+                    <td colspan="2" align='right' style="padding-top:15px;">
+                        <?= number_format(($array_print['fee_price']), 2) ?>
+                    </td>
+                </tr>
+                <tr>
+                <td colspan="4" style="padding-top:9px;">
+                    วันที่ชำระ <?= Dateim($array_print[fee_date]);?>
+                    
+                </td>
+
+            </tr>
         </table>
-        <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
-                <tr>             
-                    <th align="center" colspan="2">รายการ</th>
-                    <th align="center" colspan="2">จำนวนเงิน</th>
-                </tr> 		
-                <tr>
-                    <td align="center" colspan="2"><?= $array_ele['me_name'] ?></td>
-                    <td align="right" colspan="2"><?= number_format($tt, 2) ?></td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                    <td  align="right"><b>ภาษีมูลค่าเพื่ม</b></td>
-                    <td  align="right"><b><?= number_format($tex, 2) ?></b></td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                    <td align="right"><b>รวมทั้งสิ้น</b></td>
-                    <td align="right"><b><?= number_format(($array_print['fee_price']), 2) ?></b></td>
-                </tr>
-        </table>
+        <hr>
         <?php
         
         }else{
@@ -135,30 +155,25 @@ function Dateim($mydate) {
         $array_print = mysql_fetch_array($result_print);
         ?>
         <br>
-        <table border="1" align="center" style=" border-collapse:inherit; ">
-            <tr >
-                <td width="70px" style="border-right-color: white;">
+            <table  align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
+                <tr >
+                    <td colspan="2" width="70px" style="border-right-color: white;">
+                <center>
                     <img  src="img/lo.png" width="70" >
-                </td>
-                <td valign="top" align="center"  style="padding-top:7px;">
-                    <b>การไฟฟ้าส่วนภูมิภาค<br>
-                        200 ถนนงามวงส์วาน จตุจักร กรุงเทพฯ 10900<br>
-                        </b>
-                </td>
-            </tr>
+                </center>
+            </td>
+        </table>
+        <table style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
             <tr>
                 <td valign="top" colspan="2">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    ใบเสร็จชำระเงิน <br>
-                    
-                    รหัสชำระเงิน <?= $array_print[fee_id] ?><br>
-                    ผู้รับเงิน <?= $array_print[user_name] ?> <?= $array_print[user_last] ?><br>
-                    วันที่ <?= Dateim($array_print[fee_date]); ?>
+                    ใบเสร็จเลขที่ <?= $array_print[fee_id] ?><br>
+                                       การไฟฟ้าส่วนภูมิภาคขอนแก่น(มะลิวัลย์)(สาขาที่ 00918)<br>
+                        เลขที่ 444 หมู่ 8 ถนนมะลิวัลย์ ตำบลบ้านเป็ด อำเภอเมืองขอนแก่น จังหวัดขอนแก่น 40000<br>
+                        
                 </td>
             </tr>
         </table>
+        <hr >
         <?php
         if($array_print[rg_want_type]==0){
             $want="ขอรับเงินประกันการใช้ไฟฟ้าคืน";
@@ -191,35 +206,62 @@ function Dateim($mydate) {
         $tex=$array_print['fee_price'] - $tt ;
         
         ?>
-        <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
+        <table width="100%"  align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
             <tr>
                 <td colspan="4" style="padding-top:9px;">
-                    รหัสใบคำร้องทั่วไป : <?= $array_print[rg_id] ?> <br>
-                    ชื่อลูกค้า : <?= $array_print[cus_name] ?> <br>
-                    เบอร์โทรศัพท์ : <?= $array_print[cus_tel] ?><br>
+                    รหัสใบคำร้อง : <?= $array_print[rg_id] ?> <br>
+                    ชื่อ : <?= $array_print[cus_name] ?> <br>
+                    ที่อยู่ :บ้านเลขที่ <?=$array_print[cus_number]?> หมู่บ้าน/อาคาร <?=$array_print[cus_village]?> ซ. <?=$array_print[cus_alleyway]?> ถ. <?=$array_print[cus_road]?> ม. <?=$array_print[cus_vilno]?> ต. <?=$array_print[cus_district]?> อ. <?=$array_print[cus_canton]?> จ. <?=$array_print[cus_province]?> <?=$array_print[cus_post]?><br>
+                    
                 </td>
+
+            </tr>
+            <tr>
+                    <td colspan="4" >
+                        รายการ: <?= $want ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" >
+                        จำนวนเงิน
+                    </td>
+                    <td colspan="2" align='right'>
+                        <?= number_format($tt, 2) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" >
+                        ภาษีมูลค่าเพื่ม
+                    </td>
+                    <td colspan="2" align='right'>
+                        <?= number_format($tex, 2) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" >
+                        รวมทั้งสิ้น
+                    </td>
+                    <td colspan="2" align='right' >
+                        <?= number_format(($array_print['fee_price']), 2) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-top:15px;">
+                        ชำระ
+                    </td>
+                    <td colspan="2" align='right' style="padding-top:15px;">
+                        <?= number_format(($array_print['fee_price']), 2) ?>
+                    </td>
+                </tr>
+                <tr>
+                <td colspan="4" style="padding-top:9px;">
+                    วันที่ชำระ <?= Dateim($array_print[fee_date]);?>
+                    
+                </td>
+
             </tr>
         </table>
-        <table width="100%" border="1" align="center" style=" border-collapse:inherit; border:1px  #666666; line-height: 20px;">
-                <tr>             
-                    <th align="center" colspan="2">รายการ</th>
-                    <th align="center" colspan="2">จำนวนเงิน</th>
-                </tr> 		
-                <tr>
-                    <td align="center" colspan="2"><?= $want ?></td>
-                    <td align="right" colspan="2"><?= number_format($tt, 2) ?></td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                    <td  align="right"><b>ภาษีมูลค่าเพื่ม</b></td>
-                    <td  align="right"><b><?= number_format($tex, 2) ?></b></td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                    <td align="right"><b>รวมทั้งสิ้น</b></td>
-                    <td align="right"><b><?= number_format(($array_print['fee_price']), 2) ?></b></td>
-                </tr>
-        </table>
+        <hr>
         <?php
         }
         ?>
@@ -229,9 +271,9 @@ function Dateim($mydate) {
 $html = ob_get_contents();
 ob_end_clean();
 
-$pdf = new mPDF('th', array( 120,120 ), '0', 'THSaraban'); //การตั้งค่ากระดาษถ้าต้องการแนวตั้ง ก็ A4 เฉยๆครับ ถ้าต้องการแนวนอนเท่ากับ A4-L
-$pdf->SetLeftMargin( 1 );
-$pdf->SetTopMargin( 1 );
+$pdf = new mPDF('th', array( 90,165 ), '0', 'THSaraban'); //การตั้งค่ากระดาษถ้าต้องการแนวตั้ง ก็ A4 เฉยๆครับ ถ้าต้องการแนวนอนเท่ากับ A4-L
+$pdf->SetLeftMargin( 0 );
+$pdf->SetTopMargin( 0);
 $pdf->SetAutoFont();
 $pdf->SetDisplayMode('fullpage');
 $pdf->WriteHTML($html, 2);

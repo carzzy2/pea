@@ -163,20 +163,15 @@ function Dateim($mydate) {
                                 </table>
                             <?php } ?>
                             <center>
-                                <input type="hidden" name="send_type" value="rgid" >
+                              
                                 <a class="btn btn-info" onclick="location.href = 'fee_show.php'"> ย้อนกลับ</a>
-                                <button class="btn  btn-success" name="Submit" type="submit" value="1">บันทึก</button>                            
+                                <a class="btn btn-default" href="fee_print.php?fee_id=<?= $array_show[fee_id] ?>" target="_blank">พิมพ์</a>                      
                             </center>
                         </div>
                     </form> 
                 </div>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#fee_price').numeric();
- 
-});
-</script>
+
             </div>
         </div>
     </body>

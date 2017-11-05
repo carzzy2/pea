@@ -54,13 +54,16 @@ $ses_username = $_SESSION[loginid];
                     $result = mysql_db_query($dbname, $sql);
                     if (mysql_num_rows($result) > 0) {
                         while ($array = mysql_fetch_array($result)) {
-                            if($array[re_want_type]=="1" or $array[re_want_type]=="6" or $array[re_want_type]=="7" or $array[re_want_type]=="8" or $array[re_want_type]=="9" or $array[re_want_type]=="14"){
+                            $first=$array[user_name];
+                            $last=$array[user_last];
+                            $tel=$array[user_tel];
+                            if($array[re_want_type]=="1" or $array[re_want_type]=="5" or $array[re_want_type]=="6" or $array[re_want_type]=="7" or $array[re_want_type]=="8" or $array[re_want_type]=="9" or $array[re_want_type]=="14"){
                             ?>	
                             <tr>
                                 <td class="text-center"><?= Dateim($array['re_date']); ?></td>
                                 <td class="text-center"><?= $array['user_name'] ?> <?= $array['user_last'] ?></td>
                                 <td class="text-center">เสร็จสิ้น</td>
-                                <td><?= $array['re_detail'] ?></td>
+                                <td align="center"> - </td>
                             </tr>
                             <?php
                             }else{ ?>
@@ -68,7 +71,7 @@ $ses_username = $_SESSION[loginid];
                                     <td class="text-center"><?= Dateim($array['re_date']); ?></td>
                                     <td class="text-center"><?= $array['user_name'] ?> <?= $array['user_last'] ?></td>
                                     <td class="text-center">ลงทะเบียน</td>
-                                    <td><?= $array['re_detail'] ?></td>
+                                    <td align="center"> - </td>
                                 </tr>
                             <?php
                             }
@@ -104,6 +107,9 @@ $ses_username = $_SESSION[loginid];
                         ?>				  
                 </tbody>
             </table>
+            <div class="col-md-12">
+                <label style="color: red;">* หากมีปัญหากรุณาติดต่อ <?=$tel?> คุณ<?=$first?> <?=$last?> (ผู้บันทึกข้อมูลใบคำร้องขอใช้ไฟฟ้า)</label>
+            </div>
         </div>
     </div>  
 </div>

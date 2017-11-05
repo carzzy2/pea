@@ -23,7 +23,6 @@ $ses_username = $_SESSION[loginid];
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script><!-- Bootstrap Core JavaScript -->
     <script src="vendor/metisMenu/metisMenu.min.js"></script><!-- Metis Menu Plugin JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script><!-- Custom Theme JavaScript -->
-
 </head>
 
 <body>
@@ -70,7 +69,13 @@ $ses_username = $_SESSION[loginid];
                         $rows=mysql_num_rows($result_all_rows);
                         echo $row;
                         $total_page=ceil($rows/$limit);
-                        if($_GET[start]==""){ $start="1"; }else{ $start=$_GET[start]; }
+                        if($_GET[start]==""){
+                            $start="1"; 
+                            
+                        }else{ 
+                            $start=$_GET[start]; 
+                            
+                        }
                     ?>	
                     <?php
                     for($i=1;$i<=$total_page;$i++){
@@ -81,7 +86,8 @@ $ses_username = $_SESSION[loginid];
                             }
 
                     }
-                    ?> <br><br>
+                    ?> 
+                    <br><br>
                     <table width="100%" class="table table-bordered table-hover">
                         <thead>               
                             <tr>

@@ -43,7 +43,7 @@ $sql="select * from tb_electricity,tb_user where tb_electricity.re_id='".$_GET[i
 $result=mysql_db_query($dbname,$sql);
 $array2=mysql_fetch_array($result);
 
-
+$limit=2;
 ?>
     <div id="page-wrapper">
         <div class="panel panel-primary">
@@ -72,8 +72,32 @@ $array2=mysql_fetch_array($result);
                             </div>
                         </div>
                         <?php
-                        $n=0;
-                            $sql_eq="select * from tb_equipment where re_id='".$_GET[id]."' order by equ_id asc ";
+                        $sql_all_rows="select * from tb_equipment where re_id='".$_GET[id]."' ";
+                        $result_all_rows=mysql_db_query($dbname,$sql_all_rows);
+                        $rows=mysql_num_rows($result_all_rows);
+                        echo $row;
+                        $total_page=ceil($rows/$limit);
+                        if($_GET[start]==""){
+                            $start="1"; 
+                            
+                        }else{ 
+                            $start=$_GET[start]; 
+                            
+                        }
+                    ?>	
+                        <?php
+                        if($_GET[time]==NULL){
+                            $n=1;
+                        }else{
+                            $n=$_GET[time];
+                        }
+                        
+                            if($_GET[start]=="" || $_GET[start]=="1"){ 
+                                        $page="0"; 
+                                }else{
+                                        $page=($_GET[start]-1)*$limit; 
+                                }
+                            $sql_eq="select * from tb_equipment where re_id='".$_GET[id]."'  order by equ_id asc  limit $page,$limit";
                             $result_eq=mysql_db_query($dbname,$sql_eq);
                             if (mysql_num_rows($result_eq) == 0) {
                                 ?>
@@ -83,14 +107,14 @@ $array2=mysql_fetch_array($result);
                         <?php
                             }else{
                             while ($array = mysql_fetch_array($result_eq)) {
-                               $n++; 
-                               echo "<label>สำรวจครั้งที่".$n."</label>";
+                                $page++;
+                               echo "<label>สำรวจครั้งที่".$page."</label>";
                                 if($array[equ_status]==0){
                         ?>
                         <br>
                         <div class="panel panel-success">
                             <div class="panel-heading">
-                                <h2 class="panel-title">ผ่านการสำรวจ</h2>
+                                <h2 class="panel-title">ผ่านการสำรวจ วันที่ <?=Dateim($array[equ_date])?></h2> 
                             </div>
                             <div class="panel-body">
                                  <div class="row">
@@ -219,7 +243,7 @@ $array2=mysql_fetch_array($result);
                         ?>
                         <div class="panel panel-danger">
                             <div class="panel-heading">
-                                <h2 class="panel-title">ไม่ผ่านการสำรวจ</h2>
+                                <h2 class="panel-title">ไม่ผ่านการสำรวจ วันที่ <?=Dateim($array[equ_date])?></h2>
                             </div>
                             <div class="panel-body">
                                 <div class="row">
@@ -235,12 +259,32 @@ $array2=mysql_fetch_array($result);
                         
                         <?php
                         }
+                        
                     }
                         }
                         ?>
-                    <center>
-                        <a class="btn btn-info" onclick="location.href='StatusElectricity.php'"> ย้อนกลับ</a>                     
-                    </center>
+                        <center>
+
+                        <?php
+                    for($i=1;$i<=$total_page;$i++){
+                            if($i==$start-1){
+                                    echo "<a href='StatusElectricity_view.php?start=".$i."&limit=".$limit."&id=".$_GET[id]."'><button class='btn btn-default '><i class='fa fa-arrow-left'> ย้อนกลับ</i></button></a>&nbsp;";
+                            }
+                            
+                    }
+                    ?>
+
+                            <a class="btn btn-info" onclick="location.href='StatusElectricity.php'"> <i class='fa fa-times'> กลับหน้าแรก</i></a>                     
+                         <?php
+                    for($i=1;$i<=$total_page;$i++){
+                            if($i==$start+1){
+                                    echo "<a href='StatusElectricity_view.php?start=".$i."&limit=".$limit."&id=".$_GET[id]."'><button class='btn btn-default '><i class='fa fa-arrow-right'> ถัดไป</i></button></a>&nbsp;";
+                            }
+                    }
+                    ?> 
+                            
+                        </center>
+
                 </div>
             </div>
          </div>
