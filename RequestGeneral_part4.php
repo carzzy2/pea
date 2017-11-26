@@ -152,7 +152,7 @@ $ses_username = $_SESSION[loginid];
                     </div>
                         <div class="form-group col-sm-12">
                             <label>รายละเอียดเพื่มเติม</label>
-                            <textarea class="form-control"  rows="2" id="rg_detail" placeholder="กรุณากรอกข้อมูล" name="rg_detail"><?=$array_edit[rg_detail]?></textarea>
+                            <textarea class="form-control"  rows="2" id="rg_detail" placeholder="กรุณากรอกข้อมูล" name="rg_detail" required><?=$array_edit[rg_detail]?></textarea>
                         </div> 
                     <center>
                         <a class="btn btn-info" href="RequestGeneral_part3.php?back=1"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>

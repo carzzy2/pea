@@ -124,10 +124,6 @@ $ses_username = $_SESSION[loginid];
                         }
                         ?>
                     </div>
-                        <div class="form-group col-sm-12">
-                            <label>รายละเอียดเพื่มเติม</label>
-                            <textarea class="form-control"  rows="2" id="rg_detail" name="rg_detail" disabled/><?=$array_edit[rg_detail]?></textarea>
-                        </div> 
                     <center>
                         <input name="ok" type="submit" value="อนุมัติใบคำร้อง" id="calculatertool" class="btn btn-success" >
                         <input name="txtid" type="hidden" value="<?=$id?>" />

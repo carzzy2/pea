@@ -257,7 +257,7 @@ $("#disable1").click(function(){
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label>ชื่อสถานที่ใช้ไฟฟ้า</label>
-                            <textarea class="form-control"  rows="2" id="rg_place_name" placeholder="กรุณากรอกข้อมูล" name="rg_place_name"><?=$_SESSION[ss_rg_place_name]?></textarea>
+                            <textarea class="form-control"  rows="2" id="rg_place_name" placeholder="กรุณากรอกข้อมูล" name="rg_place_name" required><?=$_SESSION[ss_rg_place_name]?></textarea>
                         </div>
                         <div class="form-group col-sm-12">
                             <input type="checkbox" id="checkbox-place"><b> ใช้ที่อยู่เดียวกับที่อยู่ผู้ใช้ไฟฟ้า</b>
@@ -336,7 +336,7 @@ $("#disable1").click(function(){
                         </div>
                         <div class="form-group col-sm-12">
                             <label>ประเภทกิจการ</label>
-                            <textarea class="form-control"  rows="2" id="rg_place_service" placeholder="กรุณากรอกข้อมูล" name="rg_place_service"><?=$_SESSION[ss_rg_place_service]?></textarea>
+                            <textarea class="form-control"  rows="2" id="rg_place_service" placeholder="กรุณากรอกข้อมูล" name="rg_place_service" required><?=$_SESSION[ss_rg_place_service]?></textarea>
                         </div>
                     </div>
                 <center>

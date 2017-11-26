@@ -184,7 +184,7 @@ $("#checkbox-place").click(function(){
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label>3.สถานที่ติดต่อ/ที่อยู่ในการจัดส่งเอกสาร</label>
-                            <textarea class="form-control"  rows="2" id="rg_contact_place" placeholder="กรุณากรอกข้อมูล" name="rg_contact_place"><?=$_SESSION[ss_rg_contact_place]?></textarea>
+                            <textarea class="form-control"  rows="2" id="rg_contact_place" placeholder="กรุณากรอกข้อมูล" name="rg_contact_place" required><?=$_SESSION[ss_rg_contact_place]?></textarea>
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
