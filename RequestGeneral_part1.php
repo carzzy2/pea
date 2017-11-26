@@ -62,9 +62,9 @@ $ses_username = $_SESSION[loginid];
                             <label>กฟฟ(สาขา).</label>
                             <select class="form-control" name="rg_branch" id="rg_branch" required/>
                                     <option style="display: none">--กรุณาเลือก--</option>
-                                    <option value="มะลิวัลย์" >มะลิวัลย์</option>
-                                    <option value="ท่าพระ" >ท่าพระ</option>
-                                    <option value="พระยืน" >พระยืน</option>
+                                    <option value="มะลิวัลย์" <?php if($_SESSION['ss_rg_branch']=="มะลิวัลย์"){ echo "selected=selected"; }?>>มะลิวัลย์</option>
+                                    <option value="ท่าพระ" <?php if($_SESSION['ss_rg_branch']=="ท่าพระ"){ echo "selected=selected"; }?>>ท่าพระ</option>
+                                    <option value="พระยืน" <?php if($_SESSION['ss_rg_branch']=="พระยืน"){ echo "selected=selected"; }?>>พระยืน</option>
                             </select>	
                         </div>
                         <div class="col-sm-3 form-group">
@@ -84,104 +84,104 @@ $ses_username = $_SESSION[loginid];
                             <label>คำนำหน้า</label>
                                 <select id="cus_first" class="form-control" name="cus_first" <?=$read?>>
                                     <option style="display: none">--กรุณาเลือก--</option>
-                                    <option value="0" <?php if($array_edit['cus_first']=="0"){ echo "selected=selected"; }?>>นาย</option>
-                                    <option value="1" <?php if($array_edit['cus_first']=="1"){ echo "selected=selected"; }?>>นาง</option>
-                                    <option value="2" <?php if($array_edit['cus_first']=="2"){ echo "selected=selected"; }?>>นางสาว</option>
+                                    <option value="0" <?php if($_SESSION['ss_cus_first']=="0"){ echo "selected=selected"; }?>>นาย</option>
+                                    <option value="1" <?php if($_SESSION['ss_cus_first']=="1"){ echo "selected=selected"; }?>>นาง</option>
+                                    <option value="2" <?php if($_SESSION['ss_cus_first']=="2"){ echo "selected=selected"; }?>>นางสาว</option>
                                 </select>
                         </div>
                         <div class="col-sm-4 form-group">
                             <label>ชื่อ-นามสกุล</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_name" type="text" id="cus_name" value="<?=$array_edit[cus_name]?>"  <?=$read?>>	
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_name" type="text" id="cus_name" value="<?=$_SESSION[ss_cus_name]?>"  <?=$read?>>	
                         </div>
                         <div class="col-sm-5 form-group">
                             <label>ประเภทบัตร</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_type" type="text" id="cus_type" value="<?=$array_edit[cus_type]?>"  <?=$read?>>	
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_type" type="text" id="cus_type" value="<?=$_SESSION[ss_cus_type]?>"  <?=$read?>>	
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4 form-group">
                             <label>รหัสประชาชน </label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" autocomplete=off  name="cus_id" type="text" id="cus_id" value="<?=$array_edit[cus_id]?>" size="30"  onkeyup="IsNumeric(this.value,this)" maxlength="13" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" autocomplete=off  name="cus_id" type="text" id="cus_id" value="<?=$_SESSION[ss_cus_id]?>" size="30"  onkeyup="IsNumeric(this.value,this)" maxlength="13" required/>
                         </div>
                         <div class="col-sm-4 form-group">
                             <label>หมายเลขประจำตัวผู้เสียภาษีอากร</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_tax" type="text" id="cus_tax" value="<?=$array_edit[cus_tax]?>" <?=$read?>>	
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_tax" type="text" id="cus_tax" value="<?=$_SESSION[ss_cus_tax]?>" <?=$read?>>	
                         </div>
                         <div class="col-sm-4 form-group">
                             <label>หมายเลขผู้ใช้ไฟฟ้า</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_code" type="text" id="cus_code" value="<?=$array_edit[cus_code]?>" <?=$read?>>	
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_code" type="text" id="cus_code" value="<?=$_SESSION[ss_cus_code]?>" <?=$read?>>	
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <b>ที่อยู่:</b> <label>รหัสบ้าน</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_homeid" type="text" id="cus_homeid" value="<?=$array_edit[cus_homeid]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_homeid" type="text" id="cus_homeid" value="<?=$_SESSION[ss_cus_homeid]?>" <?=$read?>>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>เลขที่</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_number" type="text" id="cus_number" value="<?=$array_edit[cus_number]?>"<?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_number" type="text" id="cus_number" value="<?=$_SESSION[ss_cus_number]?>"<?=$read?>>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>หมู่บ้าน/อาคาร</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_village" type="text" id="cus_village" value="<?=$array_edit[cus_village]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_village" type="text" id="cus_village" value="<?=$_SESSION[ss_cus_village]?>" <?=$read?>>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>ห้อง</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_room" type="text" id="cus_room" value="<?=$array_edit[cus_room]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_room" type="text" id="cus_room" value="<?=$_SESSION[ss_cus_room]?>" <?=$read?>>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>ชั้น</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_floor" type="text" id="cus_floor" value="<?=$array_edit[cus_floor]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_floor" type="text" id="cus_floor" value="<?=$_SESSION[ss_cus_floor]?>" <?=$read?>>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <label>ตรอก</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_alley" type="text" id="cus_alley" value="<?=$array_edit[cus_alley]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_alley" type="text" id="cus_alley" value="<?=$_SESSION[ss_cus_alley]?>" <?=$read?>>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>ซอย</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_alleyway" type="text" id="cus_alleyway" value="<?=$array_edit[cus_alleyway]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_alleyway" type="text" id="cus_alleyway" value="<?=$_SESSION[ss_cus_alleyway]?>" <?=$read?>>
                         </div>
                         <div class="form-group col-sm-4">
                             <label>ถนน</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_road" type="text" id="cus_road" value="<?=$array_edit[cus_road]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_road" type="text" id="cus_road" value="<?=$_SESSION[ss_cus_road]?>" <?=$read?>>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>หมู่ที่</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_vilno" type="text" id="cus_vilno" value="<?=$array_edit[cus_vilno]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_vilno" type="text" id="cus_vilno" value="<?=$_SESSION[ss_cus_vilno]?>" <?=$read?>>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <label>ตำบล</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_district" type="text" id="cus_district" value="<?=$array_edit[cus_district]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_district" type="text" id="cus_district" value="<?=$_SESSION[ss_cus_district]?>" <?=$read?>>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>อำเภอ</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_canton" type="text" id="cus_canton" value="<?=$array_edit[cus_canton]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_canton" type="text" id="cus_canton" value="<?=$_SESSION[ss_cus_canton]?>" <?=$read?>>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>จังหวัด</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_province" type="text" id="cus_province" value="<?=$array_edit[cus_province]?>"<?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_province" type="text" id="cus_province" value="<?=$_SESSION[ss_cus_province]?>"<?=$read?>>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>รหัสไปรษณีย์</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_post" type="text" id="cus_post" value="<?=$array_edit[cus_post]?>"  maxlength="5" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_post" type="text" id="cus_post" value="<?=$_SESSION[ss_cus_post]?>"  maxlength="5" <?=$read?>>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <label>โทรศัพท์</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_tel" type="text" id="cus_tel" value="<?=$array_edit[cus_tel]?>"  maxlength="10"  <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_tel" type="text" id="cus_tel" value="<?=$_SESSION[ss_cus_tel]?>"  maxlength="10"  <?=$read?>>
                         </div>
                         <div class="form-group col-sm-4">
                             <label>โทรสาร/Fax</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_fax" type="text" id="cus_fax" value="<?=$array_edit[cus_fax]?>"  maxlength="10" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_fax" type="text" id="cus_fax" value="<?=$_SESSION[ss_cus_fax]?>"  maxlength="10" <?=$read?>>
                         </div>
                         <div class="form-group col-sm-4">
                             <label>E-mail</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_email" type="text" id="cus_email" value="<?=$array_edit[cus_email]?>" <?=$read?>>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="cus_email" type="text" id="cus_email" value="<?=$_SESSION[ss_cus_email]?>" <?=$read?>>
                         </div>
                     </div>
                     <center>

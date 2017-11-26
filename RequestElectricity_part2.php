@@ -171,13 +171,13 @@ $("#checkbox-place").click(function(){
                         </div>
                         <div class="form-group col-sm-4">
                             <div class="radio-inline">
-                                <label><input name="re_place_type" size="30" type="radio" value="0" id="disable" <? if($_SESSION['re_place_type']=="0"){ echo "checked"; }?>>เอกชน</label>
+                                <label><input name="re_place_type" size="30" type="radio" value="0" id="disable" <?php if($_SESSION['re_place_type']=="0"){ echo "checked"; }?>>เอกชน</label>
                             </div>
                             <div class="radio-inline">
-                                <label><input name="re_place_type" size="30" type="radio" value="1" id="disable1"<? if($_SESSION['re_place_type']=="1"){ echo "checked"; }?>>ราชการ</label>
+                                <label><input name="re_place_type" size="30" type="radio" value="1" id="disable1"<?php if($_SESSION['re_place_type']=="1"){ echo "checked"; }?>>ราชการ</label>
                             </div>
                             <div class="radio-inline">
-                                <label><input name="re_place_type" size="30" type="radio" value="2" id="enable"<? if($_SESSION['re_place_type']=="2"){ echo "checked"; }?>>อื่นๆ(ระบุ)</label>
+                                <label><input name="re_place_type" size="30" type="radio" value="2" id="enable"<?php if($_SESSION['re_place_type']=="2"){ echo "checked"; }?>>อื่นๆ(ระบุ)</label>
                             </div>
    
                         </div>

@@ -124,8 +124,8 @@ function Dateim($mydate) {
                                                     $status = "ไม่ผ่านการสำรวจ";
                                                     $label = "danger";
                                                 } elseif ($array[re_status] == "0") {
-                                                    $status = "ยังไม่ได้สำรวจ";
-                                                    $label = "success";
+                                                    $status = "ไม่ผ่านการสำรวจ";
+                                                    $label = "danger";
                                                 } else {
                                                     $status = "ผ่านการสำรวจแล้ว";
                                                     $label = "info";
@@ -144,7 +144,7 @@ function Dateim($mydate) {
                                                     <td class="text-center"><span class="label label-<?= $label ?>"><?= $status ?></span></td>
                                                     <td>
                                                         <div class="btn-group" align="center">
-                                                            <?php if($array['re_status'] == "0" or $array[re_status] == "9"){?>
+                                                            <?php if($array['re_status'] == "0" or $array['re_status'] == "9"){?>
                                                             <center>
                                                                 <a class="btn btn-default" href="StatusElectricity_detail.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ผ่าน</i></a>
                                                                 <a class="btn btn-danger" href="StatusElectricity_nopass.php?id=<?= $array[re_id] ?>"><i class="fa fa-times"> ไม่ผ่าน</i></a>

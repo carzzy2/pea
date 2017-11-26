@@ -38,9 +38,57 @@ if($_SESSION[ss_add]=="oldcus"){
                 . ",'".$_SESSION[ss_rg_contact_place]."','".$_SESSION[ss_rg_contact_homeid]."','".$_SESSION[ss_rg_contact_number]."','".$_SESSION[ss_rg_contact_village]."','".$_SESSION[ss_rg_contact_room]."','".$_SESSION[ss_rg_contact_floor]."','".$_SESSION[ss_rg_contact_alley]."','".$_SESSION[ss_rg_contact_alleyway]."','".$_SESSION[ss_rg_contact_road]."','".$_SESSION[ss_rg_contact_villno]."','".$_SESSION[ss_rg_contact_district]."','".$_SESSION[ss_rg_contact_canton]."','".$_SESSION[ss_rg_contact_province]."','".$_SESSION[ss_rg_contact_post]."','".$_SESSION[ss_rg_contact_tel]."','".$_SESSION[ss_rg_contact_fax]."','".$_SESSION[ss_rg_contact_email]."'"
                 . ",'".$_POST[rg_want_type]."','".$other2."','".$other3."','".$status."')";
         mysql_query($sql);
-      echo $sql;
+
+    session_unregister('ss_rg_branch');
+    session_unregister('ss_cus_id');
+    session_unregister('ss_cus_first');
+    session_unregister('ss_cus_name');
+    session_unregister('ss_cus_type');
+    session_unregister('ss_cus_tax');
+    session_unregister('ss_cus_code');
+    session_unregister('ss_cus_homeid');
+    session_unregister('ss_cus_number');
+    session_unregister('ss_cus_village');
+    session_unregister('ss_cus_room');
+    session_unregister('ss_cus_floor');
+    session_unregister('ss_cus_alley');
+    session_unregister('ss_cus_alleyway');
+    session_unregister('ss_cus_road');
+    session_unregister('ss_cus_vilno');
+    session_unregister('ss_cus_district');
+    session_unregister('ss_cus_canton');
+    session_unregister('ss_cus_province');
+    session_unregister('ss_cus_post');
+    session_unregister('ss_cus_tel');
+    session_unregister('ss_cus_fax');
+    session_unregister('ss_cus_road');
+    session_unregister('ss_cus_email');
+    
+    session_unregister('ss_rg_place_type');
+    session_unregister('ss_rg_place_other');
+    session_unregister('ss_rg_place_name');
+    session_unregister('ss_rg_place_homeid');
+    session_unregister('ss_rg_place_number');
+    session_unregister('ss_rg_place_village');
+    session_unregister('ss_rg_place_room');
+    session_unregister('ss_rg_place_floor');
+    session_unregister('ss_rg_place_alley');
+    session_unregister('ss_rg_place_alleyway');
+    session_unregister('ss_cus_email');
+    session_unregister('ss_rg_place_road');
+    session_unregister('ss_rg_place_vilno');
+    session_unregister('ss_rg_place_district');
+    session_unregister('ss_rg_place_canton');
+    session_unregister('ss_rg_place_province');
+    session_unregister('ss_rg_place_post');
+    session_unregister('ss_rg_place_tel');
+    session_unregister('ss_rg_place_fax');
+    session_unregister('ss_rg_place_road');
+    session_unregister('ss_rg_place_email');
+    session_unregister('ss_rg_place_service');
+
         echo "<script>alert('บันทึกข้อมูลเรียบร้อยแล้ว');</script>";
-//        echo "<META http-equiv='refresh' Content='0; URL=RequestGeneral_plate.php?rg_id=$_POST[rg_id]'> ";
+        echo "<META http-equiv='refresh' Content='0; URL=RequestGeneral_plate.php?rg_id=$_POST[rg_id]'> ";
             
 }else{
     $sql_find="select cus_id from tb_customer where cus_id='".$_SESSION[ss_cus_id]."'";
@@ -68,9 +116,57 @@ if($_SESSION[ss_add]=="oldcus"){
                 . ",'".$_POST[rg_want_type]."','".$other2."','".$other3."','".$status."')";
 
         mysql_query($sql2);
+    session_unregister('ss_rg_branch');
+    session_unregister('ss_cus_id');
+    session_unregister('ss_cus_first');
+    session_unregister('ss_cus_name');
+    session_unregister('ss_cus_type');
+    session_unregister('ss_cus_tax');
+    session_unregister('ss_cus_code');
+    session_unregister('ss_cus_homeid');
+    session_unregister('ss_cus_number');
+    session_unregister('ss_cus_village');
+    session_unregister('ss_cus_room');
+    session_unregister('ss_cus_floor');
+    session_unregister('ss_cus_alley');
+    session_unregister('ss_cus_alleyway');
+    session_unregister('ss_cus_road');
+    session_unregister('ss_cus_vilno');
+    session_unregister('ss_cus_district');
+    session_unregister('ss_cus_canton');
+    session_unregister('ss_cus_province');
+    session_unregister('ss_cus_post');
+    session_unregister('ss_cus_tel');
+    session_unregister('ss_cus_fax');
+    session_unregister('ss_cus_road');
+    session_unregister('ss_cus_email');
+    
+    session_unregister('ss_rg_place_type');
+    session_unregister('ss_rg_place_other');
+    session_unregister('ss_rg_place_name');
+    session_unregister('ss_rg_place_homeid');
+    session_unregister('ss_rg_place_number');
+    session_unregister('ss_rg_place_village');
+    session_unregister('ss_rg_place_room');
+    session_unregister('ss_rg_place_floor');
+    session_unregister('ss_rg_place_alley');
+    session_unregister('ss_rg_place_alleyway');
+    session_unregister('ss_cus_email');
+    session_unregister('ss_rg_place_road');
+    session_unregister('ss_rg_place_vilno');
+    session_unregister('ss_rg_place_district');
+    session_unregister('ss_rg_place_canton');
+    session_unregister('ss_rg_place_province');
+    session_unregister('ss_rg_place_post');
+    session_unregister('ss_rg_place_tel');
+    session_unregister('ss_rg_place_fax');
+    session_unregister('ss_rg_place_road');
+    session_unregister('ss_rg_place_email');
+    session_unregister('ss_rg_place_service');
         echo "<script>alert('บันทึกข้อมูลเรียบร้อยแล้ว');</script>";
-//        echo "<META http-equiv='refresh' Content='0; URL=RequestGeneral_plate.php?rg_id=$_POST[rg_id]'> ";
+        echo "<META http-equiv='refresh' Content='0; URL=RequestGeneral_plate.php?rg_id=$_POST[rg_id]'> ";
     }
 
+    
 }
 ?>

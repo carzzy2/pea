@@ -33,6 +33,7 @@ $ses_username = $_SESSION[loginid];
     include"sidebar.php"; 
 ?>
  <?php
+ if(!isset($_GET[back])){
  if($_POST[newcus]=="addcus"){
      $add="newcus";
      $_SESSION[ss_rg_branch]=$_POST[rg_branch];
@@ -91,6 +92,7 @@ $ses_username = $_SESSION[loginid];
      $_SESSION[ss_cus_road]=$place_data[cus_road];
      $_SESSION[ss_cus_email]=$place_data[cus_email];
      $add="oldcus";
+ }
  }
 ?>
     <script type="text/javascript">
@@ -238,24 +240,24 @@ $("#disable1").click(function(){
                         </div>
                         <div class="form-group col-sm-3">
                             <div class="radio-inline">
-                                <label><input name="rg_place_type" size="30" type="radio" value="0" id="disable">เอกชน</label>
+                                <label><input name="rg_place_type" size="30" type="radio" value="0" id="disable" <?php if($_SESSION['rg_place_type']=="0"){ echo "checked"; }?>>เอกชน</label>
                             </div>
                             <div class="radio-inline">
-                                <label><input name="rg_place_type" size="30" type="radio" value="1" id="disable1">ราชการ</label>
+                                <label><input name="rg_place_type" size="30" type="radio" value="1" id="disable1" <?php if($_SESSION['rg_place_type']=="1"){ echo "checked"; }?>>ราชการ</label>
                             </div>
                             <div class="radio-inline">
-                                <label><input name="rg_place_type" size="30" type="radio" value="2" id="enable">อื่นๆ(ระบุ)</label>
+                                <label><input name="rg_place_type" size="30" type="radio" value="2" id="enable" <?php if($_SESSION['rg_place_type']=="2"){ echo "checked"; }?>>อื่นๆ(ระบุ)</label>
                             </div>
    
                         </div>
                         <div class="form-group col-sm-4">
-                            <input class="form-control" name="rg_place_other" type="text" id="rg_place_other" >	
+                            <input class="form-control" name="rg_place_other" type="text" id="rg_place_other" value="<?=$_SESSION[ss_rg_place_other]?>">	
                         </div> 
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label>ชื่อสถานที่ใช้ไฟฟ้า</label>
-                            <textarea class="form-control"  rows="2" id="rg_place_name" placeholder="กรุณากรอกข้อมูล" name="rg_place_name"><?=$array_edit[Emp_Address]?></textarea>
+                            <textarea class="form-control"  rows="2" id="rg_place_name" placeholder="กรุณากรอกข้อมูล" name="rg_place_name"><?=$_SESSION[ss_rg_place_name]?></textarea>
                         </div>
                         <div class="form-group col-sm-12">
                             <input type="checkbox" id="checkbox-place"><b> ใช้ที่อยู่เดียวกับที่อยู่ผู้ใช้ไฟฟ้า</b>
@@ -264,82 +266,82 @@ $("#disable1").click(function(){
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <b>ที่อยู่:</b> <label>รหัสบ้าน</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_homeid" type="text" id="rg_place_homeid"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_homeid" type="text" id="rg_place_homeid" value="<?=$_SESSION[ss_rg_place_homeid]?>" required/>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>เลขที่</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_number" type="text" id="rg_place_number" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_number" type="text" id="rg_place_number" value="<?=$_SESSION[ss_rg_place_number]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>หมู่บ้าน/อาคาร</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_village" type="text" id="rg_place_village"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_village" type="text" id="rg_place_village" value="<?=$_SESSION[ss_rg_place_village]?>" required/>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>ห้อง</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_room" type="text" id="rg_place_room"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_room" type="text" id="rg_place_room" value="<?=$_SESSION[ss_rg_place_room]?>" required/>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>ชั้น</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_floor" type="text" id="rg_place_floor"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_floor" type="text" id="rg_place_floor" value="<?=$_SESSION[ss_rg_place_floor]?>" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <label>ตรอก</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_alley" type="text" id="rg_place_alley" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_alley" type="text" id="rg_place_alley" value="<?=$_SESSION[ss_rg_place_alley]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>ซอย</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_alleyway" type="text" id="rg_place_alleyway"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_alleyway" type="text" id="rg_place_alleyway" value="<?=$_SESSION[ss_rg_place_alleyway]?>" required/>
                         </div>
                         <div class="form-group col-sm-4">
                             <label>ถนน</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_road" type="text" id="rg_place_road"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_road" type="text" id="rg_place_road" value="<?=$_SESSION[ss_rg_place_road]?>" required/>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>หมู่ที่</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_villno" type="text" id="rg_place_vilno" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_villno" type="text" id="rg_place_vilno" value="<?=$_SESSION[ss_rg_place_vilno]?>" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <label>ตำบล</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_district" type="text" id="rg_place_district"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_district" type="text" id="rg_place_district" value="<?=$_SESSION[ss_rg_place_district]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>อำเภอ</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_canton" type="text" id="rg_place_canton"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_canton" type="text" id="rg_place_canton" value="<?=$_SESSION[ss_rg_place_canton]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>จังหวัด</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_province" type="text" id="rg_place_province"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_province" type="text" id="rg_place_province" value="<?=$_SESSION[ss_rg_place_province]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>รหัสไปรษณีย์</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_post" type="text" id="rg_place_post"  maxlength="5" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_post" type="text" id="rg_place_post" value="<?=$_SESSION[ss_rg_place_post]?>" maxlength="5" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <label>โทรศัพท์</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_tel" type="text" id="rg_place_tel" onkeyup="IsNumeric(this.value,this)" maxlength="10" >
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_tel" type="text" id="rg_place_tel" value="<?=$_SESSION[ss_rg_place_tel]?>" onkeyup="IsNumeric(this.value,this)" maxlength="10" >
                         </div>
                         <div class="form-group col-sm-4">
                             <label>โทรสาร/Fax</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_fax" type="text" id="rg_place_fax"  onkeyup="IsNumeric(this.value,this)" maxlength="10" >
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_fax" type="text" id="rg_place_fax" value="<?=$_SESSION[ss_rg_place_fax]?>" onkeyup="IsNumeric(this.value,this)" maxlength="10" >
                         </div>
                         <div class="form-group col-sm-4">
                             <label>E-mail</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_email" type="text" id="rg_place_email"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_place_email" type="text" id="rg_place_email" value="<?=$_SESSION[ss_rg_place_email]?>" required/>
                         </div>
                         <div class="form-group col-sm-12">
                             <label>ประเภทกิจการ</label>
-                            <textarea class="form-control"  rows="2" id="rg_place_service" placeholder="กรุณากรอกข้อมูล" name="rg_place_service"></textarea>
+                            <textarea class="form-control"  rows="2" id="rg_place_service" placeholder="กรุณากรอกข้อมูล" name="rg_place_service"><?=$_SESSION[ss_rg_place_service]?></textarea>
                         </div>
                     </div>
                 <center>
                     <input  type="hidden" class="form-control " name="add" id="add" value="<?=$add?>">
-                    <a class="btn btn-info" onclick="window.history.back()"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
+                    <a class="btn btn-info" href="RequestGeneral_part1.php?back=1"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
                     <button class="btn  btn-success" name="Submit" type="submit"><i class="fa fa-arrow-right"> ถัดไป</i></button>	
                 </center>
                 </div>

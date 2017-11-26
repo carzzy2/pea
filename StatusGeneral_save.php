@@ -9,11 +9,11 @@ if($_GET[mode]=="del"){
     echo "<script>alert('ยกเลิกใบคำร้องทั่วไปเลขที่ $_GET[id] เรียบร้อยแล้ว');</script>";
     echo "<META http-equiv='refresh' Content='0; URL=StatusGeneral.php'> ";
 }else{
-    if($_POST[rg_want_type]>4){
+    if($_POST[rg_want_type]>3){
         $sql="update tb_general set rg_status='1' where rg_id='".$_POST[rg_id]."'";
         mysql_query($sql);
     }else{
-        $sql="update tb_general set rg_status='3' where rg_id='".$_POST[rg_id]."'";
+        $sql="update tb_general set rg_status='3' , rg_money='".$_POST[rg_money]."' where rg_id='".$_POST[rg_id]."'";
         mysql_query($sql);
     }
     echo "<script>alert('อนุมัติใบคำร้องทั่วไปเลขที่ $_POST[rg_id] เรียบร้อยแล้ว');</script>";

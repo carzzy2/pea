@@ -22,6 +22,8 @@
         <group>
             <file>file:/C:/AppServ/www/pea/investigate_show.php</file>
             <file>file:/C:/AppServ/www/pea/investigate_add.php</file>
+            <file>file:/C:/AppServ/www/pea/RequestGeneral_save.php</file>
+            <file>file:/C:/AppServ/www/pea/sidebar.php</file>
         </group>
     </open-files>
 </project-private>

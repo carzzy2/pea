@@ -195,7 +195,7 @@ $("#checkbox-place").click(function(){
                         </div>
                         <div class="form-group col-sm-2">
                             <label>หมู่ที่</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_contact_villno" type="text" id="re_contact_vilno" value="<?=$_SESSION['re_contact_villno']?>" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_contact_villno" type="text" id="re_contact_villno" value="<?=$_SESSION['re_contact_villno']?>" required/>
                         </div>
                     </div>
                     <div class="row">

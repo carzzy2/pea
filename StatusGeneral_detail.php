@@ -113,6 +113,16 @@ $ses_username = $_SESSION[loginid];
                         <label>มีความประสงค์</label>
                             <input class="form-control"  name="rg_want_other" type="text" id="rg_want_other" value="<?=$want?>" readonly/>
                         </div>
+                        <?php
+                        if($array_edit[rg_want_type]=='0' or  $array_edit[rg_want_type]=='1' or  $array_edit[rg_want_type]=='2' or $array_edit[rg_want_type]=='3'){
+                        ?>
+                        <div class="form-group col-sm-5">
+                        <label>จำนวนเงิน(บาท)</label>
+                            <input class="form-control"  name="rg_money" type="number" id="rg_money"  min="0">
+                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                         <div class="form-group col-sm-12">
                             <label>รายละเอียดเพื่มเติม</label>

@@ -78,14 +78,56 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                     <label>วัน/เดือน/ปี</label>
                                     <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="re_date" type="text" id="re_date" value="<?= date("d/m/") . (date("Y") + 543) ?>"  readonly/>	
                                 </div>
+                                <?php
+                                 if ($_SESSION['ss_re_id'] != "") {
+                                     $sql = "select * from tb_electricity ele,tb_customer cus where re_id='" . $_GET[item] . "' and ele.cus_id=cus.cus_id";
+                                    $result = mysql_db_query($dbname, $sql);
+                                    $array = mysql_fetch_array($result);
+                                    if ($array[re_want_type] == 0) {
+                                        $want = "ขอติดตั้งมิเตอร์ใหม่";
+                                    } elseif ($array[re_want_type] == 1) {
+                                        $want = "ขอตัดฝากมิเตอร์โดยไม่ใช้ไฟฟ้า";
+                                    } elseif ($array[re_want_type] == 2) {
+                                        $want = "ขอต่อกลับการใช้ไฟฟ้า";
+                                    } elseif ($array[re_want_type] == 3) {
+                                        $want = "ขอเพื่มขนาดมิเตอร์/อุปกรณ์ประกอบ";
+                                    } elseif ($array[re_want_type] == 4) {
+                                        $want = "ขอเปลี่ยนประเภทมิเตอร์";
+                                    } elseif ($array[re_want_type] == 5) {
+                                        $want = "ขอหยุดซ่อมแซมเครื่องจักรประจำปี";
+                                    } elseif ($array[re_want_type] == 6) {
+                                        $want = "ขอใช้ไฟฟ้าชั่วคราวแบบเหมาจ่าย";
+                                    } elseif ($array[re_want_type] == 7) {
+                                        $want = "ขอติดตั้งไฟฟ้าชั่วคราว";
+                                    } elseif ($array[re_want_type] == 8) {
+                                        $want = "ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT";
+                                    } elseif ($array[re_want_type] == 9) {
+                                        $want = "ขอยกเลิกเลิกการใช้ไฟฟ้า";
+                                    } elseif ($array[re_want_type] == 10) {
+                                        $want = "ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
+                                    } elseif ($array[re_want_type] == 11) {
+                                        $want = "ขอใช้ไฟฟ้าสาธารณะ";
+                                    } elseif ($array[re_want_type] == 12) {
+                                        $want = "ขอตัดมิเตอร์ใช้เพื่อแสงสว่างลด CT";
+                                    } elseif ($array[re_want_type] == 13) {
+                                        $want = "ขอย้ายจุดติดตั้งมิเตอร์/อุปกรณ์ประกอบ";
+                                    } elseif ($array[re_want_type] == 14) {
+                                        $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
+                                    }
+                                 
+                                ?>
 
-                                
+                                <div class="col-sm-3 form-group">
+                                    <label>มีความประสงค์</label>
+                                    <input class="form-control" autocomplete=off  value="<?= $want ?>" size="30" readonly/>
+                                </div>
+                                <?php
+                                 }
+                                 ?>
                             </div>
                             <?php
                             if ($_SESSION['ss_re_id'] != "") {
-                                    $sql = "select * from tb_electricity ele,tb_customer cus where re_id='" . $_GET[item] . "' and ele.cus_id=cus.cus_id";
-                                    $result = mysql_db_query($dbname, $sql);
-                                    $array = mysql_fetch_array($result);
+                                    
                                 ?>
                             <div class="row">
                                 <div class="col-sm-3 form-group">

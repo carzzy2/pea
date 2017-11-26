@@ -33,8 +33,8 @@ $ses_username = $_SESSION[loginid];
     include"sidebar.php"; 
 ?>
  <?php
+ if(!isset($_GET[back])){
     $_SESSION[ss_rg_contact_place]=$_POST[rg_contact_place];
-
     $_SESSION[ss_rg_contact_homeid]=$_POST[rg_contact_homeid];
     $_SESSION[ss_rg_contact_number]=$_POST[rg_contact_number];
     $_SESSION[ss_rg_contact_village]=$_POST[rg_contact_village];
@@ -43,7 +43,7 @@ $ses_username = $_SESSION[loginid];
     $_SESSION[ss_rg_contact_alley]=$_POST[rg_contact_alley];
     $_SESSION[ss_rg_contact_alleyway]=$_POST[rg_contact_alleyway];
     $_SESSION[ss_rg_contact_road]=$_POST[rg_contact_road];
-    $_SESSION[ss_rg_contact_vilno]=$_POST[rg_contact_vilno];
+    $_SESSION[ss_rg_contact_villno]=$_POST[rg_contact_villno];
     $_SESSION[ss_rg_contact_district]=$_POST[rg_contact_district];
     $_SESSION[ss_rg_contact_canton]=$_POST[rg_contact_canton];
     $_SESSION[ss_rg_contact_province]=$_POST[rg_contact_province];
@@ -52,6 +52,8 @@ $ses_username = $_SESSION[loginid];
     $_SESSION[ss_rg_contact_fax]=$_POST[rg_contact_fax];
     $_SESSION[ss_rg_contact_road]=$_POST[rg_contact_road];
     $_SESSION[ss_rg_contact_email]=$_POST[rg_contact_email];
+ }
+
 ?>
     <div id="page-wrapper">
         <div class="panel panel-primary">
@@ -153,7 +155,7 @@ $ses_username = $_SESSION[loginid];
                             <textarea class="form-control"  rows="2" id="rg_detail" placeholder="กรุณากรอกข้อมูล" name="rg_detail"><?=$array_edit[rg_detail]?></textarea>
                         </div> 
                     <center>
-                        <a class="btn btn-info" onclick="window.history.back()"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
+                        <a class="btn btn-info" href="RequestGeneral_part3.php?back=1"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
                         <button class="btn  btn-success" name="Submit" type="submit"><i class="fa fa-check"> บันทึก</i></button>	
                     </center>
                 </div>

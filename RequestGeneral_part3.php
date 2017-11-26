@@ -33,7 +33,8 @@ $ses_username = $_SESSION[loginid];
     include"sidebar.php"; 
 ?>
 <?php
- if($_POST[add]=="oldcus"){
+if(!isset($_GET[back])){
+   if($_POST[add]=="oldcus"){
      $_SESSION[ss_rg_branch]=$_POST[rg_branch];
      $_SESSION[ss_add]="oldcus";
  }else{
@@ -51,7 +52,7 @@ $ses_username = $_SESSION[loginid];
     $_SESSION[ss_rg_place_alley]=$_POST[rg_place_alley];
     $_SESSION[ss_rg_place_alleyway]=$_POST[rg_place_alleyway];
     $_SESSION[ss_rg_place_road]=$_POST[rg_place_road];
-    $_SESSION[ss_rg_place_vilno]=$_POST[rg_place_vilno];
+    $_SESSION[ss_rg_place_vilno]=$_POST[rg_place_villno];
     $_SESSION[ss_rg_place_district]=$_POST[rg_place_district];
     $_SESSION[ss_rg_place_canton]=$_POST[rg_place_canton];
     $_SESSION[ss_rg_place_province]=$_POST[rg_place_province];
@@ -61,7 +62,9 @@ $ses_username = $_SESSION[loginid];
     $_SESSION[ss_rg_place_road]=$_POST[rg_place_road];
     $_SESSION[ss_rg_place_email]=$_POST[rg_place_email];
     
-    $_SESSION[ss_rg_place_service]=$_POST[rg_place_service];
+    $_SESSION[ss_rg_place_service]=$_POST[rg_place_service];  
+}
+
 ?>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -181,7 +184,7 @@ $("#checkbox-place").click(function(){
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label>3.สถานที่ติดต่อ/ที่อยู่ในการจัดส่งเอกสาร</label>
-                            <textarea class="form-control"  rows="2" id="rg_contact_place" placeholder="กรุณากรอกข้อมูล" name="rg_contact_place"></textarea>
+                            <textarea class="form-control"  rows="2" id="rg_contact_place" placeholder="กรุณากรอกข้อมูล" name="rg_contact_place"><?=$_SESSION[ss_rg_contact_place]?></textarea>
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
@@ -190,77 +193,77 @@ $("#checkbox-place").click(function(){
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <b>ที่อยู่:</b> <label>รหัสบ้าน</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_homeid" type="text" id="rg_contact_homeid"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_homeid" type="text" id="rg_contact_homeid" value="<?=$_SESSION[ss_rg_contact_homeid]?>" required/>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>เลขที่</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_number" type="text" id="rg_contact_number" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_number" type="text" id="rg_contact_number" value="<?=$_SESSION[ss_rg_contact_village]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>หมู่บ้าน/อาคาร</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_village" type="text" id="rg_contact_village"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_village" type="text" id="rg_contact_village" value="<?=$_SESSION[ss_rg_contact_village]?>" required/>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>ห้อง</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_room" type="text" id="rg_contact_room"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_room" type="text" id="rg_contact_room" value="<?=$_SESSION[ss_rg_contact_room]?>" required/>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>ชั้น</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_floor" type="text" id="rg_contact_floor"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_floor" type="text" id="rg_contact_floor" value="<?=$_SESSION[ss_rg_contact_floor]?>" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <label>ตรอก</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_alley" type="text" id="rg_contact_alley" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_alley" type="text" id="rg_contact_alley" value="<?=$_SESSION[ss_rg_contact_alley]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>ซอย</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_alleyway" type="text" id="rg_contact_alleyway"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_alleyway" type="text" id="rg_contact_alleyway" value="<?=$_SESSION[ss_rg_contact_alleyway]?>" required/>
                         </div>
                         <div class="form-group col-sm-4">
                             <label>ถนน</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_road" type="text" id="rg_contact_road"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_road" type="text" id="rg_contact_road" value="<?=$_SESSION[ss_rg_contact_road]?>" required/>
                         </div>
                         <div class="form-group col-sm-2">
                             <label>หมู่ที่</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_villno" type="text" id="rg_contact_vilno" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_villno" type="text" id="rg_contact_vilno" value="<?=$_SESSION[ss_rg_contact_villno]?>" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-3">
                             <label>ตำบล</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_district" type="text" id="rg_contact_district"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_district" type="text" id="rg_contact_district" value="<?=$_SESSION[ss_rg_contact_district]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>อำเภอ</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_canton" type="text" id="rg_contact_canton"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_canton" type="text" id="rg_contact_canton" value="<?=$_SESSION[ss_rg_contact_canton]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>จังหวัด</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_province" type="text" id="rg_contact_province"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_province" type="text" id="rg_contact_province" value="<?=$_SESSION[ss_rg_contact_province]?>" required/>
                         </div>
                         <div class="form-group col-sm-3">
                             <label>รหัสไปรษณีย์</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_post" type="text" id="rg_contact_post"  maxlength="5" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_post" type="text" id="rg_contact_post"  maxlength="5" value="<?=$_SESSION[ss_rg_contact_post]?>" required/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <label>โทรศัพท์</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_tel" type="text" id="rg_contact_tel" onkeyup="IsNumeric(this.value,this)" maxlength="10" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_tel" type="text" id="rg_contact_tel" onkeyup="IsNumeric(this.value,this)" maxlength="10" value="<?=$_SESSION[ss_rg_contact_tel]?>" required/>
                         </div>
                         <div class="form-group col-sm-4">
                             <label>โทรสาร/Fax</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_fax" type="text" id="rg_contact_fax"  onkeyup="IsNumeric(this.value,this)" maxlength="10" required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_fax" type="text" id="rg_contact_fax"  onkeyup="IsNumeric(this.value,this)" value="<?=$_SESSION[ss_rg_contact_fax]?>" maxlength="10" required/>
                         </div>
                         <div class="form-group col-sm-4">
                             <label>E-mail</label>
-                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_email" type="text" id="rg_contact_email"  required/>
+                            <input class="form-control" placeholder="กรุณากรอกข้อมูล" name="rg_contact_email" type="text" id="rg_contact_email" value="<?=$_SESSION[ss_rg_contact_email]?>" required/>
                         </div>
                     </div>
                     <center>
-                        <a class="btn btn-info" onclick="window.history.back()"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
+                        <a class="btn btn-info" href="RequestGeneral_part2.php?back=1"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
                         <button class="btn  btn-success" name="Submit" type="submit"><i class="fa fa-arrow-right"> ถัดไป</i></button>	
                     </center>
                 </div>
