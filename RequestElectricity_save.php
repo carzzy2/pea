@@ -57,6 +57,7 @@ $_SESSION['re_keep_post']=$_POST[re_keep_post];
 $_SESSION['re_keep_tel']=$_POST[re_keep_tel];
 $_SESSION['re_keep_fax']=$_POST[re_keep_fax];
 $_SESSION['re_keep_email']=$_POST[re_keep_email];
+
     $sql_find="select cus_id from tb_customer where cus_id='".$_SESSION[cus_id]."'";
     $result_find=mysql_db_query($dbname,$sql_find);
     if(mysql_num_rows($result_find)>0){

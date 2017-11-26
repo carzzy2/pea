@@ -55,8 +55,8 @@ $("#checkbox-place").click(function(){
     $("#re_contact_alleyway").attr('readonly', true);
     $("#re_contact_road").val("<?= $_SESSION[cus_road] ?>");
     $("#re_contact_road").attr('readonly', true);
-    $("#re_contact_vilno").val("<?= $_SESSION[cus_vilno] ?>");
-    $("#re_contact_vilno").attr('readonly', true);
+    $("#re_contact_villno").val("<?= $_SESSION[cus_vilno] ?>");
+    $("#re_contact_villno").attr('readonly', true);
     $("#re_contact_district").val("<?= $_SESSION[cus_district] ?>");
     $("#re_contact_district").attr('readonly', true);
     $("#re_contact_canton").val("<?= $_SESSION[cus_canton] ?>");
@@ -90,8 +90,8 @@ $("#checkbox-place").click(function(){
     $("#re_contact_alleyway").attr('readonly', false);
     $("#re_contact_road").val("");
     $("#re_contact_road").attr('readonly', false);
-    $("#re_contact_vilno").val("");
-    $("#re_contact_vilno").attr('readonly', false);
+    $("#re_contact_villno").val("");
+    $("#re_contact_villno").attr('readonly', false);
     $("#re_contact_district").val("");
     $("#re_contact_district").attr('readonly', false);
     $("#re_contact_canton").val("");
