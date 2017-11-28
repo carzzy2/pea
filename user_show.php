@@ -115,7 +115,7 @@ $ses_username = $_SESSION[loginid];
                                         <td class="text-center"><?=$n?></td>
                                             <td><?=$array[user_id]?></td>
                                             <td><?=$first?><?=$array[user_name]?> <?=$array[user_last]?></td>
-                                            <td><?=$array[user_add]?></td>
+                                            <td width="250"><?=$array[user_add]?></td>
                                             <td class="text-center"><?=$array[user_tel]?></td>
                                             <td class="text-center"><?=$stat?></td>
                                             <td align="center">

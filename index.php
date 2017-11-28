@@ -38,7 +38,7 @@ $ses_username = $_SESSION[loginid];
         <div class="col-sm-12 ">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>การไฟฟ้าส่วนภูมิภาค </h2>
+                    <h2>ระบบผู้ใช้บริการไฟฟ้า </h2>
                     <hr class="star-primary">
                 </div>
             </div>

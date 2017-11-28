@@ -119,7 +119,7 @@ $("#checkbox-place").click(function(){
                 </div>
             <div class="panel-body">
 
-            <form method="post" action="RequestElectricity_save">
+            <form method="post" action="RequestElectricity_save" enctype="multipart/form-data">
                 <?php
                     $new_id =mysql_result(mysql_query("Select Max(substr(re_id,-4))+1 as MaxID from tb_electricity"),0,"MaxID" );
                     if($new_id==''){
@@ -266,8 +266,8 @@ $("#checkbox-place").click(function(){
                 </div>
                     <center>
                         <input  type="hidden" class="form-control " name="newcus" id="add" value="addcus">
-                        <a class="btn btn-info" onclick="location.href='RequestElectricity_part6.php'"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
-                        <button class="btn  btn-success" name="Submit" type="submit"><i class="fa fa-arrow-right"> ถัดไป</i></button>	
+                        <a class="btn btn-info" onclick="location.href='RequestElectricity_part5.php'"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
+                        <button class="btn  btn-success" name="Submit" type="submit"><i class="fa fa-arrow-right"> บันทึก</i></button>	
                     </center>
                 </div>
             </form> 

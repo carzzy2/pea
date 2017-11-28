@@ -55,7 +55,7 @@ if($_GET[mode]==""){
             <div class="panel-body">
             <div class="col-sm-12">
                 <div class="row">
-            <form method="post" id="frm_user" name="frm_user" action="user_save.php" onsubmit="return check_null()">
+                    <form method="post" id="frm_user" name="frm_user" action="user_save.php" onsubmit="return check_null()">
                 <?php
                     $new_id =mysql_result(mysql_query("Select Max(substr(user_id,-4))+1 as MaxID from tb_user"),0,"MaxID" );
                     if($new_id==''){ // ถ้าได้เป็นค่าว่าง หรือ null ก็แสดงว่ายังไม่มีข้อมูลในฐานข้อมูล
@@ -118,18 +118,15 @@ if($_GET[mode]==""){
                                 </div>
                             </div>
                         </div>
-                    <?php if($_GET[mode]=="edit"){ ?>
-                    <input name="user_pass" type="hidden" id="user_pass" value="<?=$array_edit[user_pass]?>" >
-                     <?php }else{ ?>
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label>รหัสผ่าน</label>
-                                <input class="form-control" autocomplete=off placeholder="กรุณากรอกข้อมูล" name="user_pass" type="password" id="user_pass" value="<?=$array_edit[user_pass]?>" >
+                                <input class="form-control" autocomplete=off placeholder="กรุณากรอกข้อมูล" name="user_pass1" type="password" id="user_pass1" value="<?=$array_edit[user_pass]?>" >
                             </div>
                         </div>
                          <div class="row">
                             <div class="form-group col-sm-6">
-                                <label>ยืนยันรหัสผ่าน</label>
+                                <label>ยืนยันรหัสผ่าน</label><code>*กรุณากรอกรหัสผ่านให้ตรงกัน</code>
                                 <input class="form-control" autocomplete=off placeholder="กรุณากรอกข้อมูล" name="user_pass2" type="password" id="user_pass2" value="<?=$array_edit[user_pass]?>">
                             </div>
                         </div>
@@ -140,24 +137,32 @@ if($_GET[mode]==""){
                     </script>
                     <script>
                     function check_null(){
-                     var pass = $("#user_pass").val();
+                     var pass = $("#user_pass1").val();
                      var pass2 = $("#user_pass2").val();
+                     
+//                     if(pass.length < 6 || pass2.length <6){
+//                        alert("กรุณากรอก Password !");
+//                        $("#user_pass").focus();
+//                      return false;
+//                     }
+                     
                      if(pass == ''){
                       alert("กรุณากรอก Password !");
                       $("#user_pass").focus();
                       return false;
-                     }else if(pass2 == ''){
-                      alert("กรุณากรอก Password อีกครั้ง !");
-                      $("#user_pass2").focus();
-                      return false;
-                     }else if(pass != pass2){
-                      alert("Password ไม่ตรงกัน!");
-                      $("#user_pass2").focus();
-                      return false;
+                     }
+                     if(pass2 == ''){
+                        alert("กรุณากรอก Password อีกครั้ง !");
+                        $("#user_pass2").focus();
+                        return false;
+                     }
+                     if(pass != pass2){
+                        alert("Password ไม่ตรงกัน!");
+                        $("#user_pass2").focus();
+                        return false;
                      }
                     }
                     </script>
-                     <?php } ?>
                     <center>
                         <button class="btn  btn-success" name="Submit" type="submit"><i class="fa fa-check" > <?=$str?></i></button>
                         <input name="txtmode" type="hidden" id="txtmode" value="<?=$mode?>" />

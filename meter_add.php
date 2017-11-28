@@ -84,7 +84,7 @@ if($_GET[mode]==""){
                         <div class="row">
                             <div class="col-sm-4 form-group">
                                 <label>ราคา</label>
-                                <input class="form-control" autocomplete=off placeholder="กรุณากรอกข้อมูล" name="me_price" type="text" id="me_price" value="<?=$array_edit[me_price]?>"  required/>	
+                                <input class="form-control" autocomplete=off placeholder="กรุณากรอกข้อมูล" name="me_price" type="number"  id="me_price" value="<?=$array_edit[me_price]?>" min="0" required>	
                             </div>
                         </div>
                         <div class="row">

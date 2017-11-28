@@ -149,12 +149,16 @@ body {
                                             <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
                                     </div>
                                     <div class="form-group">
+                                            <code>*หมายเหตุ ลืมรหัสผ่านกรุณาติดต่อ Adminrator</code>
+                                    </div>
+                                    <div class="form-group">
                                             <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
                                                             <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="เข้าสู่ระบบ">
                                                     </div>
                                             </div>
                                     </div>
+                                    
                                 </form>
                                 <form id="register-form" action="login_check2.php" method="post" role="form" style="display: none;" onsubmit="return login_check()">
                                         <div class="form-group">

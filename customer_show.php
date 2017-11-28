@@ -125,7 +125,7 @@ $ses_username = $_SESSION[loginid];
                                             </td>
                                     </tr>
                                     <?php
-                                                    }
+                                        }
                                             }else{	
                                     ?>				  
                                     <tr><td colspan="6" align="center">ไม่พบข้อมูล</td></tr>

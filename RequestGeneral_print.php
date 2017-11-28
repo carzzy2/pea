@@ -1,6 +1,6 @@
 <?php
 session_start();
-ob_start();
+
 include "connect_db.php";
 require_once('mpdf/mpdf.php');
 
@@ -16,9 +16,8 @@ function Dateim($mydate){
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
+<body OnClick="window.print();" title="คลิกเพื่อปริ้นเอกสารนี้">
 <?php
-
 $sql_print="select * from  tb_general,tb_user,tb_customer where rg_id='".$_GET[rg_id]."' and tb_general.user_id=tb_user.user_id and tb_general.cus_id=tb_customer.cus_id  ";
 $result_print=mysql_db_query($dbname,$sql_print);
 $array_print=mysql_fetch_array($result_print);
@@ -244,12 +243,3 @@ if($array_print[rg_place_type]=="0"){
         </table>
 </body>
 </html>
-<?Php
-$html = ob_get_contents();
-ob_end_clean();
-$pdf = new mPDF('th', 'A4', '0', 'THSaraban'); //การตั้งค่ากระดาษถ้าต้องการแนวตั้ง ก็ A4 เฉยๆครับ ถ้าต้องการแนวนอนเท่ากับ A4-L
-$pdf->SetAutoFont();
-$pdf->SetDisplayMode('fullpage');
-$pdf->WriteHTML($html, 2);
-$pdf->Output();
-?>
