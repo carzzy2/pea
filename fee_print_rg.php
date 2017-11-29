@@ -55,7 +55,7 @@
         $tex=$array_print['fee_price'] - $tt ;
         
         ?>
-        <table width="100%"   align="center" style=" border-collapse:inherit; line-height: 20px;">
+        <table width="100%"   align="center" style="font-size: 11px;">
             <tr>
                 <td colspan="4" style="padding-top:9px;">
                     รหัสใบคำร้อง : <?= $array_print[rg_id] ?> <br>
