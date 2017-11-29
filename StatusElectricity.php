@@ -115,7 +115,7 @@ function Dateim($mydate) {
                                         $result = mysql_db_query($dbname, $sql);
                                         if (mysql_num_rows($result) > 0) {
                                             while ($array = mysql_fetch_array($result)) {
-                                                $page++;
+                                                
                                                 $sqlcus = "select * from tb_customer where cus_id='" . $array[cus_id] . "'";
                                                 $resultcus = mysql_db_query($dbname, $sqlcus);
                                                 $arraycus = mysql_fetch_array($resultcus);
@@ -133,6 +133,7 @@ function Dateim($mydate) {
                                                 $wanttype = getlistname($array[re_want_type], $array[re_place_other]);
                                                 
                                                 if(!in_array($array['re_want_type'],$stop)){
+                                                    $page++;
                                                 ?>	
                                                 <tr>
                                                     <td class="text-center"><?= $page ?></td>
