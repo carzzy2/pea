@@ -121,7 +121,7 @@ if($_GET[mode]==""){
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label>รหัสผ่าน</label>
-                                <input class="form-control" autocomplete=off placeholder="กรุณากรอกข้อมูล" name="user_pass1" type="password" id="user_pass1" value="<?=$array_edit[user_pass]?>" >
+                                <input class="form-control" autocomplete=off placeholder="กรุณากรอกข้อมูล" name="user_pass" type="password" id="user_pass1" value="<?=$array_edit[user_pass]?>" >
                             </div>
                         </div>
                          <div class="row">
