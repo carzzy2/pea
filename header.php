@@ -22,9 +22,6 @@ $user=mysql_fetch_array($reuser);
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="employee_profile.php"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                       
                         <li class="divider"></li>
                         <li><a href="logout.php" onclick="return confirm('คุณต้องการออกจากระบบ ใช่หรือไม่ ?')"><i class="fa fa-sign-out fa-fw"></i> ออกจากระบบ</a>
                         </li>

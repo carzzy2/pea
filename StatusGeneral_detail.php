@@ -84,7 +84,7 @@ $ses_username = $_SESSION[loginid];
     <div id="page-wrapper">
         <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h2 class="panel-title">อนุมัติใบคำร้องทั่วไปเลขที่ <?=$array_edit[rg_id]?></h2>
+                    <h2 class="panel-title">บันทึกใบคำร้องทั่วไปเลขที่ <?=$array_edit[rg_id]?></h2>
                 </div>
             <div class="panel-body">
                 <div class="row">

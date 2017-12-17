@@ -40,7 +40,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
         } else {
             $igid = "16" . sprintf("%010d", $new_id);
         }
-        $sql="select * from tb_electricity,tb_equipment where tb_electricity.re_id='".$_GET[id]."' and tb_equipment.re_id=tb_electricity.re_id and tb_equipment.equ_status='0' ";
+        $sql="select * from tb_investigate where re_id='".$_GET[id]."' and ig_install='2' order by ig_id asc LIMIT 1 ";
         $result=mysql_db_query($dbname,$sql);
         $array=mysql_fetch_array($result);
         ?>
@@ -82,21 +82,21 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group ">
                                             <label>1. สายแม่แรงต่ำ ขนาด</label>
                                             <div class="form-group input-group">
-                                                <input type="text" class="form-control" name="ig_lowtension"   required>
+                                                <input type="text" class="form-control" name="ig_lowtension" value="<?=$array['ig_lowtension']?>"  readonly>
                                                 <span class="input-group-addon">ตร.มม</span>
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label>จำนวน</label>
                                             <div class="form-group input-group">
-                                                <input type="number" class="form-control" name="ig_lowtension_amount" min="0"  required>
+                                                <input type="number" class="form-control" name="ig_lowtension_amount" min="0" value="<?=$array[ig_lowtension]?>"  readonly>
                                                 <span class="input-group-addon">เฟส</span>
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                             <div class="form-group input-group">
-                                                <input type="number" class="form-control" name="ig_lowtension_line" min="0"  required>
+                                                <input type="number" class="form-control" name="ig_lowtension_line" min="0" value="<?=$array['ig_lowtension']?>" readonly>
                                                 <span class="input-group-addon">สาย</span>
                                             </div>
                                         </div>
@@ -106,59 +106,59 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group ">
                                             <label>2. จ่ายไฟจากสถานไฟฟ้าย่อย</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_power" required>
+                                                <input type="text" class="form-control" name="ig_power" value="<?=$array['ig_lowtension']?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>ฟีดเดอร์แรงสูง</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_power_speed"   required>
+                                                <input type="text" class="form-control" name="ig_power_speed"  value="<?=$array['ig_lowtension']?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>ปีจัดซื้อ(ตาม มป.5)</label>
                                             <div class="form-group">
-                                                <select id="equ_tran" class="form-control" name="ig_power_year" required>
+                                                <select id="equ_tran" class="form-control" name="ig_power_year" disabled>
                                                     <option value=""><-- เลือกปี --></option>
-                                                    <option value="2560">2560</option>
-                                                    <option value="2559">2559</option>
-                                                    <option value="2558">2558</option>
-                                                    <option value="2557">2557</option>
-                                                    <option value="2556">2556</option>
-                                                    <option value="2555">2555</option>
-                                                    <option value="2554">2554</option>
-                                                    <option value="2553">2553</option>
-                                                    <option value="2552">2552</option>
-                                                    <option value="2551">2551</option>
-                                                    <option value="2550">2550</option>
+                                                    <option value="2560"<?php if($array[ig_power_year]=="2560"){ echo "selected";} ?>>2560</option>
+                                                    <option value="2559" <?php if($array[ig_power_year]=="2559"){ echo "selected";} ?>>2559</option>
+                                                    <option value="2558" <?php if($array[ig_power_year]=="2558"){ echo "selected";} ?>>2558</option>
+                                                    <option value="2557" <?php if($array[ig_power_year]=="2557"){ echo "selected";} ?>>2557</option>
+                                                    <option value="2556" <?php if($array[ig_power_year]=="2556"){ echo "selected";} ?>>2556</option>
+                                                    <option value="2555" <?php if($array[ig_power_year]=="2555"){ echo "selected";} ?>>2555</option>
+                                                    <option value="2554" <?php if($array[ig_power_year]=="2554"){ echo "selected";} ?>>2554</option>
+                                                    <option value="2553" <?php if($array[ig_power_year]=="2553"){ echo "selected";} ?>>2553</option>
+                                                    <option value="2552" <?php if($array[ig_power_year]=="2552"){ echo "selected";} ?>>2552</option>
+                                                    <option value="2551" <?php if($array[ig_power_year]=="2551"){ echo "selected";} ?>>2551</option>
+                                                    <option value="2550" <?php if($array[ig_power_year]=="2550"){ echo "selected";} ?>>2550</option>
                                                 </select>
-                                            </div>
+                                            </div><input type="hidden"  name="ig_power_year" value="<?=$array[ig_power_year]?>" >
                                         </div>
                                     </div>
                                     <br>
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="radio">
-                                                <label><input name="ig_lowpower" size="30" type="radio" value="1" id="ig_lowpower1">ฟิดเดอร์แรงต่ำ</label>
-                                                <label><input name="ig_lowpower" size="30" type="radio" value="2" id="ig_lowpower2">เฟสแรงต่ำ</label>
-                                            </div>
+                                                <label><input name="ig_lowpower" size="30" type="radio" value="1" id="ig_lowpower1" <?php if($array[ig_lowpower]=="1"){ echo "checked";} ?> disabled>ฟิดเดอร์แรงต่ำ</label>
+                                                <label><input name="ig_lowpower" size="30" type="radio" value="2" id="ig_lowpower2" <?php if($array[ig_lowpower]=="2"){ echo "checked";} ?> disabled>เฟสแรงต่ำ</label>
+                                            </div><input type="hidden"  name="ig_lowpower" value="<?=$array[ig_lowpower]?>" >
                                         </div>
                                         <div class="form-group ">
                                             <label>ชนิดของหม้อแปลง</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control"  name="ig_lowpower_type"  required>
+                                                <input type="text" class="form-control"  name="ig_lowpower_type" value="<?=$array['ig_lowtension']?>" readonly>
                                             </div>
                                         </div>
                                          <div class="form-group">
                                             <label>หมายเลขหม้อแปลง</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control"  name="ig_lowpower_number"  required>
+                                                <input type="text" class="form-control"  name="ig_lowpower_number" value="<?=$array['ig_lowpower_number']?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>หม้อแปลงขนาด</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control"  name="ig_outlet"  >
+                                                <input type="text" class="form-control" value="<?=$array['ig_outlet']?>" name="ig_outlet"  readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -167,13 +167,15 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group">
                                             <label>3.ความเห็นของผู้ตรวจสอบ</label>
                                         </div>
-                                    </div>   <div class="row">
+                                    </div>   <br> 
+                                    <div class="row">
                                         <div class="form-group">
                                             <label >ประเภทกิจการ</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_bstype"   required>
+                                                <input type="text" class="form-control" name="ig_bstype" value="<?=$array['ig_bstype']?>"  readonly>
                                             </div>
-                                        </div></div> 
+                                        </div>
+                                    </div>
                                     <br>
                                     <div class="row">
                                         <div class="form-group">
@@ -279,31 +281,23 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                     <br>
                                     <div class="row">
                                             <div class="form-group">
-                                                <label>การเดินสายและติดตั้งอุปกรณ์ไฟฟ้า</label>
+                                                <label>ผลการแก้ไข</label>
                                             </div>
                                         </div>
                                     <div class="row">
+                                         
                                         <div class="form-group col-md-12">
                                             <div class="radio">
-                                                <label><input name="ig_install" size="30" type="radio" value="1" id="ig_install1">เรียบร้อยถูกต้องตามมาตรฐาน</label>
+                                                <label><input name="ig_install" size="30" type="radio" value="1" id="ig_install1">เรียบร้อย</label>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <div class="radio">
-                                                <label><input name="ig_install" size="30" type="radio" value="2" id="ig_install2">ไม่เรียบร้อย ควรแก้ไขเนื่องจาก</label>
+                                                <label><input name="ig_install" size="30" type="radio" value="2" id="ig_install2">แก้ไข</label>
                                             </div>
                                             <div class="form-group ">
                                                 <input type="text" class="form-control"  name="ig_install_other1" id="ig_install_other1" required>
                                             </div>
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <div class="radio">
-                                                <label><input name="ig_install" size="30" type="radio" value="3" id="ig_install3">นัดตรวจสอบใหม่วันที่</label>
-                                                <div class="form-group ">
-                                                    <input type="date" class="form-control"  name="ig_install_other2" id="ig_install_other2" required>
-                                                </div>
-                                            </div>
-                  
                                         </div>
                                     </div>
 

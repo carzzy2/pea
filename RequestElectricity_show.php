@@ -185,10 +185,10 @@ function Dateim($mydate){
                                                $label="บันทึกการปฎิบัติงานแล้ว";
                                             }elseif($array[re_status]==4){
                                                $status="#16DD87";
-                                               $label="ผ่านการตรวจสอบมาตรฐาน";
+                                               $label="ไม่ผ่านการตรวจสอบมาตรฐาน,รอแก้ไข";
                                             }elseif($array[re_status]==5){
                                                $status="#751C90";
-                                               $label="ไม่ผ่านการตรวจสอบมาตรฐาน";
+                                               $label="ไม่ผ่านการตรวจสอบมาตรฐาน,รอตรวจสอบใหม่";
                                             }elseif($array[re_status]==6){
                                                $status="#2E9AFE";
                                                $label="เสร็จสิ้น";

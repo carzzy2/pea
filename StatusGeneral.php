@@ -40,7 +40,7 @@ function Dateim($mydate){
     <div id="page-wrapper">
         <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h2 class="panel-title">อนุมัติคำร้องทั่วไป</h2>
+                    <h2 class="panel-title">บันทึกคำร้องทั่วไป</h2>
                 </div>
             <div class="panel-body">
                 <div class="col-sm-12">
