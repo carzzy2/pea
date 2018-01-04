@@ -40,7 +40,7 @@ if($user[user_pos]==0){
                         </li>
 
                         <li><a href="requestGeneral_show.php"><i class="hidden-xs showopacity glyphicon glyphicon-file">&nbsp;</i>คำร้องทั่วไป</a></li>
-                        <li><a href="StatusGeneral.php"><i class="hidden-xs showopacity glyphicon glyphicon-ok-circle">&nbsp;</i>บันทึกคำร้องทั่วไป</a></li>
+                        <li><a href="StatusGeneral.php"><i class="hidden-xs showopacity glyphicon glyphicon-ok-circle">&nbsp;</i>บันทึกขอคืนเงิน</a></li>
                         <li><a href="RequestElectricity_show.php"><i class="hidden-xs showopacity glyphicon glyphicon-random">&nbsp;</i>คำร้องขอใช้ไฟฟ้า</a></li>
                         <li><a href="StatusElectricity.php"><i class="hidden-xs showopacity glyphicon glyphicon-zoom-in">&nbsp;</i>สำรวจสถานะหน้างาน</a></li>
                         <li><a href="fee_show.php"><i class="hidden-xs showopacity glyphicon glyphicon-usd">&nbsp;</i>รับชำระค่าธรรมเนียม</a></li>

@@ -61,14 +61,14 @@ $ses_username = $_SESSION[loginid];
                             <tr>
                                 <td class="text-center"><?= Dateim($array['re_date']); ?></td>
                                 <td class="text-center"><?= $array['user_name'] ?> <?= $array['user_last'] ?></td>
-                                <td class="text-center">เสร็จสิ้น</td>
+                                <td class="text-center"><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: #2E9AFE; border-radius:5px;">เสร็จสิ้น</span></td>
                             </tr>
                             <?php
                             }else{ ?>
                                 <tr>
                                     <td class="text-center"><?= Dateim($array['re_date']); ?></td>
                                     <td class="text-center"><?= $array['user_name'] ?> <?= $array['user_last'] ?></td>
-                                    <td class="text-center">ลงทะเบียน</td>
+                                    <td class="text-center"><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: #848480; border-radius:5px;">ยังไม่ได้สำรวจ</span></td>
                                 </tr>
                             <?php
                             }
@@ -83,14 +83,16 @@ $ses_username = $_SESSION[loginid];
                             
                             if($array2[equ_status]==0){
                                 $ee="สำรวจแล้ว";
+                                $st="#5bc0de";
                             }else{
                                 $ee="ไม่ผ่านการสำรวจ";
+                                $st="#848480";
                             }
                             ?>	
                             <tr>
                                 <td class="text-center"><?= Dateim($array2['equ_date']); ?></td>
                                 <td class="text-center"><?= $array2['user_name'] ?> <?= $array2['user_last'] ?></td>
-                                <td class="text-center" ><?=$ee?></td>
+                                <td class="text-center" ><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: <?=$st?>; border-radius:5px;"><?=$ee?></span></td>
                             </tr>
                             <?php
                         }
@@ -105,7 +107,7 @@ $ses_username = $_SESSION[loginid];
                             <tr>
                                 <td class="text-center"><?= Dateim($array3['fee_date']); ?></td>
                                 <td class="text-center"><?= $array3['user_name'] ?> <?= $array3['user_last'] ?></td>
-                                <td class="text-center" >ชำระค่าธรรมเนียมแล้ว</td>
+                                <td class="text-center" ><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: #F78234; border-radius:5px;">ชำระค่าธรรมเนียมแล้ว</span></td>
                             </tr>
                             <?php
                         }
@@ -121,7 +123,7 @@ $ses_username = $_SESSION[loginid];
                             <tr>
                                 <td class="text-center"><?= Dateim($array4['work_date']); ?></td>
                                 <td class="text-center"><?=$first?> <?=$last?></td>
-                                <td class="text-center" >บันทึกการปฎิบัติงานแล้ว</td>
+                                <td class="text-center" ><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: #99cc00; border-radius:5px;">บันทึกการปฎิบัติงานแล้ว</span></td>
                             </tr>
                             <?php
                         }
@@ -134,16 +136,16 @@ $ses_username = $_SESSION[loginid];
                         while ($array5 = mysql_fetch_array($result5)) {
                             if($array5[ig_install]==1){
                                 $status="เสร็จสิ้น";
-                            }elseif($array5[ig_install]==2){
-                               $status="ไม่เรียบร้อย"; 
-                            }elseif($array5[ig_install]==3){
-                               $status="ไม่ผ่านการตรวจสอบมาตรฐาน,รอตรวจสอบใหม่วันที่"; 
+                                $tt="#2E9AFE";
+                            }elseif($array5[ig_install]==2 or $array5[ig_install]==3){
+                               $status="ไม่ผ่านการตรวจสอบมาตรฐาน";
+                               $tt="#751C90";
                             }
                             ?>	
                             <tr>
                                 <td class="text-center"><?= Dateim($array5['ig_date']); ?></td>
                                 <td class="text-center"><?= $array5['user_name'] ?> <?= $array5['user_last'] ?></td>
-                                <td class="text-center" ><?=$status?> ,<?=$array5[ig_install_other]?></td>
+                                <td class="text-center" ><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: <?=$tt?>; border-radius:5px;"><?=$status?></span></td>
                             </tr>
                             <?php
                         }
