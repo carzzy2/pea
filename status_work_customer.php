@@ -137,9 +137,13 @@ $ses_username = $_SESSION[loginid];
                             if($array5[ig_install]==1){
                                 $status="เสร็จสิ้น";
                                 $tt="#2E9AFE";
-                            }elseif($array5[ig_install]==2 or $array5[ig_install]==3){
-                               $status="ไม่ผ่านการตรวจสอบมาตรฐาน";
+                            }elseif($array5[ig_install]==2 ){
+                               $status="ไม่ผ่านการตรวจสอบมาตรฐาน (รอแก้ไข)";
                                $tt="#751C90";
+                            }
+                            elseif($array5[ig_install]==3){
+                               $status="ไม่ผ่านการตรวจสอบมาตรฐาน (รอตรวจสอบใหม่)";
+                               $tt="#751C40";
                             }
                             ?>	
                             <tr>

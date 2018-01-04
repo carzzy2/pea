@@ -120,7 +120,7 @@ function Dateim($mydate) {
                                                 $arraycus = mysql_fetch_array($resultcus);
 
                                                 if ($array[re_status] == "5") {
-                                                    $status = "รอตรวจสอบใหม่";
+                                                    $status = "รอการแก้ไข";
                                                     $label = "danger";
                                                 } elseif ($array[re_status] == "4") {
                                                     $status = "ไม่ผ่านการตรวจสอบ";
