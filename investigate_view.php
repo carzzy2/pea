@@ -352,17 +352,8 @@ $limit=2;
                                                 <label><input name="ig_install" size="30" type="radio" value="2" <?php if($array[ig_install]=="2"){ echo "checked";} ?> disabled>ไม่เรียบร้อย ควรแก้ไขเนื่องจาก</label>
                                             </div>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control"  name="ig_install_other1" value="<?php if($array_print[ig_install]=="2"){ echo $array_print[ig_install_other]; }?>" readonly>
+                                                <input type="text" class="form-control"  name="ig_install_other1"  size="50" value="<?php echo $array[ig_install_other]; 0?>" readonly>
                                             </div>
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <div class="radio">
-                                                <label><input name="ig_install" size="30" type="radio" value="3" <?php if($array[ig_install]=="3"){ echo "checked";} ?> disabled>นัดตรวจสอบใหม่วันที่</label>
-                                                <div class="form-group ">
-                                                    <input type="date" class="form-control"  name="ig_install_other2" value="<?php if($array_print[ig_install]=="3"){ echo $array_print[ig_install_other]; } ?>" readonly>
-                                                </div>
-                                            </div>
-                  
                                         </div>
                                     </div>
 

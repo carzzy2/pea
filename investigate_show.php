@@ -145,7 +145,7 @@ function Dateim($mydate) {
                                                                 <?php if($array[re_status]=="3"){ ?>
                                                                     <a class="btn btn-default" href="investigate_add.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ดำเนินการตรวจสอบ</i></a>
                                                                 <?php }elseif ($array[re_status]=="4"){ ?>                                                       
-                                                                    <a class="btn btn-default" href="investigate_edit.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> แก้ไข</i></a>
+                                                                    <a class="btn btn-default" href="investigate_add.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> แก้ไข</i></a>
                                                                 <?php }elseif ($array[re_status]=="5"){ ?>
                                                                     <a class="btn btn-default" href="investigate_add.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ตรวจสอบใหม่</i></a>
                                                                 <?php } ?>

@@ -86,6 +86,10 @@ if($_GET[mode]==""){
                                 <label>ราคา</label>
                                 <input class="form-control" autocomplete=off placeholder="กรุณากรอกข้อมูล" name="me_price" type="number"  id="me_price" value="<?=$array_edit[me_price]?>" min="0" required>	
                             </div>
+                            <div class="col-sm-4 form-group">
+                                <label>ค่ามัดจำ</label>
+                                <input class="form-control" autocomplete=off placeholder="กรุณากรอกข้อมูล" name="me_insure" type="number"  id="me_price" value="<?=$array_edit[me_insure]?>" min="0" required>	
+                            </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-3">

@@ -37,9 +37,9 @@ if(!isset($_GET[back])){
    if($_POST[add]=="oldcus"){
      $_SESSION[ss_rg_branch]=$_POST[rg_branch];
      $_SESSION[ss_add]="oldcus";
- }else{
-     $_SESSION[ss_add]="newcus";
- }
+    }else{
+        $_SESSION[ss_add]="newcus";
+    }
     $_SESSION[ss_rg_place_type]=$_POST[rg_place_type];
     $_SESSION[ss_rg_place_other]=$_POST[rg_place_other];
     $_SESSION[ss_rg_place_name]=$_POST[rg_place_name];

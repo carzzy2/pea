@@ -63,7 +63,7 @@ $ses_username = $_SESSION[loginid];
      $_SESSION[ss_cus_email]=$_POST[cus_email];
 
  }else{
-     $sql="select * from tb_customer where cus_code like '%".$_POST[search]."%' order by cus_id";
+     $sql="select * from tb_customer where cus_id= '".$_GET[id]."' order by cus_id";
      $result=mysql_db_query($dbname,$sql);
      $place_data=mysql_fetch_array($result);
      
@@ -94,6 +94,7 @@ $ses_username = $_SESSION[loginid];
      $add="oldcus";
  }
  }
+
 ?>
     <script type="text/javascript">
 $(document).ready(function() {
@@ -196,6 +197,7 @@ $("#disable1").click(function(){
         <div class="row">
             <form method="post" action="RequestGeneral_part3.php" id="form">
                 <?php
+                 var_dump($_SESSION);
                     $new_id =mysql_result(mysql_query("Select Max(substr(rg_id,-4))+1 as MaxID from tb_general "),0,"MaxID" );
                     if($new_id==''){
                         $rg_id="110000000001";

@@ -63,8 +63,6 @@ $array_print=mysql_fetch_array($result_print);
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input size="30" type="checkbox"  <?php if($array_print[ig_install]=="1"){ echo "checked";} ?> disabled>เรียบร้อยถูกต้องตามมาตรฐาน</label><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input size="30" type="checkbox"  <?php if($array_print[ig_install]=="2"){ echo "checked";} ?> disabled>ไม่เรียบร้อย ควรแก้ไขเนื่องจาก 
                         <?php if($array_print[ig_install]=="2"){ echo $array_print[ig_install_other]; }else{echo "-";} ?></label><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<label><input size="30" type="checkbox"  <?php if($array_print[ig_install]=="3"){ echo "checked";} ?> disabled>นัดตรวจสอบใหม่วันที่ 
-                         <?php if($array_print[ig_install]=="3"){ echo $array_print[ig_install_other]; }else{echo "-";} ?></label>
                         <br><br><br>
                         <center>
                         (ลงชื่อ).................................................. <br>

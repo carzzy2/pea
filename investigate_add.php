@@ -292,24 +292,15 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                             <div class="radio">
                                                 <label><input name="ig_install" size="30" type="radio" value="2" id="ig_install2">ไม่เรียบร้อย ควรแก้ไขเนื่องจาก</label>
                                             </div>
-                                            <div class="form-group ">
-                                                <input type="text" class="form-control"  name="ig_install_other1" id="ig_install_other1" required>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control"  name="ig_install_other1" size="50"  id="ig_install_other1" required>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <div class="radio">
-                                                <label><input name="ig_install" size="30" type="radio" value="3" id="ig_install3">นัดตรวจสอบใหม่วันที่</label>
-                                                <div class="form-group ">
-                                                    <input type="date" class="form-control"  name="ig_install_other2" id="ig_install_other2" required>
-                                                </div>
-                                            </div>
-                  
-                                        </div>
+                                        
                                     </div>
-
                                 </div>
                                 
-                            </div>
+                            </div><br><br>
                             <center>
                                 <a class="btn btn-info" onclick="location.href = 'investigate_show.php'"> ย้อนกลับ</a>
                                 <input class="btn btn-success" name="finish" type="submit" id="finish" value="บันทึก" >

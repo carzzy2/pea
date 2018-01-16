@@ -42,7 +42,7 @@ $ses_username = $_SESSION[loginid];
             <table  class="table table-striped table-bordered  ">
                 <thead>               
                     <tr>
-                        <th class=" text-center" >วันที่</th>
+                        <th class=" text-center" >วันที่บันทึกคำร้อง</th>
                         <th class=" text-center" >พนักงานผู้ดำเนินการ</th>
                         <th class=" text-center" >สถานะการทำงาน</th>
                     </tr> 
@@ -53,6 +53,31 @@ $ses_username = $_SESSION[loginid];
                     $result = mysql_db_query($dbname, $sql);
                     if (mysql_num_rows($result) > 0) {
                         while ($array = mysql_fetch_array($result)) {
+                            if($array[re_status]==0){
+                                $label="ยังไม่ได้สำรวจ";
+                                $status="#848480";
+                            }elseif($array[re_status]==1){
+                               $status="#5bc0de";
+                               $label="ผ่านการสำรวจแล้ว";
+                            }elseif($array[re_status]==2){
+                               $status="#F78234";
+                               $label="ชำระค่าธรรมเนียมแล้ว";
+                            }elseif($array[re_status]==3){
+                               $status="#99cc00";
+                               $label="บันทึกการปฎิบัติงานแล้ว";
+                            }elseif($array[re_status]==4){
+                               $status="#16DD87";
+                               $label="ไม่ผ่านการตรวจสอบมาตรฐาน,รอแก้ไข";
+                            }elseif($array[re_status]==5){
+                               $status="#751C90";
+                               $label="ไม่ผ่านการตรวจสอบมาตรฐาน,รอตรวจสอบใหม่";
+                            }elseif($array[re_status]==6){
+                               $status="#2E9AFE";
+                               $label="เสร็จสิ้น";
+                            }elseif($array[re_status]==9){
+                               $status="#d9534f";
+                               $label="ไม่ผ่านการสำรวจ";
+                            }
                             $first=$array[user_name];
                             $last=$array[user_last];
                             $tel=$array[user_tel];
@@ -61,109 +86,50 @@ $ses_username = $_SESSION[loginid];
                             <tr>
                                 <td class="text-center"><?= Dateim($array['re_date']); ?></td>
                                 <td class="text-center"><?= $array['user_name'] ?> <?= $array['user_last'] ?></td>
-                                <td class="text-center"><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: #2E9AFE; border-radius:5px;">เสร็จสิ้น</span></td>
+                                <td class="text-center"><?=$label?></td>
                             </tr>
                             <?php
                             }else{ ?>
                                 <tr>
                                     <td class="text-center"><?= Dateim($array['re_date']); ?></td>
                                     <td class="text-center"><?= $array['user_name'] ?> <?= $array['user_last'] ?></td>
-                                    <td class="text-center"><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: #848480; border-radius:5px;">ยังไม่ได้สำรวจ</span></td>
+                                    <td class="text-center"><?=$label?></td>
                                 </tr>
                             <?php
                             }
                         }
                     } 
                     ?>				                           
-                    <?php
-                    $sql2 = "select * from tb_equipment,tb_user where re_id='" . $_SESSION[loginid] . "' and tb_equipment.user_id=tb_user.user_id";
-                    $result2 = mysql_db_query($dbname, $sql2);
-                    if (mysql_num_rows($result2) > 0) {
-                        while ($array2 = mysql_fetch_array($result2)) {
-                            
-                            if($array2[equ_status]==0){
-                                $ee="สำรวจแล้ว";
-                                $st="#5bc0de";
-                            }else{
-                                $ee="ไม่ผ่านการสำรวจ";
-                                $st="#848480";
-                            }
-                            ?>	
-                            <tr>
-                                <td class="text-center"><?= Dateim($array2['equ_date']); ?></td>
-                                <td class="text-center"><?= $array2['user_name'] ?> <?= $array2['user_last'] ?></td>
-                                <td class="text-center" ><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: <?=$st?>; border-radius:5px;"><?=$ee?></span></td>
-                            </tr>
-                            <?php
-                        }
-                    }
-                        ?>
-                    <?php
-                    $sql3 = "select * from tb_fee,tb_user where re_id='" . $_SESSION[loginid] . "' and tb_fee.user_id=tb_user.user_id";
-                    $result3 = mysql_db_query($dbname, $sql3);
-                    if (mysql_num_rows($result3) > 0) {
-                        while ($array3 = mysql_fetch_array($result3)) {
-                            ?>	
-                            <tr>
-                                <td class="text-center"><?= Dateim($array3['fee_date']); ?></td>
-                                <td class="text-center"><?= $array3['user_name'] ?> <?= $array3['user_last'] ?></td>
-                                <td class="text-center" ><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: #F78234; border-radius:5px;">ชำระค่าธรรมเนียมแล้ว</span></td>
-                            </tr>
-                            <?php
-                        }
-                    }
-                        ?>
-                    <?php
-                    $sql4 = "select * from tb_work where re_id='" . $_SESSION[loginid] . "' ";
-                    $result4 = mysql_db_query($dbname, $sql4);
-                    if (mysql_num_rows($result4) > 0) {
-                        while ($array4 = mysql_fetch_array($result4)) {
-                            
-                            ?>	
-                            <tr>
-                                <td class="text-center"><?= Dateim($array4['work_date']); ?></td>
-                                <td class="text-center"><?=$first?> <?=$last?></td>
-                                <td class="text-center" ><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: #99cc00; border-radius:5px;">บันทึกการปฎิบัติงานแล้ว</span></td>
-                            </tr>
-                            <?php
-                        }
-                    }
-                        ?>
-                    <?php
-                    $sql5 = "select * from tb_investigate,tb_user where re_id='" . $_SESSION[loginid] . "' and tb_investigate.user_id=tb_user.user_id order by ig_date asc";
-                    $result5 = mysql_db_query($dbname, $sql5);
-                    if (mysql_num_rows($result5) > 0) {
-                        while ($array5 = mysql_fetch_array($result5)) {
-                            if($array5[ig_install]==1){
-                                $status="เสร็จสิ้น";
-                                $tt="#2E9AFE";
-                            }elseif($array5[ig_install]==2 ){
-                               $status="ไม่ผ่านการตรวจสอบมาตรฐาน (รอแก้ไข)";
-                               $tt="#751C90";
-                            }
-                            elseif($array5[ig_install]==3){
-                               $status="ไม่ผ่านการตรวจสอบมาตรฐาน (รอตรวจสอบใหม่)";
-                               $tt="#751C40";
-                            }
-                            ?>	
-                            <tr>
-                                <td class="text-center"><?= Dateim($array5['ig_date']); ?></td>
-                                <td class="text-center"><?= $array5['user_name'] ?> <?= $array5['user_last'] ?></td>
-                                <td class="text-center" ><span  style="padding-right: 15px; padding-left: 15px; color: white; background-color: <?=$tt?>; border-radius:5px;"><?=$status?></span></td>
-                            </tr>
-                            <?php
-                        }
-                    }
-                        ?> 
+                    
                 </tbody>
             </table>
+            <?php
+            $sqlv = "select * from tb_logview where re_id='" . $_SESSION[loginid] . "' order by log_date desc limit 1 ";
+            $resultv = mysql_db_query($dbname, $sqlv);
+            $arrayv = mysql_fetch_array($resultv)
+            ?>
+            <div class="col-md-12">
+                <h4>
+                    <small>เข้าดูล่าสุด เมื่อ <?=$arrayv['log_date']?></small>
+                </h4>
+            </div>
             <div class="col-md-12">
                 <label style="color: red;">* หากมีปัญหากรุณาติดต่อ <?=$tel?> คุณ<?=$first?> <?=$last?> (ผู้บันทึกข้อมูลใบคำร้องขอใช้ไฟฟ้า)</label>
             </div>
         </div>
     </div>  
 </div>
-            
+<?php
+$new_id =mysql_result(mysql_query("Select Max(substr(log_id,-4))+1 as MaxID from tb_logview"),0,"MaxID" );
+if($new_id==''){ // ถ้าได้เป็นค่าว่าง หรือ null ก็แสดงว่ายังไม่มีข้อมูลในฐานข้อมูล
+$logid="LOG00001";
+}else{
+$logid="LOG".sprintf("%05d",$new_id);//ถ้าไม่ใช่ค่าว่าง
+}
+ $sql="insert into tb_logview(log_id,log_date,re_id) values('".$logid."',NOW(),'".$_SESSION[loginid]."')";
+        
+        mysql_query($sql);
+?>
 </body>
 
 </html>
