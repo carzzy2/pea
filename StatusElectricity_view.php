@@ -219,13 +219,6 @@ $limit=2;
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group col-sm-4">
-                                    <label>จำนวน</label>
-                                    <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_meter_unit" value="<?= $array[equ_meter_unit] ?>"readonly>
-                                        <span class="input-group-addon">ตัว</span>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-8">

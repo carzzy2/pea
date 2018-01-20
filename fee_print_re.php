@@ -87,6 +87,14 @@
             </tr>
             <tr>
                 <td colspan="2" >
+                    ค่าประกัน
+                </td>
+                <td colspan="2" align='right'>
+                    <?= number_format($array_ele['me_insure'], 2) ?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" >
                     ภาษีมูลค่าเพื่ม
                 </td>
                 <td colspan="2" align='right'>
@@ -98,7 +106,7 @@
                     รวมทั้งสิ้น
                 </td>
                 <td colspan="2" align='right' >
-                    <?= number_format(($array_print['fee_price']), 2) ?>
+                    <?= number_format(($array_print['fee_price']+$array_ele['me_insure']), 2) ?>
                 </td>
             </tr>
             <tr>
@@ -106,7 +114,7 @@
                     ชำระ
                 </td>
                 <td colspan="2" align='right' >
-                    <?= number_format(($array_print['fee_price']), 2) ?>
+                    <?= number_format(($array_print['fee_price']+$array_ele['me_insure']), 2) ?>
                 </td>
             </tr>
             <tr>

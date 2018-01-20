@@ -157,7 +157,7 @@ function Dateim($mydate) {
                                             }
                                         } else {
                                             ?>				  
-                                            <tr><td colspan="7" align="center">ไม่พบข้อมูล</td></tr>
+                                            <tr><td colspan="8" align="center">ไม่พบข้อมูล</td></tr>
                                             <?php
                                         }
                                         ?>	

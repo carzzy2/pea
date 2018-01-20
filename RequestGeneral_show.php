@@ -195,6 +195,55 @@ function Dateim($mydate){
         </div>
     </div>
 </div>
+<?php
+    session_unregister('ss_rg_branch');
+    session_unregister('ss_cus_id');
+    session_unregister('ss_cus_first');
+    session_unregister('ss_cus_name');
+    session_unregister('ss_cus_type');
+    session_unregister('ss_cus_tax');
+    session_unregister('ss_cus_code');
+    session_unregister('ss_cus_homeid');
+    session_unregister('ss_cus_number');
+    session_unregister('ss_cus_village');
+    session_unregister('ss_cus_room');
+    session_unregister('ss_cus_floor');
+    session_unregister('ss_cus_alley');
+    session_unregister('ss_cus_alleyway');
+    session_unregister('ss_cus_road');
+    session_unregister('ss_cus_vilno');
+    session_unregister('ss_cus_district');
+    session_unregister('ss_cus_canton');
+    session_unregister('ss_cus_province');
+    session_unregister('ss_cus_post');
+    session_unregister('ss_cus_tel');
+    session_unregister('ss_cus_fax');
+    session_unregister('ss_cus_road');
+    session_unregister('ss_cus_email');
+    
+    session_unregister('ss_rg_place_type');
+    session_unregister('ss_rg_place_other');
+    session_unregister('ss_rg_place_name');
+    session_unregister('ss_rg_place_homeid');
+    session_unregister('ss_rg_place_number');
+    session_unregister('ss_rg_place_village');
+    session_unregister('ss_rg_place_room');
+    session_unregister('ss_rg_place_floor');
+    session_unregister('ss_rg_place_alley');
+    session_unregister('ss_rg_place_alleyway');
+    session_unregister('ss_cus_email');
+    session_unregister('ss_rg_place_road');
+    session_unregister('ss_rg_place_vilno');
+    session_unregister('ss_rg_place_district');
+    session_unregister('ss_rg_place_canton');
+    session_unregister('ss_rg_place_province');
+    session_unregister('ss_rg_place_post');
+    session_unregister('ss_rg_place_tel');
+    session_unregister('ss_rg_place_fax');
+    session_unregister('ss_rg_place_road');
+    session_unregister('ss_rg_place_email');
+    session_unregister('ss_rg_place_service');
+?>
 </body>
 
 </html>

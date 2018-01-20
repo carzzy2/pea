@@ -164,6 +164,12 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                                     <td class="text-right"><?= number_format($array_mat['me_price'],2) ?></td>
                                                 </tr>
                                                 <tr>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td>ค่าประกัน</td>
+                                                    <td class="text-right"><?= number_format($array_mat['me_insure'],2) ?></td>
+                                                </tr>
+                                                <tr>
                                                     <td colspan="2"></td>
                                                     <td  class="text-right"><b>ภาษีมูลค่าเพื่ม</b></td>
                                                     <td  class="text-right"><b><?= number_format(($array_mat['me_price']*7)/100,2) ?></b></td>
@@ -171,7 +177,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                                 <tr>
                                                     <td colspan="2"></td>
                                                     <td  class="text-right"><b>รวมทั้งสิ้น</b></td>
-                                                    <td  class="text-right"><b><?= number_format($total,2) ?></b></td>
+                                                    <td  class="text-right"><b><?= number_format($total+$array_mat['me_insure'],2) ?></b></td>
                                                 </tr>
                                     </tbody>
                                 </table>

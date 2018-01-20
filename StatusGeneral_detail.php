@@ -79,7 +79,7 @@ $ses_username = $_SESSION[loginid];
     $sql_user="select * from tb_user where user_id='".$array_edit[user_id]."'";
     $result_user=mysql_db_query($dbname,$sql_user);
     $array_user=mysql_fetch_array($result_user);
-    
+    $read="";
 ?>
     <div id="page-wrapper">
         <div class="panel panel-primary">
@@ -114,11 +114,26 @@ $ses_username = $_SESSION[loginid];
                             <input class="form-control"  name="rg_want_other" type="text" id="rg_want_other" value="<?=$want?>" readonly/>
                         </div>
                         <?php
+                        
                         if($array_edit[rg_want_type]=='0' or  $array_edit[rg_want_type]=='1' or  $array_edit[rg_want_type]=='2' or $array_edit[rg_want_type]=='3'){
+                            if($array_edit[rg_want_type]=='0'){
+                               $sql_f="select * from tb_electricity where cus_id='".$array_edit[cus_id]."' and re_want_type='0' and re_pay='0' and re_status='6' ";
+                                $result_f=mysql_db_query($dbname,$sql_f);
+                                $array_f=mysql_fetch_array($result_f);
+                                $sql_f2="select * from tb_equipment where re_id='".$array_f[re_id]."'";
+                                $result_f2=mysql_db_query($dbname,$sql_f2);
+                                $array_f2=mysql_fetch_array($result_f2);
+
+                                $sql_f3="select * from tb_meter where me_id='".$array_f2[me_id]."'";
+                                $result_f3=mysql_db_query($dbname,$sql_f3);
+                                $array_f3=mysql_fetch_array($result_f3);
+                                $read="readonly";
+                            }
+                            
                         ?>
                         <div class="form-group col-sm-5">
                         <label>จำนวนเงิน(บาท)</label>
-                            <input class="form-control"  name="rg_money" type="number" id="rg_money"  min="0">
+                        <input class="form-control"  name="rg_money" type="number" id="rg_money"  min="0" value="<?=$array_f3[me_insure]?>" <?=$read?>>
                         </div>
                         <?php
                         }

@@ -61,6 +61,7 @@ $ses_username = $_SESSION[loginid];
      $_SESSION[ss_cus_fax]=$_POST[cus_fax];
      $_SESSION[ss_cus_road]=$_POST[cus_road];
      $_SESSION[ss_cus_email]=$_POST[cus_email];
+     $link="RequestGeneral_part1.php?back=1";
 
  }else{
      $sql="select * from tb_customer where cus_id= '".$_GET[id]."' order by cus_id";
@@ -92,6 +93,7 @@ $ses_username = $_SESSION[loginid];
      $_SESSION[ss_cus_road]=$place_data[cus_road];
      $_SESSION[ss_cus_email]=$place_data[cus_email];
      $add="oldcus";
+     $link="RequestGeneral_show.php";
  }
  }
 
@@ -197,7 +199,6 @@ $("#disable1").click(function(){
         <div class="row">
             <form method="post" action="RequestGeneral_part3.php" id="form">
                 <?php
-                 var_dump($_SESSION);
                     $new_id =mysql_result(mysql_query("Select Max(substr(rg_id,-4))+1 as MaxID from tb_general "),0,"MaxID" );
                     if($new_id==''){
                         $rg_id="110000000001";
@@ -215,10 +216,10 @@ $("#disable1").click(function(){
                         <div class="col-sm-3 form-group">
                             <label>กฟฟ(สาขา).</label>
                             <?php if($_POST[newcus]=="addcus"){?>
-                            <input class="form-control"  name="rg_branch" type="text" id="rg_branch" value="<?=$_POST[rg_branch]?>" readonly/>
+                            <input class="form-control"  name="rg_branch" type="text" value="<?=$_POST[rg_branch]?>" readonly/>
                             <?php }else{ ?>
-                            <select class="form-control" name="rg_branch" id="rg_branch" required/>
-                                    <option style="display: none">--กรุณาเลือก--</option>
+                            <select class="form-control" name="rg_branch"  required>
+                                <option style="display: none" value="">--กรุณาเลือก--</option>
                                     <option value="มะลิวัลย์" >มะลิวัลย์</option>
                                     <option value="ท่าพระ" >ท่าพระ</option>
                                     <option value="พระยืน" >พระยืน</option>
@@ -343,7 +344,7 @@ $("#disable1").click(function(){
                     </div>
                 <center>
                     <input  type="hidden" class="form-control " name="add" id="add" value="<?=$add?>">
-                    <a class="btn btn-info" href="RequestGeneral_part1.php?back=1"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
+                    <a class="btn btn-info" href="<?=$link?>"><i class="fa fa-arrow-left"> ย้อนกลับ</i></a>
                     <button class="btn  btn-success" name="Submit" type="submit"><i class="fa fa-arrow-right"> ถัดไป</i></button>	
                 </center>
                 </div>

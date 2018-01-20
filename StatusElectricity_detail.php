@@ -185,14 +185,7 @@ $ses_username = $_SESSION[loginid];
                                             }
                                             ?>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    <label>จำนวน</label>
-                                    <div class="form-group input-group">
-                                        <input type="number" class="form-control" name="equ_meter_unit" min="0" required>
-                                        <span class="input-group-addon">ตัว</span>
-                                    </div>
+                                    </div><input type="hidden"  name="equ_meter_unit"value="1" >
                                 </div>
                             </div>
                             <div class="row">
