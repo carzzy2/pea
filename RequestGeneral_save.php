@@ -4,7 +4,7 @@
 include "connect_db.php";
 mysql_query("SET NAMES UTF8");
 if($_POST['rg_want_type']=="0"){
-    $sql_f="select * from tb_electricity where cus_id='".$_SESSION[ss_cus_id]."' and re_want_type='0' and re_pay='0' ";
+    $sql_f="select * from tb_electricity where cus_id='".$_SESSION[ss_cus_id]."' and re_want_type='0' and re_pay='0' and re_status='6' ";
     $result_f=mysql_db_query($dbname,$sql_f);
     if(mysql_num_rows($result_f)==0){
         echo "<script>alert('ไม่สามารถบันทึกได้เนื่องจากยังไม่มีข้อมูลการติดตั้งมิเตอร์ในระบบ');</script>";

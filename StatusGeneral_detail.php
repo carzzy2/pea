@@ -120,6 +120,7 @@ $ses_username = $_SESSION[loginid];
                                $sql_f="select * from tb_electricity where cus_id='".$array_edit[cus_id]."' and re_want_type='0' and re_pay='0' and re_status='6' ";
                                 $result_f=mysql_db_query($dbname,$sql_f);
                                 $array_f=mysql_fetch_array($result_f);
+                                
                                 $sql_f2="select * from tb_equipment where re_id='".$array_f[re_id]."'";
                                 $result_f2=mysql_db_query($dbname,$sql_f2);
                                 $array_f2=mysql_fetch_array($result_f2);
