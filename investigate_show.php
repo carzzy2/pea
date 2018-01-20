@@ -110,7 +110,7 @@ function Dateim($mydate) {
                                     <tbody>
                                         <?php
                                         $page = 0;
-                                        $sql = "select * from tb_electricity where re_status in (3,4,5) and re_id like '%" . $_POST[search] . "%'  order by re_id desc";
+                                        $sql = "select * from tb_electricity where re_id like '%" . $_POST[search] . "%'  order by re_id desc";
                                         $result = mysql_db_query($dbname, $sql);
                                         if (mysql_num_rows($result) > 0) {
                                             while ($array = mysql_fetch_array($result)) {
@@ -125,8 +125,11 @@ function Dateim($mydate) {
                                                 } elseif ($array[re_status] == "4") {
                                                     $status = "ไม่ผ่านการตรวจสอบ";
                                                     $label = "warning";
-                                                } else {
+                                                } elseif ($array[re_status] == "3"){ 
                                                     $status = "รอตรวจสอบ";
+                                                    $label = "info";
+                                                }elseif ($array[re_status] == "6"){ 
+                                                    $status = "เสร็จสิ้น";
                                                     $label = "info";
                                                 }
                                                 $wanttype = getlistname($array[re_want_type], $array[re_place_other]);
@@ -148,6 +151,8 @@ function Dateim($mydate) {
                                                                     <a class="btn btn-default" href="investigate_add.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> แก้ไข</i></a>
                                                                 <?php }elseif ($array[re_status]=="5"){ ?>
                                                                     <a class="btn btn-default" href="investigate_add.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ตรวจสอบใหม่</i></a>
+                                                                <?php }else{ ?>
+                                                                   - 
                                                                 <?php } ?>
                                                                     </div>
                                                     </td>

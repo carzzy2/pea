@@ -109,7 +109,7 @@ $limit=2;
                             while ($array = mysql_fetch_array($result_eq)) {
                                 $page++;
                                echo "<label>การตรวจสอบครั้งที่".$page."</label>";
-                                if($array[ig_install]==0){
+                                if($array[ig_install]==1){
                                     $panel="success";
                                     $head="ผ่านการตรวจสอบ";
                                 }else if($array[ig_install]==2){

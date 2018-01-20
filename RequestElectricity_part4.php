@@ -109,7 +109,7 @@ $ses_username = $_SESSION[loginid];
                                 <label><input name="re_want_type" size="30" type="radio" value="8" id="re_want_type8">ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT</label>
                             </div>
                             <div class="radio">
-                                <label><input name="re_want_type" size="30" type="radio" value="9" id="re_want_type9">ขอยกเลิกเลิกการใช้ไฟฟ้า</label>
+                                <label><input name="re_want_type" size="30" type="radio" value="9" id="re_want_type9">ขอยกเลิกการใช้ไฟฟ้า</label>
                             </div>
                             <div class="radio">
                                 <label><input name="re_want_type" size="30" type="radio" value="10" id="re_want_type10">ขอลดขนาดมิเตอร์/อุปกรณ์ประกอบ</label>

@@ -117,7 +117,7 @@ $ses_username = $_SESSION[loginid];
                         
                         if($array_edit[rg_want_type]=='0' or  $array_edit[rg_want_type]=='1' or  $array_edit[rg_want_type]=='2' or $array_edit[rg_want_type]=='3'){
                             if($array_edit[rg_want_type]=='0'){
-                               $sql_f="select * from tb_electricity where cus_id='".$array_edit[cus_id]."' and re_want_type='0' and re_pay='0' and re_status='6' ";
+                               $sql_f="select * from tb_electricity where cus_id='".$array_edit[cus_id]."' and re_want_type='0' and re_status='6' ";
                                 $result_f=mysql_db_query($dbname,$sql_f);
                                 $array_f=mysql_fetch_array($result_f);
                                 

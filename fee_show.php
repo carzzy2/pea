@@ -109,52 +109,51 @@ $ses_username = $_SESSION[loginid];
                                 }else{
                                         $page=($_GET[start]-1)*$limit; 
                                 }
-                                $sql="select * from tb_fee,tb_user where fee_id like '%".$_POST[search]."%'
-                                    and tb_fee.user_id=tb_user.user_id
-                                          limit $page,$limit ";
+                                $sql="select * from tb_fee,tb_user where fee_id like '%".$_POST[search]."%'and tb_fee.user_id=tb_user.user_id limit $page,$limit ";
                                 $result=mysql_db_query($dbname,$sql);
                                     if(mysql_num_rows($result)>0){
                                         while($array=mysql_fetch_array($result)){
+                                            echo $array[re_want_type];
                                             $n++;
                                             if($array[re_id]!=""){
                                                 $sql2="select * from tb_electricity where re_id='$array[re_id]' ";
                                                 $result2=mysql_db_query($dbname,$sql2);
                                                 $array2=mysql_fetch_array($result2);
                                                 $ss_id=$array[re_id];
-                                                if ($array[re_want_type] == 0) {
+                                                if ($array2[re_want_type] == 0) {
                                                     $want = "ขอติดตั้งมิเตอร์ใหม่";
-                                                } elseif ($array[re_want_type] == 1) {
+                                                } elseif ($array2[re_want_type] == 1) {
                                                     $want = "ขอตัดฝากมิเตอร์โดยไม่ใช้ไฟฟ้า";
-                                                } elseif ($array[re_want_type] == 2) {
+                                                } elseif ($array2[re_want_type] == 2) {
                                                     $want = "ขอต่อกลับการใช้ไฟฟ้า";
-                                                } elseif ($array[re_want_type] == 3) {
+                                                } elseif ($array2[re_want_type] == 3) {
                                                     $want = "ขอเพื่มขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                                } elseif ($array[re_want_type] == 4) {
+                                                } elseif ($array2[re_want_type] == 4) {
                                                     $want = "ขอเปลี่ยนประเภทมิเตอร์";
-                                                } elseif ($array[re_want_type] == 5) {
+                                                } elseif ($array2[re_want_type] == 5) {
                                                     $want = "ขอหยุดซ่อมแซมเครื่องจักรประจำปี";
-                                                } elseif ($array[re_want_type] == 6) {
+                                                } elseif ($array2[re_want_type] == 6) {
                                                     $want = "ขอใช้ไฟฟ้าชั่วคราวแบบเหมาจ่าย";
-                                                } elseif ($array[re_want_type] == 7) {
+                                                } elseif ($array2[re_want_type] == 7) {
                                                     $want = "ขอติดตั้งไฟฟ้าชั่วคราว";
-                                                } elseif ($array[re_want_type] == 8) {
+                                                } elseif ($array2[re_want_type] == 8) {
                                                     $want = "ขอตัดฝากมิเตอร์ใช้เพื่อแสงสว่างไม่ลด CT";
-                                                } elseif ($array[re_want_type] == 9) {
+                                                } elseif ($array2[re_want_type] == 9) {
                                                     $want = "ขอยกเลิกเลิกการใช้ไฟฟ้า";
-                                                } elseif ($array[re_want_type] == 10) {
+                                                } elseif ($array2[re_want_type] == 10) {
                                                     $want = "ชอลดขนาดมิเตอร์/อุปกรณ์ประกอบ";
-                                                } elseif ($array[re_want_type] == 11) {
+                                                } elseif ($array2[re_want_type] == 11) {
                                                     $want = "ขอใช้ไฟฟ้าสาธารณะ";
-                                                } elseif ($array[re_want_type] == 12) {
+                                                } elseif ($array2[re_want_type] == 12) {
                                                     $want = "ขอตัดมิเตอร์ใช้เพื่อแสงสว่างลด CT";
-                                                } elseif ($array[re_want_type] == 13) {
+                                                } elseif ($array2[re_want_type] == 13) {
                                                     $want = "ขอย้ายจุดติดตั้งมิเตอร์/อุปกรณ์ประกอบ";
-                                                } elseif ($array[re_want_type] == 14) {
+                                                } elseif ($array2[re_want_type] == 14) {
                                                     $want = "ขอเปลี่ยนมิเตอร์กรณีชำรุด";
-                                                } elseif ($array[re_want_type] == 15) {
+                                                } elseif ($array2[re_want_type] == 15) {
                                                     $want = "ขอใช้ไฟฟ้าตู้โทรศัพท์ต่อตรง";
-                                                } elseif ($array[re_want_type] == 16) {
-                                                    $want = $array[re_place_other];
+                                                } elseif ($array2[re_want_type] == 16) {
+                                                    $want = $array2[re_place_other];
                                                 }
                                                 $type="คำร้องขอใช้ไฟฟ้า";
                                                 $link="fee_detail";

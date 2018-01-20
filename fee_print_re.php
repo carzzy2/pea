@@ -25,7 +25,7 @@
         </table>
         <hr >
         <?php
-        $sql_ele = "select * from  tb_electricity,tb_equipment,tb_meter,tb_customer where tb_electricity.re_id='" . $array_print[re_id] . "' and tb_equipment.me_id=tb_meter.me_id and tb_electricity.cus_id=tb_customer.cus_id and tb_equipment.equ_status='0' ";
+        $sql_ele = "select * from  tb_electricity,tb_equipment,tb_meter,tb_customer where tb_electricity.re_id='" . $array_print[re_id] . "' and tb_equipment.re_id=tb_electricity.re_id  and tb_equipment.me_id=tb_meter.me_id and tb_electricity.cus_id=tb_customer.cus_id and tb_equipment.equ_status='0' ";
         $result_ele = mysql_db_query($dbname, $sql_ele);
         $array_ele = mysql_fetch_array($result_ele);
         if ($array_ele[re_want_type] == 0) {
