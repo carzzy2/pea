@@ -44,10 +44,11 @@ $ses_username = $_SESSION[loginid];
         $first="นางสาว";
     }
    function Dateim($mydate) {
-    $d = split("-", $mydate);
-    $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
-    return "$mydate";
+        $d = split("-", $mydate);
+        $mydate = $d[2] . "/" . $d[1] . "/" . ($d[0] + 543);
+        return "$mydate";
     }
+    
     if($array_edit[rg_want_type]==0){
     $want="ขอรับเงินประกันการใช้ไฟฟ้าคืน";
     }elseif($array_edit[rg_want_type]==1){
@@ -64,7 +65,7 @@ $ses_username = $_SESSION[loginid];
     $want="ขอเช่าพื้นที่โฆษณา";
     }elseif($array_edit[rg_want_type]==7){
     $want="ขอเช่าพาดสายโทรนาคม";
-    }elseif($array[rg_want_type]==8){
+    }elseif($array_edit[rg_want_type]==8){
     $want="ขอเช่าสาย fiber optic";
     }elseif($array_edit[rg_want_type]==9){
     $want="ขอเช่าที่ดิน";
@@ -75,7 +76,7 @@ $ses_username = $_SESSION[loginid];
     }else{
     $want=$array[rg_want_other]; 
     }
-    
+
     $sql_user="select * from tb_user where user_id='".$array_edit[user_id]."'";
     $result_user=mysql_db_query($dbname,$sql_user);
     $array_user=mysql_fetch_array($result_user);
@@ -114,14 +115,13 @@ $ses_username = $_SESSION[loginid];
                             <input class="form-control"  name="rg_want_other" type="text" id="rg_want_other" value="<?=$want?>" readonly/>
                         </div>
                         <?php
-                        
                         if($array_edit[rg_want_type]=='0' or  $array_edit[rg_want_type]=='1' or  $array_edit[rg_want_type]=='2' or $array_edit[rg_want_type]=='3'){
                             if($array_edit[rg_want_type]=='0'){
                                $sql_f="select * from tb_electricity where cus_id='".$array_edit[cus_id]."' and re_want_type='0' and re_status='6' ";
                                 $result_f=mysql_db_query($dbname,$sql_f);
                                 $array_f=mysql_fetch_array($result_f);
                                 
-                                $sql_f2="select * from tb_equipment where re_id='".$array_f[re_id]."'";
+                                $sql_f2="select * from tb_equipment where re_id='".$array_f[re_id]."' and equ_status=0";
                                 $result_f2=mysql_db_query($dbname,$sql_f2);
                                 $array_f2=mysql_fetch_array($result_f2);
 
