@@ -89,7 +89,7 @@ function Dateim($mydate){
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $sql = "select * from tb_general where rg_status<>0  order by rg_id desc";
+                                            $sql = "select * from tb_general where rg_status<>0 and rg_want_type <=3  order by rg_id desc";
                                             $result = mysql_db_query($dbname, $sql);
                                             $num=mysql_num_rows($result);
                                             if (mysql_num_rows($result) > 0) {

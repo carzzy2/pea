@@ -243,6 +243,25 @@ function Dateim($mydate){
     session_unregister('ss_rg_place_road');
     session_unregister('ss_rg_place_email');
     session_unregister('ss_rg_place_service');
+    
+    session_unregister('ss_rg_contact_homeid');
+    session_unregister('ss_rg_contact_number');
+    session_unregister('ss_rg_contact_village');
+    session_unregister('ss_rg_contact_room');
+    session_unregister('ss_rg_contact_floor');
+    session_unregister('ss_rg_contact_alley');
+    session_unregister('ss_rg_contact_alleyway');
+    session_unregister('ss_rg_contact_road');
+    session_unregister('ss_rg_contact_vilno');
+    session_unregister('ss_rg_contact_district');
+    session_unregister('ss_rg_contact_canton');
+    session_unregister('ss_rg_contact_province');
+    session_unregister('ss_rg_contact_post');
+    session_unregister('ss_rg_contact_tel');
+    session_unregister('ss_rg_contact_fax');
+    session_unregister('ss_rg_contact_road');
+    session_unregister('ss_rg_contact_email');
+    session_unregister('ss_rg_contact_service');
 ?>
 </body>
 

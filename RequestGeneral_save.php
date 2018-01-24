@@ -75,6 +75,7 @@ if($_SESSION[ss_add]=="oldcus"){
     session_unregister('ss_rg_place_type');
     session_unregister('ss_rg_place_other');
     session_unregister('ss_rg_place_name');
+    
     session_unregister('ss_rg_place_homeid');
     session_unregister('ss_rg_place_number');
     session_unregister('ss_rg_place_village');
@@ -94,6 +95,25 @@ if($_SESSION[ss_add]=="oldcus"){
     session_unregister('ss_rg_place_road');
     session_unregister('ss_rg_place_email');
     session_unregister('ss_rg_place_service');
+    
+    session_unregister('ss_rg_contact_homeid');
+    session_unregister('ss_rg_contact_number');
+    session_unregister('ss_rg_contact_village');
+    session_unregister('ss_rg_contact_room');
+    session_unregister('ss_rg_contact_floor');
+    session_unregister('ss_rg_contact_alley');
+    session_unregister('ss_rg_contact_alleyway');
+    session_unregister('ss_rg_contact_road');
+    session_unregister('ss_rg_contact_vilno');
+    session_unregister('ss_rg_contact_district');
+    session_unregister('ss_rg_contact_canton');
+    session_unregister('ss_rg_contact_province');
+    session_unregister('ss_rg_contact_post');
+    session_unregister('ss_rg_contact_tel');
+    session_unregister('ss_rg_contact_fax');
+    session_unregister('ss_rg_contact_road');
+    session_unregister('ss_rg_contact_email');
+    session_unregister('ss_rg_contact_service');
 
         echo "<script>alert('บันทึกข้อมูลเรียบร้อยแล้ว');</script>";
         echo "<META http-equiv='refresh' Content='0; URL=RequestGeneral_plate.php?rg_id=$_POST[rg_id]'> ";

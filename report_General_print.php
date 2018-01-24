@@ -48,7 +48,18 @@ function DateThai($date) {
                 <td style="padding-top:7px;"  align="center" width="125px"><b>สถานะ</b></td>
             </tr>
                 <?php
-                $sql = "select * from tb_general where rg_date between '".$_GET[date1]."' and '".$_GET[date2]."'  order by rg_id asc";
+                if ($_GET['status'] == 0) {
+                    $rg_status = "and rg_status='0'";
+                } elseif ($_GET['status'] == 1) {
+                    $rg_status = "and rg_status='1'";
+                } elseif ($_GET['status'] == 2) {
+                    $rg_status = "and rg_status='2'";
+                } elseif ($_GET['status'] == 3) {
+                    $rg_status = "and rg_status='3'";
+                } else {
+                    $rg_status = "";
+                }
+                $sql = "select * from tb_general where rg_date between '".$_GET[date1]."' and '".$_GET[date2]."' $rg_status order by rg_id asc";
                 $result = mysql_db_query($dbname, $sql);
                 $num = mysql_num_rows($result);
                 if (mysql_num_rows($result) > 0) {

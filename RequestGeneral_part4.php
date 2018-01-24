@@ -52,8 +52,42 @@ $ses_username = $_SESSION[loginid];
     $_SESSION[ss_rg_contact_fax]=$_POST[rg_contact_fax];
     $_SESSION[ss_rg_contact_road]=$_POST[rg_contact_road];
     $_SESSION[ss_rg_contact_email]=$_POST[rg_contact_email];
- }
-
+}
+$sql_f="select * from tb_electricity where cus_id='".$_SESSION[ss_cus_id]."' and re_want_type='0' and re_pay='0' and re_status='6' ";
+$result_f=mysql_db_query($dbname,$sql_f);
+if(mysql_num_rows($result_f)>0){
+?>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#rg_want_type0").attr('checked', true);
+    $("#rg_want_other").attr('disabled', true);
+    
+    $("#rg_want_type1").attr('disabled', true);
+    $("#rg_want_type2").attr('disabled', true);
+    $("#rg_want_type3").attr('disabled', true);
+    $("#rg_want_type4").attr('disabled', true);
+    $("#rg_want_type5").attr('disabled', true);
+    $("#rg_want_type6").attr('disabled', true);
+    $("#rg_want_type7").attr('disabled', true);
+    $("#rg_want_type8").attr('disabled', true);
+    $("#rg_want_type9").attr('disabled', true);
+    $("#rg_want_type10").attr('disabled', true);
+    $("#rg_want_type11").attr('disabled', true);
+    $("#rg_want_type12").attr('disabled', true);
+});
+</script>
+<?php
+}else{
+?>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#rg_want_type1").attr('checked', true);
+    $("#rg_want_other").attr('disabled', true);
+    $("#rg_want_type0").attr('disabled', true);
+});
+</script>
+<?php
+}
 ?>
     <div id="page-wrapper">
         <div class="panel panel-primary">
@@ -161,7 +195,6 @@ $ses_username = $_SESSION[loginid];
                 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-$("#rg_want_type0").attr('checked', true);
 $("#rg_want_other").attr('disabled', true);
 
 $("#rg_want_type0").click(function(){

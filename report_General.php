@@ -59,18 +59,34 @@ function Dateim($mydate){
                                     </span>
                                     <input type="date" name="txtdate2" id="date2" class="form-control" value="<?=$_GET['txtdate2']?>">
                                 </div>        
-                                <button type="submit" class="btn btn-primary">แสดงรายงาน</button>
+                                <button type="submit" class="btn btn-primary">แสดงรายงาน</button><br>
+                                <div class="form-group">
+                                            <label>สถานะ</label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="status" value="4" checked>ทั้งหมด
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="status" value="0">ยังไม่อนุมัติ
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="status" value="1">อนุมัติแล้ว
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="status" value="2">ยกเลิกใบคำร้อง
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="status" value="3">เสร็จสิ้น
+                                            </label>
+                                        </div>
                             </form>
                         </div>
                         <?php
-                        $date1=$_GET['txtdate1'];
-                        $date2=$_GET['txtdate2'];
-                        if($date1!='' and $date2!=''){
+                        if($_GET['txtdate1']!='' and $_GET['txtdate2']!='' and $_GET['status']!=''){
                         ?>
                         <div class="row">
                             <div class="col-md-12">
                                     <div class="pull-right">
-                                        <a  class="btn btn-info" target="_blank"  href="report_General_print.php?date1=<?=$_GET['txtdate1']?>&date2=<?=$_GET['txtdate2']?>" >Print</a>
+                                        <a  class="btn btn-info" target="_blank"  href="report_General_print.php?date1=<?=$_GET['txtdate1']?>&date2=<?=$_GET['txtdate2']?>&status=<?=$_GET['status']?>" >Print</a>
                                     </div>
                                 </div>
                             <div class="clearfix"></div><br>
@@ -89,7 +105,18 @@ function Dateim($mydate){
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $sql = "select * from tb_general where rg_date between '".$_GET[txtdate1]."' and '".$_GET[txtdate2]."' order by rg_id desc";
+                                            if($_GET['status']==0){
+                                                $rg_status="and rg_status='0'";
+                                            }elseif($_GET['status']==1){
+                                                $rg_status="and rg_status='1'";
+                                            }elseif($_GET['status']==2){
+                                                $rg_status="and rg_status='2'";
+                                            }elseif($_GET['status']==3){
+                                                $rg_status="and rg_status='3'";
+                                            }else{
+                                                $rg_status="";
+                                            }
+                                            $sql = "select * from tb_general where rg_date between '".$_GET[txtdate1]."' and '".$_GET[txtdate2]."' $rg_status order by rg_id desc";
                                             $result = mysql_db_query($dbname, $sql);
                                             $num=mysql_num_rows($result);
                                             if (mysql_num_rows($result) > 0) {

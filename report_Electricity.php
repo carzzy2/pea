@@ -60,17 +60,28 @@ function Dateim($mydate){
                                     <input type="date" name="txtdate2" id="date2" class="form-control" value="<?=$_GET['txtdate2']?>">
                                 </div>        
                                 <button type="submit" class="btn btn-primary">แสดงรายงาน</button>
+                                <div class="clearfix"></div><br>
+                                <div class="form-group">
+                                    <select  class="form-control" name="status" >
+                                        <option value="10" <?php if($_GET[status]=="10"){ echo "selected";} ?>>ทั้งหมด</option>
+                                        <option value="0" <?php if($_GET[status]=="0"){ echo "selected";} ?>>ยังไม่ได้สำรวจ</option>
+                                        <option value="9" <?php if($_GET[status]=="9"){ echo "selected";} ?>>ไม่ผ่านการสำรวจ</option>
+                                        <option value="1" <?php if($_GET[status]=="1"){ echo "selected";} ?>>ผ่านการสำรวจแล้ว</option>
+                                        <option value="2" <?php if($_GET[status]=="2"){ echo "selected";} ?>>ชำระค่าธรรมเนียมแล้ว</option>
+                                        <option value="3" <?php if($_GET[status]=="3"){ echo "selected";} ?>>บันทึกการปฎิบัติงานแล้ว</option>
+                                        <option value="4" <?php if($_GET[status]=="4"){ echo "selected";} ?>>ไม่ผ่านการตรวจสอบมาตรฐาน</option>
+                                        <option value="6" <?php if($_GET[status]=="6"){ echo "selected";} ?>>เสร็จสิ้น</option>
+                                    </select>
+                                    </div>
                             </form>
                         </div>
                         <?php
-                        $date1=$_GET['txtdate1'];
-                        $date2=$_GET['txtdate2'];
-                        if($date1!='' and $date2!=''){
+                        if($_GET['txtdate1']!='' and $_GET['txtdate2']!=''){
                         ?>
                         <div class="row">
                             <div class="col-md-12">
                                     <div class="pull-right">
-                                        <a  class="btn btn-info" target="_blank"  href="report_Electricity_print.php?date1=<?=$_GET['txtdate1']?>&date2=<?=$_GET['txtdate2']?>" >Print</a>
+                                        <a  class="btn btn-info" target="_blank"  href="report_Electricity_print.php?date1=<?=$_GET['txtdate1']?>&date2=<?=$_GET['txtdate2']?>&status=<?=$_GET[status]?>" >Print</a>
                                     </div>
                                 </div>
                             <div class="clearfix"></div><br>
@@ -90,7 +101,24 @@ function Dateim($mydate){
                                             <tbody>
                                                 <?php
                                                 $n = 0;
-                                                $sql = "select * from tb_electricity where re_date between '".$_GET[txtdate1]."' and '".$_GET[txtdate2]."'  order by re_id asc";
+                                                if($_GET['status']==0){
+                                                    $re_status="and re_status='0'";
+                                                }elseif($_GET['status']==1){
+                                                    $re_status="and re_status='1'";
+                                                }elseif($_GET['status']==2){
+                                                    $re_status="and re_status='2'";
+                                                }elseif($_GET['status']==3){
+                                                    $re_status="and re_status='3'";
+                                                }elseif($_GET['status']==4){
+                                                    $re_status="and re_status='4'";
+                                                }elseif($_GET['status']==6){
+                                                    $re_status="and re_status='6'";
+                                                }elseif($_GET['status']==9){
+                                                    $re_status="and re_status='9'";
+                                                }else{
+                                                    $re_status="";
+                                                }
+                                                $sql = "select * from tb_electricity where re_date between '".$_GET[txtdate1]."' and '".$_GET[txtdate2]."' $re_status order by re_id asc";
                                                 $result = mysql_db_query($dbname, $sql);
                                                 $num=mysql_num_rows($result);
                                                 if (mysql_num_rows($result) > 0) {

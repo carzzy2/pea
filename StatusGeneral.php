@@ -54,7 +54,19 @@ function Dateim($mydate){
                     </div> 
                 </form>
             </div>
+            <div class="col-md-12">
+                <span style="background-color: #848480; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                <span>ยังไม่อนุมัติ</span>
 
+                <span style="background-color: #d9534f; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                <span>ยกเลิกใบคำร้อง</span>
+
+                <span style="background-color: #F78234; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                <span>อนุมัติแล้ว</span>
+
+                <span style="background-color: #2E9AFE; border-radius:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                <span>เสร็จสิ้น</span>                     
+            </div>
             <div class="col-sm-12">
                 <div class="table-responsive">
                     <table width="100%" class="table table-bordered table-hover">
@@ -66,13 +78,14 @@ function Dateim($mydate){
                                 <th class=" text-center" >รายการ</th>
                                 <th class=" text-center" >ลูกค้า</th>
                                 <th class=" text-center" >โทรศัพท์</th>
+                                <th class=" text-center" style="min-width: 150"  >สถานะ</th>
                                 <th class=" text-center">จัดการข้อมูล</th>
                             </tr> 
                         </thead>
                             <tbody>
                             <?php
                                 $n=0;
-                                $sql="select * from tb_general where rg_id like '%".$_POST[search]."%' and rg_status='0' order by rg_id desc";
+                                $sql="select * from tb_general where rg_id like '%".$_POST[search]."%' order by rg_id desc";
                                 $result=mysql_db_query($dbname,$sql);
                                     if(mysql_num_rows($result)>0){
                                         while($array=mysql_fetch_array($result)){
@@ -108,6 +121,19 @@ function Dateim($mydate){
                                             }else{
                                                $want=$array[rg_want_other]; 
                                             }
+                                            if($array[rg_status]==0){
+                                                $status="#848480";
+                                                $label="ยังไม่อนุมัติ";
+                                            }elseif($array[rg_status]==1){
+                                               $status="#F78234";
+                                               $label="อนุมัติแล้ว";
+                                            }elseif($array[rg_status]==2){
+                                               $status="#d9534f";
+                                              $label="ยกเลิกใบคำร้อง";
+                                            }elseif($array[rg_status]==3){
+                                              $status="#2E9AFE";
+                                               $label="เสร็จสิ้น";
+                                            }
                             ?>	
                                     <tr>
                                         <td class="text-center"><?=$page?></td>
@@ -116,12 +142,28 @@ function Dateim($mydate){
                                             <td class=" text-center"><?=$want?></td>
                                             <td class="text-center"><?=$arraycus[cus_name]?></td>
                                             <td class="text-center"><?=$arraycus[cus_tel]?></td>
+                                            <td class="text-center"><div style="border-radius:10px; background-color: <?=$status?>; color: white;"><?=$label?></div></td>
+                                            <?php
+                                            if($array[rg_status]=='0'){
+                                            ?>
                                             <td align="center">
                                                 <div class="btn-group">
                                                     <a class="btn btn-default" href="StatusGeneral_detail.php?id=<?=$array[rg_id]?>" title="ดูรายละเอียด"><i class="fa fa-check"> อนุมัติคำร้อง</i></a>
                                                     <a class="btn btn-danger" onclick="return confirm('คุณต้องการยกเลิกใบคำร้องนี่ ?')" href="StatusGeneral_save.php?id=<?=$array[rg_id]?>&mode=del" ><i class="fa fa-times"> ยกเลิกคำร้อง</i></a>
                                                 </div>
                                             </td>
+                                            <?php
+                                            }else{
+                                            ?>
+                                            <td align="center">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-default disabled" href="#" ><i class="fa fa-check"> อนุมัติคำร้อง</i></a>
+                                                    <a class="btn btn-danger disabled"  href="#" ><i class="fa fa-times"> ยกเลิกคำร้อง</i></a>
+                                                </div>
+                                            </td>
+                                            <?php
+                                            }
+                                            ?>
                                     </tr>
                                     <?php
                                                     }
