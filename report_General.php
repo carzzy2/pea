@@ -60,24 +60,16 @@ function Dateim($mydate){
                                     <input type="date" name="txtdate2" id="date2" class="form-control" value="<?=$_GET['txtdate2']?>">
                                 </div>        
                                 <button type="submit" class="btn btn-primary">แสดงรายงาน</button><br>
+                                <div class="clearfix"></div><br>
                                 <div class="form-group">
-                                            <label>สถานะ</label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="status" value="4" checked>ทั้งหมด
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="status" value="0">ยังไม่อนุมัติ
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="status" value="1">อนุมัติแล้ว
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="status" value="2">ยกเลิกใบคำร้อง
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="status" value="3">เสร็จสิ้น
-                                            </label>
-                                        </div>
+                                    <select  class="form-control" name="status" >
+                                        <option value="10" <?php if($_GET[status]=="10"){ echo "selected";} ?>>ทั้งหมด</option>
+                                        <option value="0" <?php if($_GET[status]=="0"){ echo "selected";} ?>>ยังไม่อนุมัติ</option>
+                                        <option value="1" <?php if($_GET[status]=="1"){ echo "selected";} ?>>อนุมัติแล้ว</option>
+                                        <option value="2" <?php if($_GET[status]=="2"){ echo "selected";} ?>>ยกเลิกใบคำร้อง</option>
+                                        <option value="3" <?php if($_GET[status]=="3"){ echo "selected";} ?>>เสร็จสิ้น</option>
+                                    </select>
+                                    </div>
                             </form>
                         </div>
                         <?php

@@ -79,7 +79,7 @@ function Dateim($mydate){
                                 <th class=" text-center" >ลูกค้า</th>
                                 <th class=" text-center" >โทรศัพท์</th>
                                 <th class=" text-center" style="min-width: 150"  >สถานะ</th>
-                                <th class=" text-center">จัดการข้อมูล</th>
+                                <th class=" text-center ">จัดการข้อมูล</th>
                             </tr> 
                         </thead>
                             <tbody>
@@ -148,8 +148,8 @@ function Dateim($mydate){
                                             ?>
                                             <td align="center">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-default" href="StatusGeneral_detail.php?id=<?=$array[rg_id]?>" title="ดูรายละเอียด"><i class="fa fa-check"> อนุมัติคำร้อง</i></a>
-                                                    <a class="btn btn-danger" onclick="return confirm('คุณต้องการยกเลิกใบคำร้องนี่ ?')" href="StatusGeneral_save.php?id=<?=$array[rg_id]?>&mode=del" ><i class="fa fa-times"> ยกเลิกคำร้อง</i></a>
+                                                    <a class="btn btn-default" href="StatusGeneral_detail.php?id=<?=$array[rg_id]?>" title="ดูรายละเอียด"><i class="fa fa-check"> อนุมัติ</i></a>
+                                                    <a class="btn btn-danger" onclick="return confirm('คุณต้องการยกเลิกใบคำร้องนี่ ?')" href="StatusGeneral_save.php?id=<?=$array[rg_id]?>&mode=del" ><i class="fa fa-times"> ยกเลิก</i></a>
                                                 </div>
                                             </td>
                                             <?php
@@ -157,8 +157,8 @@ function Dateim($mydate){
                                             ?>
                                             <td align="center">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-default disabled" href="#" ><i class="fa fa-check"> อนุมัติคำร้อง</i></a>
-                                                    <a class="btn btn-danger disabled"  href="#" ><i class="fa fa-times"> ยกเลิกคำร้อง</i></a>
+                                                    <a class="btn btn-default disabled" href="#" ><i class="fa fa-check"> อนุมัติ</i></a>
+                                                    <a class="btn btn-danger disabled"  href="#" ><i class="fa fa-times"> ยกเลิก</i></a>
                                                 </div>
                                             </td>
                                             <?php

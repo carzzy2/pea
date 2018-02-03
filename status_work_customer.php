@@ -35,7 +35,7 @@ $ses_username = $_SESSION[loginid];
 <?php include "header_cus.php";?>
 </nav>
 <div class="container">
-    <h2>ผลการค้นหาคำร้องขอใช้ไฟฟ้าเลขที่ <?= $_SESSION[loginid] ?></h2>
+    <h2><i class="fa fa-eye"></i> ผลการค้นหาคำร้องขอใช้ไฟฟ้าเลขที่ <?= $_SESSION[loginid] ?></h2>
     <hr class="star-primary">
     <div class="col-md-12">
         <div class="table-responsive col-md-12">
@@ -104,15 +104,19 @@ $ses_username = $_SESSION[loginid];
                 </tbody>
             </table>
             <?php
-            $sqlv = "select * from tb_logview where re_id='" . $_SESSION[loginid] . "' order by log_date desc limit 1 ";
+            $sqlv = "select * from tb_logview order by log_date desc limit 1 ";
             $resultv = mysql_db_query($dbname, $sqlv);
-            $arrayv = mysql_fetch_array($resultv)
+            $arrayv = mysql_fetch_array($resultv);
+            if (mysql_num_rows($resultv) > 0) {
             ?>
             <div class="col-md-12">
                 <h4>
                     <small>เข้าดูล่าสุด เมื่อ <?=$arrayv['log_date']?></small>
                 </h4>
             </div>
+            <?php
+            }
+            ?>
             <div class="col-md-12">
                 <label style="color: red;">* หากมีปัญหากรุณาติดต่อ <?=$tel?> คุณ<?=$first?> <?=$last?> (ผู้บันทึกข้อมูลใบคำร้องขอใช้ไฟฟ้า)</label>
             </div>
@@ -127,8 +131,7 @@ $logid="LOG00001";
 $logid="LOG".sprintf("%05d",$new_id);//ถ้าไม่ใช่ค่าว่าง
 }
  $sql="insert into tb_logview(log_id,log_date,re_id) values('".$logid."',NOW(),'".$_SESSION[loginid]."')";
-        
-        mysql_query($sql);
+mysql_query($sql);
 ?>
 </body>
 

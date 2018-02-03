@@ -55,7 +55,13 @@ $ses_username = $_SESSION[loginid];
 }
 $sql_f="select * from tb_electricity where cus_id='".$_SESSION[ss_cus_id]."' and re_want_type='0' and re_pay='0' and re_status='6' ";
 $result_f=mysql_db_query($dbname,$sql_f);
-if(mysql_num_rows($result_f)>0){
+$num1=mysql_num_rows($result_f);
+
+$sql_g="select * from tb_general where cus_id='".$_SESSION[ss_cus_id]."' and rg_want_type='0' and rg_status='3' ";
+$result_g=mysql_db_query($dbname,$sql_g);
+$num2=mysql_num_rows($result_g);
+
+if($num1>0 and $num2 ==0){
 ?>
 <script type="text/javascript">
 $(document).ready(function() {

@@ -43,14 +43,82 @@ if ($ses_userid <> session_id() or $ses_username == "") {
         $sql="select * from tb_electricity,tb_equipment where tb_electricity.re_id='".$_GET[id]."' and tb_equipment.re_id=tb_electricity.re_id and tb_equipment.equ_status='0' ";
         $result=mysql_db_query($dbname,$sql);
         $array=mysql_fetch_array($result);
+        
+        if($_GET['mode']=="edit"){
+           $sql2="select * from tb_investigate where re_id='".$_GET[id]."'  ";
+            $result2=mysql_db_query($dbname,$sql2);
+            $array2=mysql_fetch_array($result2); 
+        }
         ?>
+<script type="text/javascript">
+$(document).ready(function() {
+$("#checkbox-place").click(function(){
+    if ($(this).is(':checked')) {
+    $("#ig_lowtension").val("<?= $array2[ig_lowtension] ?>");
+    $("#ig_lowtension_amount").val("<?= $array2[ig_lowtension_amount] ?>");
+    $("#ig_lowtension_line").val("<?= $array2[ig_lowtension_line] ?>");
+    $("#ig_power").val("<?= $array2[ig_power] ?>");
+    $("#ig_power_speed").val("<?= $array2[ig_power_speed] ?>");
+    <?php
+    if($array2[ig_lowpower]=='1'){
+        echo "$('#ig_lowpower1').attr('checked', true);";
+    }else{
+       echo "$('#ig_lowpower2').attr('checked', true);"; 
+    }
+    ?>
+    $("#ig_lowpower_type").val("<?= $array2[ig_lowpower_type] ?>");
+    $("#ig_lowpower_number").val("<?= $array2[ig_lowpower_number] ?>");
+    $("#ig_outlet").val("<?= $array2[ig_outlet] ?>");
+    $("#ig_bstype").val("<?= $array2[ig_bstype] ?>");
+    $("#ig_meter").val("<?= $array2[ig_meter] ?>");
+    $("#ig_meter_phase").val("<?= $array2[ig_meter_phase] ?>");
+    $("#ig_meter_volt").val("<?= $array2[ig_meter_volt] ?>");
+    $("#ig_linetype").val("<?= $array2[ig_linetype] ?>");
+    $("#ig_linetype_pressure").val("<?= $array2[ig_linetype_pressure] ?>");
+    $("#ig_linetype_volt").val("<?= $array2[ig_linetype_volt] ?>");
+    $("#ig_ct").val("<?= $array2[ig_ct] ?>");
+    $("#ig_vt").val("<?= $array2[ig_vt] ?>");
+    $("#ig_kwa").val("<?= $array2[ig_kwa] ?>");
+    $("#ig_number_bf").val("<?= $array2[ig_number_bf] ?>");
+    $("#ig_number_af").val("<?= $array2[ig_number_af] ?>");
+    $("#ig_linepoint").val("<?= $array2[ig_linepoint] ?>");
+    $("#ig_linenumber").val("<?= $array2[ig_linenumber] ?>");
+    $("#rg_want_type0").attr('checked', true);
+  }else{
+    $("#ig_lowtension").val("");
+    $("#ig_lowtension_amount").val("");
+    $("#ig_lowtension_line").val("");
+    $("#ig_power").val("");
+    $("#ig_power_speed").val("");
+    $('#ig_lowpower1').attr('checked', false);
+    $('#ig_lowpower2').attr('checked', false);
+    $("#ig_lowpower_type").val("");
+    $("#ig_lowpower_number").val("");
+    $("#ig_outlet").val("");
+    $("#ig_bstype").val("");
+    $("#ig_meter").val("");
+    $("#ig_meter_phase").val("");
+    $("#ig_meter_volt").val("");
+    $("#ig_linetype").val("");
+    $("#ig_linetype_pressure").val("");
+    $("#ig_linetype_volt").val("");
+    $("#ig_ct").val("");
+    $("#ig_vt").val("");
+    $("#ig_kwa").val("");
+    $("#ig_number_bf").val("");
+    $("#ig_number_af").val("");
+    $("#ig_linepoint").val("");
+    $("#ig_linenumber").val("");
+  }
+}); 
+});
+</script>
         <div id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h2 class="panel-title">ตรวจสอบมาตรฐาน</h2>
                 </div>
                 <div class="panel-body">
-                    
                     <form method="post" action="investigate_save.php" class="form-inline">
                         <div class="col-sm-12">
                             <div class="row">
@@ -70,33 +138,45 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                 </div>
                             </div>
                             <br>
-                            <br>
                             <div class="row">
+                                
                                 <div class="col-sm-12">
                                     <div class="row">
                                         <div class="form-group">
                                             <label>รายงานและความเห็นของผู้ตรวจสอบ</label>
                                         </div>
-                                    </div>    
+                                    </div>
+                                    <?php
+                                     if($_GET['mode']=="edit"){
+                                         
+                                     ?>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <input type="checkbox" id="checkbox-place"><b> ใช้ข้อมูลเดิม</b>
+                                        </div>
+                                    </div>
+                                    <?php
+                                     }
+                                     ?>
                                     <div class="row">
                                         <div class="form-group ">
                                             <label>1. สายแม่แรงต่ำ ขนาด</label>
                                             <div class="form-group input-group">
-                                                <input type="text" class="form-control" name="ig_lowtension"   required>
+                                                <input type="text" class="form-control" name="ig_lowtension" id="ig_lowtension"  required>
                                                 <span class="input-group-addon">ตร.มม</span>
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label>จำนวน</label>
                                             <div class="form-group input-group">
-                                                <input type="number" class="form-control" name="ig_lowtension_amount" min="0"  required>
+                                                <input type="number" class="form-control" name="ig_lowtension_amount" min="0" id="ig_lowtension_amount" required>
                                                 <span class="input-group-addon">เฟส</span>
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                             <div class="form-group input-group">
-                                                <input type="number" class="form-control" name="ig_lowtension_line" min="0"  required>
+                                                <input type="number" class="form-control" name="ig_lowtension_line" min="0" id="ig_lowtension_line" required>
                                                 <span class="input-group-addon">สาย</span>
                                             </div>
                                         </div>
@@ -106,19 +186,19 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group ">
                                             <label>2. จ่ายไฟจากสถานไฟฟ้าย่อย</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_power" required>
+                                                <input type="text" class="form-control" name="ig_power" id="ig_power" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>ฟีดเดอร์แรงสูง</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_power_speed"   required>
+                                                <input type="text" class="form-control" name="ig_power_speed" id="ig_power_speed"  required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>ปีจัดซื้อ(ตาม มป.5)</label>
                                             <div class="form-group">
-                                                <select id="equ_tran" class="form-control" name="ig_power_year" required>
+                                                <select  class="form-control" name="ig_power_year" id="ig_power_year" required>
                                                     <option value=""><-- เลือกปี --></option>
                                                     <option value="2560">2560</option>
                                                     <option value="2559">2559</option>
@@ -146,19 +226,19 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group ">
                                             <label>ชนิดของหม้อแปลง</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control"  name="ig_lowpower_type"  required>
+                                                <input type="text" class="form-control"  name="ig_lowpower_type" id="ig_lowpower_type" required>
                                             </div>
                                         </div>
                                          <div class="form-group">
                                             <label>หมายเลขหม้อแปลง</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control"  name="ig_lowpower_number"  required>
+                                                <input type="text" class="form-control"  name="ig_lowpower_number" id="ig_lowpower_number" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>หม้อแปลงขนาด</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control"  name="ig_outlet"  >
+                                                <input type="text" class="form-control"  name="ig_outlet"  id="ig_outlet">
                                             </div>
                                         </div>
                                     </div>
@@ -171,7 +251,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group">
                                             <label >ประเภทกิจการ</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_bstype"   required>
+                                                <input type="text" class="form-control" name="ig_bstype" id="ig_bstype"  required>
                                             </div>
                                         </div></div> 
                                     <br>
@@ -179,7 +259,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group">
                                             <label >ติดตั้งมิเตอร์ขนาด</label>
                                             <div class="form-group input-group">
-                                                <input type="text" class="form-control" name="ig_meter"   required>
+                                                <input type="text" class="form-control" name="ig_meter"  id="ig_meter" required>
                                                 <span class="input-group-addon">แอมป์</span>
 
                                             </div>
@@ -187,13 +267,13 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group">
                                             <label >เฟส</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_meter_phase"   required>
+                                                <input type="text" class="form-control" name="ig_meter_phase" id="ig_meter_phase"  required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label >โวลท์</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_meter_volt"   required>
+                                                <input type="text" class="form-control" name="ig_meter_volt" id="ig_meter_volt"  required>
                                             </div>
                                         </div>
                                     </div>
@@ -203,20 +283,20 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group">
                                             <label >สายคิดค่าไฟฟ้าประเภท</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_linetype"   required>
+                                                <input type="text" class="form-control" name="ig_linetype" id="ig_linetype"  required>
                                             </div>
                                         </div>
                                         
                                         <div class="form-group">
                                             <label >แรงดัน</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_linetype_pressure"   required>
+                                                <input type="text" class="form-control" name="ig_linetype_pressure"  id="ig_linetype_pressure" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label >โวลท์</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_linetype_volt"   required>
+                                                <input type="text" class="form-control" name="ig_linetype_volt" id="ig_linetype_volt"  required>
                                             </div>
                                         </div>
                                          
@@ -226,20 +306,20 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group">
                                             <label >ติดตั้งซีทีขนาด</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control" name="ig_ct"   required>
+                                                <input type="text" class="form-control" name="ig_ct" id="ig_ct"   required>
                                             </div>
                                         </div>
                                         
                                         <div class="form-group">
                                             <label >วีทีขนาด</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_vt"   required>
+                                                <input type="text" class="form-control" name="ig_vt" id="ig_vt"  required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label >เควาร์ขนาด</label>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="ig_kwa"   required>
+                                                <input type="text" class="form-control" name="ig_kwa"  id="ig_kwa" required>
                                             </div>
                                         </div>
                                     </div>
@@ -248,7 +328,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group">
                                             <label >หมายเลข PEA. มิเตอร์ก่อนหน้า(สายการจดหน่วยเดียวกัน)</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control" name="ig_number_bf"   required>
+                                                <input type="text" class="form-control" name="ig_number_bf" id="ig_number_bf"  required>
                                             </div>
                                         </div>
                                     </div>
@@ -257,7 +337,7 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group">
                                             <label >หมายเลข PEA. มิเตอร์ถัดไป(สายการจดหน่วยเดียวกัน)</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control" name="ig_number_af"   required>
+                                                <input type="text" class="form-control" name="ig_number_af" id="ig_number_af"  required>
                                             </div>
                                         </div>
                                     </div>
@@ -266,13 +346,13 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                         <div class="form-group">
                                             <label >สายการจดหน่วย</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control" name="ig_linepoint"   required>
+                                                <input type="text" class="form-control" name="ig_linepoint" id="ig_linepoint"  required>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label >หมายเลข PEA.มิเตอร์</label>
                                             <div class="form-group ">
-                                                <input type="text" class="form-control" name="ig_linenumber"   required>
+                                                <input type="text" class="form-control" name="ig_linenumber" id="ig_linenumber"   required>
                                             </div>
                                         </div>
                                     </div>

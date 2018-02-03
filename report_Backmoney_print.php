@@ -29,11 +29,22 @@ function DateThai($date) {
     </head>
     <body>
         <table width="100%" align="center"  style=" border-collapse:inherit; border:1px ; line-height: 20px; font-size: 13px;">
+            
             <tr>
                 <td ><p><b>ตั้งแต่ :</b> <?= DateThai($_GET[date1]); ?> ถึง : <?= DateThai($_GET[date2]); ?></p></td>
             </tr>
         </table>
         <table width="100%" align="center" border="1"  style=" border-collapse:inherit; border:1px ; line-height: 20px; font-size: 13px;">
+            <tr>
+                <td colspan="2" width="70px" style="border-right-color: white;">
+            <center><img  src="img/lo.png" width="70px" ></center>
+                </td>
+                <td valign="top" colspan="4" align="center"  width="350px" style="padding-top:7px; ">
+                    <b>การไฟฟ้าส่วนภูมิภาค<br>
+                        200 ถนนงามวงส์วาน จตุจักร กรุงเทพฯ 10900<br>
+                        คำร้องขอทั่วไป</b>
+                </td>
+            </tr>
             <tr >
                 <td colspan="6" align="center" style="background-color:#337ab7; color: #fff; padding-top:7px;" >
                     <h3>รายงานบันทึกขอคืนเงิน</h3>
