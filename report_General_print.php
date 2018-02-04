@@ -41,7 +41,7 @@ function DateThai($date) {
                 <td valign="top" colspan="4" align="center"  width="350px" style="padding-top:7px; ">
                     <b>การไฟฟ้าส่วนภูมิภาค<br>
                         200 ถนนงามวงส์วาน จตุจักร กรุงเทพฯ 10900<br>
-                        คำร้องขอทั่วไป</b>
+                        </b>
                 </td>
             </tr>
             <tr>

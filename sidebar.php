@@ -49,12 +49,23 @@ if($user[user_pos]==0){
                         <li>
                             <a href="#"><i class="hidden-xs showopacity glyphicon glyphicon-folder-open">&nbsp;</i>รายงาน<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li><a href="report_General.php" >คำร้องทั่วไป</a></li>
-                                <li><a href="report_Backmoney.php" >บันทึกขอคืนเงิน</a></li>
+                                <li>
+                                    <a href="report_General.php">คำร้องทั่วไป <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="report_General.php">คำร้องทั่วไป</a>
+                                        </li>
+                                        <li>
+                                            <a href="report_Backmoney.php">บันทึกขอคืนเงิน</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
                                 <li><a href="report_Electricity.php" >คำร้องขอใช้ไฟฟ้า</a></li>
                                 <li><a href="report_Fee.php" >รับชำระค่าธรรมเนียม</a></li>
                             </ul>
                         </li>
+                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

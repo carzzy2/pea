@@ -38,10 +38,10 @@ function DateThai($date) {
                 <td colspan="2" width="70px" style="border-right-color: white;">
             <center><img  src="img/lo.png" width="70px" ></center>
                 </td>
-                <td valign="top" colspan="4" align="center"  width="350px" style="padding-top:7px; ">
+                <td valign="top" colspan="5" align="center"  width="350px" style="padding-top:7px; ">
                     <b>การไฟฟ้าส่วนภูมิภาค<br>
                         200 ถนนงามวงส์วาน จตุจักร กรุงเทพฯ 10900<br>
-                        คำร้องขอทั่วไป</b>
+                        </b>
                 </td>
             </tr>
             <tr >
