@@ -140,8 +140,8 @@ function Dateim($mydate) {
                                                     <td><a class="btn btn-default" href="StatusElectricity_view.php?id=<?= $array[re_id] ?>">ดูรายละเอียด</a></td>
                                                     <td class=" text-center"><?= $array[re_id] ?></td>
                                                     <td class=" text-center"><?= Dateim($array[re_date]); ?></td>
-                                                    <td class=" text-center"><?= $wanttype ?></td>
-                                                    <td class="text-center"><?= $arraycus[cus_name] ?></td>
+                                                    <td><?= $wanttype ?></td>
+                                                    <td><?= $arraycus[cus_name] ?></td>
                                                     <td class="text-center"><span class="label label-<?= $label ?>"><?= $status ?></span></td>
                                                     <td>
                                                         <div class="btn-group" align="center">

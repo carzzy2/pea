@@ -45,7 +45,6 @@ $ses_username = $_SESSION[loginid];
                 <div class="col-sm-3">
                     <select id="type" class="form-control" name="type" required>
                         <option value="1" <?php if($_POST['type']=="1"){ echo "selected=selected"; }?>>รหัสบัตรประชาชน</option>
-                        <option value="0" <?php if($_POST['type']=="0"){ echo "selected=selected"; }?>>หมายเลขผู้ใช้ไฟฟ้า</option>
                         <option value="2" <?php if($_POST['type']=="2"){ echo "selected=selected"; }?>>ชื่อ-นามสกุล</option>
                     </select>
                 </div> 

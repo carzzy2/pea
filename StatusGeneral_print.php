@@ -75,6 +75,7 @@ $array_print = mysql_fetch_array($result_print);
             <tr>
                 <td colspan="4" style="padding-top:9px;">
                     รหัสใบคำร้อง : <?= $array_print[rg_id] ?> <br>
+                    วันที่ : <?= Dateim($array_print[rg_date_back]) ?><br>
                     ชื่อ : <?= $array_print[cus_name] ?> <br>
                     ที่อยู่ :บ้านเลขที่ <?=$array_print[cus_number]?> หมู่บ้าน/อาคาร <?=$array_print[cus_village]?> ซ. <?=$array_print[cus_alleyway]?> ถ. <?=$array_print[cus_road]?> ม. <?=$array_print[cus_vilno]?> ต. <?=$array_print[cus_district]?> อ. <?=$array_print[cus_canton]?> จ. <?=$array_print[cus_province]?> <?=$array_print[cus_post]?><br>
                     
@@ -102,7 +103,7 @@ $array_print = mysql_fetch_array($result_print);
 $html = ob_get_contents();
 ob_end_clean();
 
-$pdf = new mPDF('th', array( 90,140 ), '0', 'THSaraban'); //การตั้งค่ากระดาษถ้าต้องการแนวตั้ง ก็ A4 เฉยๆครับ ถ้าต้องการแนวนอนเท่ากับ A4-L
+$pdf = new mPDF('th', array( 90,120 ), '0', 'THSaraban'); //การตั้งค่ากระดาษถ้าต้องการแนวตั้ง ก็ A4 เฉยๆครับ ถ้าต้องการแนวนอนเท่ากับ A4-L
 $pdf->SetLeftMargin( 0 );
 $pdf->SetTopMargin( 0);
 $pdf->SetAutoFont();

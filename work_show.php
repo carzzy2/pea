@@ -145,7 +145,7 @@ $ses_username = $_SESSION[loginid];
                                             <td><?=$array[work_id]?></td>
                                             <td><?= Dateim($array[work_date]); ?></td>
                                             <td class="text-center"><?=$array[re_id]?></td>
-                                            <td class="text-center"><?=$want?></td>
+                                            <td><?=$want?></td>
                                             <td align="center">
                                                 <div class="btn-group">
                                                     <a class="btn btn-default" href="work_detail.php?work_id=<?=$array[work_id]?>">ดูรายละเอียด</a>

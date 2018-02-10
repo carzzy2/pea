@@ -183,7 +183,7 @@ function Dateim($mydate){
                                                                 <td><?= Dateim($array[fee_date]); ?></td>
                                                                 <td class="text-center"><?= $type ?></td>
                                                                 <td class="text-center"><?= $ss_id ?></td>
-                                                                <td class="text-center"><?= $want ?></td>
+                                                                <td><?= $want ?></td>
                                                                 <td class="text-right"><?= number_format($array[fee_price],2) ?></td>
                                                             </tr>
                                                                     <?php

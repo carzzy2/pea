@@ -59,7 +59,7 @@ function DateThai($date) {
                 <td style="padding-top:7px;"  align="center" width="125px"><b>จำนวนเงิน</b></td>
             </tr>
                 <?php
-                $sql = "select * from tb_general where rg_date between '".$_GET[date1]."' and '".$_GET[date2]."' and rg_status<>0 and rg_want_type <=3 order by rg_id asc";
+                $sql = "select * from tb_general where rg_date_back between '".$_GET[date1]."' and '".$_GET[date2]."' and rg_status<>0 and rg_want_type <=3 order by rg_id asc";
                 $result = mysql_db_query($dbname, $sql);
                 $num = mysql_num_rows($result);
                 if (mysql_num_rows($result) > 0) {
@@ -117,9 +117,9 @@ function DateThai($date) {
                         <tr>
                             <td style="padding-top:7px;" align="center"><?= $page ?></td>
                             <td  style="padding-top:7px;" align="center"><?= $array[rg_id] ?></td>
-                            <td  style="padding-top:7px;" align="center"><?= Dateim($array[rg_date]); ?></td>
-                            <td  style="padding-top:7px;" align="center"><?= $want ?></td>
-                            <td style="padding-top:7px;" align="center"><?= $arraycus[cus_name] ?></td>
+                            <td  style="padding-top:7px;" align="center"><?= Dateim($array[rg_date_back]); ?></td>
+                            <td  style="padding-top:7px;" ><?= $want ?></td>
+                            <td style="padding-top:7px;"><?= $arraycus[cus_name] ?></td>
                             <td style="padding-top:7px; padding-right:7px;" align="<?=$text?>" ><?= $money ?></td>
                         </tr>
                         <?php

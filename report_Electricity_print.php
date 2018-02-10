@@ -150,8 +150,8 @@ function DateThai($date) {
                             <td style="padding-top:7px;" align="center"><?= $page ?></td>
                             <td  style="padding-top:7px;" align="center"><?= $array[re_id] ?></td>
                             <td  style="padding-top:7px;" align="center"><?= Dateim($array[re_date]); ?></td>
-                            <td  style="padding-top:7px;" align="center"><?= $want ?></td>
-                            <td style="padding-top:7px;" align="center"><?= $arraycus[cus_name] ?></td>
+                            <td  style="padding-top:7px;" ><?= $want ?></td>
+                            <td style="padding-top:7px;" ><?= $arraycus[cus_name] ?></td>
                             <td style="padding-top:7px;" align="center"><?= $label ?></td>
                         </tr>
                         <?php

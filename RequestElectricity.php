@@ -48,11 +48,6 @@ if ($ses_userid <> session_id() or $ses_username == "") {
                                             echo "selected=selected";
                                         }
                                         ?>>รหัสบัตรประชาชน</option>
-                                        <option value="0" <?php
-                                        if ($_POST['type'] == "0") {
-                                            echo "selected=selected";
-                                        }
-                                        ?>>หมายเลขผู้ใช้ไฟฟ้า</option>
                                         <option value="2" <?php
                                         if ($_POST['type'] == "2") {
                                             echo "selected=selected";

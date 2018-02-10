@@ -89,7 +89,7 @@ function Dateim($mydate){
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $sql = "select * from tb_general where rg_status<>0 and rg_want_type <=3  order by rg_id desc";
+                                            $sql = "select * from tb_general where rg_date_back between '".$_GET[txtdate1]."' and '".$_GET[txtdate2]."' and rg_status<>0 and rg_want_type <=3  order by rg_id desc";
                                             $result = mysql_db_query($dbname, $sql);
                                             $num=mysql_num_rows($result);
                                             if (mysql_num_rows($result) > 0) {
@@ -138,7 +138,7 @@ function Dateim($mydate){
                                                     <tr>
                                                         <td class="text-center"><?= $page ?></td>
                                                         <td class=" text-center"><?= $array[rg_id] ?></td>
-                                                        <td class=" text-center"><?= Dateim($array[rg_date]); ?></td>
+                                                        <td class=" text-center"><?= Dateim($array[rg_date_back]); ?></td>
                                                         <td class=" text-center"><?= $want ?></td>
                                                         <td class="text-center"><?= $arraycus[cus_name] ?></td>
                                                         <td class="text-<?=$text?>"><?= $money ?></td>
@@ -148,7 +148,7 @@ function Dateim($mydate){
                                                     ?>
                                                     <tr>
                                                         <td class="text-right" colspan="3"><b>รวมทั้งสิ้น</b></td>
-                                                        <td class="text-right"><?= $num ?> รายการ</td>
+                                                        <td><?= $num ?> รายการ</td>
                                                         <td class="text-right" ><b>เป็นเงิน</b></td>
                                                         <td class="text-right"><?= number_format($summoney,2) ?> บาท</td>
                                                     </tr>

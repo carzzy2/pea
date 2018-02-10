@@ -193,8 +193,8 @@ function Dateim($mydate){
                                                             <td class="text-center"><?= $page ?></td>
                                                             <td class=" text-center"><?= $array[re_id] ?></td>
                                                             <td class=" text-center"><?= Dateim($array[re_date]); ?></td>
-                                                            <td class=" text-center"><?= $want ?></td>
-                                                            <td class="text-center"><?= $arraycus[cus_name] ?></td>
+                                                            <td><?= $want ?></td>
+                                                            <td><?= $arraycus[cus_name] ?></td>
                                                             <td class="text-center"><?= $label ?></td>
                                                         </tr>
                                                         

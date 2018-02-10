@@ -170,8 +170,8 @@ function Dateim($mydate){
                                         <td class="text-center"><?=$page?></td>
                                             <td class=" text-center"><?=$array[rg_id]?></td>
                                             <td class=" text-center"><?= Dateim($array[rg_date]);?></td>
-                                            <td class=" text-center"><?=$want?></td>
-                                            <td class="text-center"><?=$arraycus[cus_name]?></td>
+                                            <td class=" text-left"><?=$want?></td>
+                                            <td class="text-left"><?=$arraycus[cus_name]?></td>
                                             <td class="text-center"><div style="border-radius:10px; background-color: <?=$status?>; color: white;"><?=$label?></div></td>
                                             <td align="center">
                                                 <div class="btn-group">

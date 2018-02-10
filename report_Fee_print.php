@@ -151,7 +151,7 @@ function DateThai($date) {
                             <td  style="padding-top:7px;" align="center"><?= Dateim($array[fee_date]); ?></td>
                             <td  style="padding-top:7px;" align="center"><?= $type ?></td>
                             <td style="padding-top:7px;" align="center"><?=$ss_id?></td>
-                            <td style="padding-top:7px;" align="center"><?= $want ?></td>
+                            <td style="padding-top:7px;" ><?= $want ?></td>
                             <td style="padding-top:7px; padding-right:7px;" align="right"><?= number_format($array[fee_price],2) ?></td>
                         </tr>
                         <?php

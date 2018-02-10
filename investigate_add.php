@@ -198,20 +198,7 @@ $("#checkbox-place").click(function(){
                                         <div class="form-group">
                                             <label>ปีจัดซื้อ(ตาม มป.5)</label>
                                             <div class="form-group">
-                                                <select  class="form-control" name="ig_power_year" id="ig_power_year" required>
-                                                    <option value=""><-- เลือกปี --></option>
-                                                    <option value="2560">2560</option>
-                                                    <option value="2559">2559</option>
-                                                    <option value="2558">2558</option>
-                                                    <option value="2557">2557</option>
-                                                    <option value="2556">2556</option>
-                                                    <option value="2555">2555</option>
-                                                    <option value="2554">2554</option>
-                                                    <option value="2553">2553</option>
-                                                    <option value="2552">2552</option>
-                                                    <option value="2551">2551</option>
-                                                    <option value="2550">2550</option>
-                                                </select>
+                                                <input type="text" class="form-control" name="ig_power_year" id="ig_power_year" value="<?=date("Y")+543?>" readonly="">
                                             </div>
                                         </div>
                                     </div>
