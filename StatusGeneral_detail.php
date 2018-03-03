@@ -149,9 +149,15 @@ $ses_username = $_SESSION[loginid];
                         ?>
                     </div>
                     <center>
+                        <?php
+                        if($_GET['mode']!="view"){
+                        ?>
                         <input name="ok" type="submit" value="อนุมัติใบคำร้อง" id="calculatertool" class="btn btn-success" >
                         <input name="txtid" type="hidden" value="<?=$id?>" />
                         <input name="rg_want_type" type="hidden" value="<?=$array_edit[rg_want_type]?>" />
+                        <?php
+                        }
+                        ?>
                         <a class="btn btn-info" onclick="location.href='StatusGeneral.php'">ย้อนกลับ</a>
                     </center>
                 </div>

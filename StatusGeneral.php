@@ -85,7 +85,7 @@ function Dateim($mydate){
                             <tbody>
                             <?php
                                 $n=0;
-                                $sql="select * from tb_general where rg_id like '%".$_POST[search]."%' and rg_status=0 order by rg_id desc";
+                                $sql="select * from tb_general where rg_id like '%".$_POST[search]."%' order by rg_id desc";
                                 $result=mysql_db_query($dbname,$sql);
                                     if(mysql_num_rows($result)>0){
                                         while($array=mysql_fetch_array($result)){
@@ -148,7 +148,7 @@ function Dateim($mydate){
                                             ?>
                                             <td align="center">
                                                 <div class="btn-group">
-                                                    <a class="btn btn-default" href="StatusGeneral_detail.php?id=<?=$array[rg_id]?>" title="ดูรายละเอียด"><i class="fa fa-check"> อนุมัติ</i></a>
+                                                    <a class="btn btn-default" href="StatusGeneral_detail.php?id=<?=$array[rg_id]?>" title="อนุมัติ"><i class="fa fa-check"> อนุมัติ</i></a>
                                                     <a class="btn btn-danger" onclick="return confirm('คุณต้องการยกเลิกใบคำร้องนี่ ?')" href="StatusGeneral_save.php?id=<?=$array[rg_id]?>&mode=del" ><i class="fa fa-times"> ยกเลิก</i></a>
                                                 </div>
                                             </td>
@@ -156,10 +156,9 @@ function Dateim($mydate){
                                             }else{
                                             ?>
                                             <td align="center">
-                                                <div class="btn-group">
-                                                    <a class="btn btn-default disabled" href="#" ><i class="fa fa-check"> อนุมัติ</i></a>
-                                                    <a class="btn btn-danger disabled"  href="#" ><i class="fa fa-times"> ยกเลิก</i></a>
-                                                </div>
+                                                <center>
+                                                    <a class="btn btn-default" href="StatusGeneral_detail.php?id=<?=$array[rg_id]?>&mode=view" title="ดูรายละเอียด">ดูรายละเอียด</a>
+                                                </center>
                                             </td>
                                             <?php
                                             }
