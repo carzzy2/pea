@@ -98,7 +98,6 @@ function Dateim($mydate) {
                                     <thead>               
                                         <tr>
                                             <th class=" text-center" >ลำดับ</th>
-                                            <th class=" text-center">ดูรายละเอียด</th>
                                             <th class=" text-center" >รหัสใบคำร้อง</th>
                                             <th class=" text-center" >วันที่บันทึก</th>
                                             <th class=" text-center" >รายการ</th>
@@ -109,6 +108,7 @@ function Dateim($mydate) {
                                     </thead>
                                     <tbody>
                                         <?php
+                                        //and re_status in (0,9)
                                         $stop = array("1","5","6","7","8","9","14");
                                         $page = 0;
                                         $sql = "select * from tb_electricity where re_id like '%" . $_POST[search] . "%'  order by re_id desc";
@@ -137,7 +137,6 @@ function Dateim($mydate) {
                                                 ?>	
                                                 <tr>
                                                     <td class="text-center"><?= $page ?></td>
-                                                    <td><a class="btn btn-default" href="StatusElectricity_view.php?id=<?= $array[re_id] ?>">ดูรายละเอียด</a></td>
                                                     <td class=" text-center"><?= $array[re_id] ?></td>
                                                     <td class=" text-center"><?= Dateim($array[re_date]); ?></td>
                                                     <td><?= $wanttype ?></td>
@@ -153,8 +152,7 @@ function Dateim($mydate) {
                                                            
                                                             <?php }else{?>
                                                              <center>
-                                                                <a class="btn btn-default disabled" ><i class="fa fa-check"> ผ่าน</i></a>
-                                                                <a class="btn btn-danger disabled" ><i class="fa fa-times"> ไม่ผ่าน</i></a>
+                                                                <a class="btn btn-default" href="StatusElectricity_view.php?id=<?= $array[re_id] ?>">ดูรายละเอียด</a>
                                                             </center>
                                                             <?php }?>
                                                         </div>
@@ -165,7 +163,7 @@ function Dateim($mydate) {
                                             }
                                         } else {
                                             ?>				  
-                                            <tr><td colspan="7" align="center">ไม่พบข้อมูล</td></tr>
+                                            <tr><td colspan="8" align="center">ไม่พบข้อมูล</td></tr>
                                             <?php
                                         }
                                         ?>	

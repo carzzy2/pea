@@ -98,7 +98,6 @@ function Dateim($mydate) {
                                     <thead>               
                                         <tr>
                                             <th class=" text-center" >ลำดับ</th>
-                                            <th class=" text-center">ดูรายละเอียด</th>
                                             <th class=" text-center" >รหัสใบคำร้อง</th>
                                             <th class=" text-center" >วันที่บันทึก</th>
                                             <th class=" text-center" >รายการ</th>
@@ -137,7 +136,6 @@ function Dateim($mydate) {
                                                 ?>	
                                                 <tr>
                                                     <td class="text-center"><?= $page ?></td>
-                                                    <td><a class="btn btn-default" href="investigate_view.php?id=<?= $array[re_id] ?>">ดูรายละเอียด</a></td>
                                                     <td class=" text-center"><?= $array[re_id] ?></td>
                                                     <td class=" text-center"><?= Dateim($array[re_date]); ?></td>
                                                     <td><?= $wanttype ?></td>
@@ -146,13 +144,13 @@ function Dateim($mydate) {
                                                     <td>
                                                         <div  align="center">
                                                                 <?php if($array[re_status]=="3"){ ?>
-                                                                    <a class="btn btn-default" href="investigate_add.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ดำเนินการตรวจสอบ</i></a>
+                                                                    <a class="btn btn-info" href="investigate_add.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ดำเนินการตรวจสอบ</i></a>
                                                                 <?php }elseif ($array[re_status]=="4"){ ?>                                                       
-                                                                    <a class="btn btn-default" href="investigate_add.php?id=<?= $array[re_id] ?>&mode=edit"><i class="fa fa-check"> แก้ไข</i></a>
+                                                                    <a class="btn btn-warning " href="investigate_add.php?id=<?= $array[re_id] ?>&mode=edit"><i class="fa fa-check"> แก้ไข</i></a>
                                                                 <?php }elseif ($array[re_status]=="5"){ ?>
-                                                                    <a class="btn btn-default" href="investigate_add.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ตรวจสอบใหม่</i></a>
+                                                                    <a class="btn btn-success" href="investigate_add.php?id=<?= $array[re_id] ?>"><i class="fa fa-check"> ตรวจสอบใหม่</i></a>
                                                                 <?php }else{ ?>
-                                                                   - 
+                                                                <a class="btn btn-default" href="investigate_view.php?id=<?= $array[re_id] ?>">ดูรายละเอียด</a>
                                                                 <?php } ?>
                                                                     </div>
                                                     </td>

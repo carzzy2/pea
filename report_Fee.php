@@ -59,18 +59,27 @@ function Dateim($mydate){
                                     </span>
                                     <input type="date" name="txtdate2" id="date2" class="form-control" value="<?=$_GET['txtdate2']?>">
                                 </div>        
-                                <button type="submit" class="btn btn-primary">แสดงรายงาน</button>
+                                <button type="submit" class="btn btn-primary">แสดงรายงาน</button><br>
+                                <div class="clearfix"></div><br>
+                                <div class="form-group">
+                                    <select  class="form-control" name="status" >
+                                        <option value="10" <?php if($_GET[status]=="10"){ echo "selected";} ?>>ทั้งหมด</option>
+                                        <option value="0" <?php if($_GET[status]=="0"){ echo "selected";} ?>>ทำร้องทั่วไป</option>
+                                        <option value="1" <?php if($_GET[status]=="1"){ echo "selected";} ?>>คำร้องขอใช้ไฟฟ้า</option>
+                                    </select>
+                                    </div>
                             </form>
                         </div>
                         <?php
                         $date1=$_GET['txtdate1'];
                         $date2=$_GET['txtdate2'];
+                        $status=$_GET['status'];
                         if($date1!='' and $date2!=''){
                         ?>
                         <div class="row">
                             <div class="col-md-12">
                                     <div class="pull-right">
-                                        <a  class="btn btn-info" target="_blank"  href="report_Fee_print.php?date1=<?=$_GET['txtdate1']?>&date2=<?=$_GET['txtdate2']?>" >Print</a>
+                                        <a  class="btn btn-info" target="_blank"  href="report_Fee_print.php?date1=<?=$_GET['txtdate1']?>&date2=<?=$_GET['txtdate2']?>&status=<?=$_GET['status']?>" >Print</a>
                                     </div>
                                 </div>
                             <div class="clearfix"></div><br>
@@ -90,8 +99,15 @@ function Dateim($mydate){
                                                 </thead>
                                                 <tbody>
                                                     <?php
+                                                    if($status=="0"){
+                                                        $where="and rg_id<>''";
+                                                    }elseif($status=="1"){
+                                                        $where="and re_id<>''";
+                                                    }else{
+                                                        $where="";
+                                                    }
                                                     $n = 0;
-                                                    $sql = "select * from tb_fee,tb_user where fee_date between '".$_GET[txtdate1]."' and '".$_GET[txtdate2]."' and  tb_fee.user_id=tb_user.user_id  ";
+                                                    $sql = "select * from tb_fee,tb_user where fee_date between '".$_GET[txtdate1]."' and '".$_GET[txtdate2]."' $where and  tb_fee.user_id=tb_user.user_id  ";
                                                     $result = mysql_db_query($dbname, $sql);
                                                     $num = mysql_num_rows($result);
                                                     if (mysql_num_rows($result) > 0) {

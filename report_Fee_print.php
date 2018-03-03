@@ -59,7 +59,14 @@ function DateThai($date) {
                 <td style="padding-top:7px;"  align="center" width="125px"><b>จำนวนเงิน</b></td>
             </tr>
                 <?php
-                $sql = "select * from tb_fee,tb_user where fee_date between '".$_GET[date1]."' and '".$_GET[date2]."' and  tb_fee.user_id=tb_user.user_id  ";
+                if ($_GET['status'] == "0") {
+                    $where = "and rg_id<>''";
+                } elseif ($_GET['status'] == "1") {
+                    $where = "and re_id<>''";
+                } else {
+                    $where="";
+                }
+                $sql = "select * from tb_fee,tb_user where fee_date between '".$_GET[date1]."' and '".$_GET[date2]."' $where and  tb_fee.user_id=tb_user.user_id  ";
                 $result = mysql_db_query($dbname, $sql);
                 $num = mysql_num_rows($result);
                 if (mysql_num_rows($result) > 0) {

@@ -85,7 +85,7 @@ function Dateim($mydate){
                             <tbody>
                             <?php
                                 $n=0;
-                                $sql="select * from tb_general where rg_id like '%".$_POST[search]."%' order by rg_id desc";
+                                $sql="select * from tb_general where rg_id like '%".$_POST[search]."%' and rg_status=0 order by rg_id desc";
                                 $result=mysql_db_query($dbname,$sql);
                                     if(mysql_num_rows($result)>0){
                                         while($array=mysql_fetch_array($result)){

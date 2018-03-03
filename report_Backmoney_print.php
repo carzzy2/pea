@@ -54,8 +54,8 @@ function DateThai($date) {
                 <td style="padding-top:7px;" align="center" width="50px"><b>ลำดับ</b></td>
                 <td style="padding-top:7px;" align="center" width="125px"><b>รหัสใบคำร้อง</b></td>
                 <td style="padding-top:7px;" align="center" width="125px"><b>วันที่บันทึก</b></td>
-                <td style="padding-top:7px;" align="center"><b>รายการ</b></td>
-                <td style="padding-top:7px;" align="center"><b>ลูกค้า</b></td>
+                <td style="padding-top:7px;"><b>รายการ</b></td>
+                <td style="padding-top:7px;"><b>ลูกค้า</b></td>
                 <td style="padding-top:7px;"  align="center" width="125px"><b>จำนวนเงิน</b></td>
             </tr>
                 <?php

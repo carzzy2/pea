@@ -110,7 +110,7 @@ $ses_username = $_SESSION[loginid];
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-5">
+                        <div class="form-group col-sm-4">
                         <label>มีความประสงค์</label>
                             <input class="form-control"  name="rg_want_other" type="text" id="rg_want_other" value="<?=$want?>" readonly/>
                         </div>
@@ -129,13 +129,21 @@ $ses_username = $_SESSION[loginid];
                                 $result_f3=mysql_db_query($dbname,$sql_f3);
                                 $array_f3=mysql_fetch_array($result_f3);
                                 $read="readonly";
+                                $sql_f4="select * from tb_fee where re_id='".$array_f[re_id]."'";
+                                $result_f4=mysql_db_query($dbname,$sql_f4);
+                                $array_f4=mysql_fetch_array($result_f4);
                             }
                             
                         ?>
-                        <div class="form-group col-sm-5">
-                        <label>จำนวนเงิน(บาท)</label>
+                        <div class="form-group col-sm-3">
+                        <label>จำนวนทั้งหมด(บาท)</label>
+                        <input class="form-control"  name="rg_money" type="number" id="rg_money"  min="0" value="<?=$array_f4[fee_price]?>" <?=$read?>>
+                        </div>
+                        <div class="form-group col-sm-3">
+                        <label>จำนวนเงินค่าประกัน(บาท)</label>
                         <input class="form-control"  name="rg_money" type="number" id="rg_money"  min="0" value="<?=$array_f3[me_insure]?>" <?=$read?>>
                         </div>
+                        
                         <?php
                         }
                         ?>
